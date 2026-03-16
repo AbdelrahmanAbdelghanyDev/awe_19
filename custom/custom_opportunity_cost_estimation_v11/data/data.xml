@@ -1,0 +1,61 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="custom_warehouse_location" model="stock.location">
+          <field name="name">Project</field>
+          <field name="usage">customer</field>
+          <field name="location_id" ref="stock.stock_location_locations_virtual"/>
+        </record>
+
+        <record id="seq_custom_stock" model="ir.sequence">
+          <field name="name">seq custom stock</field>
+          <field name="code">seq.custom.stock</field>
+          <field name="prefix">Project-%(year)s/</field>
+          <field name="padding">5</field>
+        </record>
+
+        <record id="custom_warehouse_operation" model="stock.picking.type">
+          <field name="name">Projects</field>
+          <field name="sequence_id" ref="seq_custom_stock"/>
+          <field name="code">outgoing</field>
+          <field name="default_location_dest_id" ref="custom_warehouse_location"/>
+        </record>
+
+        <function model="sale.order" name="initiate_field"/>
+
+        <!--<record id="seq_cost_estimation" model="ir.sequence">-->
+          <!--<field name="name">seq cost estimation</field>-->
+          <!--<field name="code">seq.cost.estimation</field>-->
+          <!--<field name="prefix">CE/</field>-->
+          <!--<field name="padding">5</field>-->
+       <!--</record>-->
+        <record id="seq_cost_estimation_egy" model="ir.sequence">
+            <field name="name">Cost Estimation Egypt</field>
+            <field name="code">seq.cost.estimation.egy</field>
+             <field name="company_id">3</field>
+            <field name="prefix">BUD</field>
+            <field name="padding">5</field>
+        </record>
+        <record id="seq_cost_estimation_ksa" model="ir.sequence">
+            <field name="name">Cost Estimation KSA</field>
+            <field name="code">seq.cost.estimation.ksa</field>
+            <field name="company_id">4</field>
+            <field name="prefix">BUD</field>
+            <field name="padding">5</field>
+        </record>
+        <record id="seq_cost_estimation_uae" model="ir.sequence">
+            <field name="name">Cost Estimation UAE</field>
+            <field name="code">seq.cost.estimation.uae</field>
+            <field name="company_id">5</field>
+            <field name="prefix">BUD</field>
+            <field name="padding">5</field>
+        </record>
+        <record id="seq_cost_estimation_res" model="ir.sequence">
+            <field name="name">Cost Estimation Research</field>
+            <field name="code">seq.cost.estimation.res</field>
+            <field name="company_id">1</field>
+            <field name="prefix">BUD</field>
+            <field name="padding">5</field>
+        </record>
+   </data>
+</odoo>

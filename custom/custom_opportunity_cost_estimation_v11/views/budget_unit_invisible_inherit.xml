@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+         <record id="budget_unit_invisible_view_inherit" model="ir.ui.view">
+             <field name="name">budget unit invisible</field>
+             <field name="model">opportunity.cost.estimation</field>
+             <field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.opportunity_cost_estimation_form"/>
+             <field name="arch" type="xml">
+                <data>
+
+                    <xpath expr="//page//field[@name='order_line']//list//field[@name='no_of_units']" position="attributes">
+                       <attribute name="invisible">True</attribute>
+                    </xpath>
+
+
+                </data>
+            </field>
+         </record>
+    </data>
+</odoo>

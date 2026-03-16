@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="group_delete_permission" model="res.groups">
+        <field name="name">Access Delete Group</field>
+    </record>
+
+</odoo>

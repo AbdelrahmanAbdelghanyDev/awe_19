@@ -1,0 +1,159 @@
+<odoo>
+    <data>
+        <record id="custom_res_config_mysettings_view_form" model="ir.ui.view">
+            <field name="name">csutom.res.config.mysetting.add.ded</field>
+            <field name="model">res.config.mysetting</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="my_type" string="Type"/>
+                                <field name="my_cat" string="Category"/>
+                                <field name="default_value"/>
+                                <field name="chk"/>
+                                <field name="code"/>
+                                <field name="salary_rule_done" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="first_approval"/>
+                                <field name="second_approval"/>
+                                <field name="third_approval"/>
+                                <field name="IncludeTax" string="Company Tax"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_main_configsetting_tree" model="ir.ui.view">
+            <field name="name">res.config.mysetting.tree</field>
+            <field name="model">res.config.mysetting</field>
+            <field name="arch" type="xml">
+                <list string="configration">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="my_type" string="Type"/>
+                    <field name="my_cat" string="Category"/>
+                    <field name="default_value"/>
+                    <field name="chk" readonly="chk == True"/>
+                    <field name="first_approval"/>
+                    <field name="second_approval"/>
+                    <field name="third_approval"/>
+                </list>
+            </field>
+        </record>
+
+        <record id='custom_deducton_add_main_form_view' model="ir.ui.view">
+            <field name="model">main.add.deduction</field>
+            <field name="arch" type="xml">
+                <form string='Addition And Deduction'>
+                    <header>
+                        <button name="set_wait" string="Submit" type="object"
+                                invisible="state != 'draft'"
+                                groups="addition_deduction_segmatek.group_first,addition_deduction_segmatek.group_Manager"/>
+                        <button name="set_first" string="First Approval" type="object"
+                                invisible="state != 'w'"
+                                groups="addition_deduction_segmatek.group_first,addition_deduction_segmatek.group_Manager"/>
+                        <button name="set_sec" string="Second Approval" type="object"
+                                invisible="state != 'first'"
+                                groups="addition_deduction_segmatek.group_sec,addition_deduction_segmatek.group_Manager"/>
+                        <button name="set_third" string="Third Approval" type="object"
+                                invisible="state != 'secapp'"
+                                groups="addition_deduction_segmatek.group_third,addition_deduction_segmatek.group_Manager"/>
+                        <button name="set_done" string="Done" type="object"
+                                invisible="state != 'third'"
+                                groups="addition_deduction_segmatek.group_Manager"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="open_recrurring_model" string="Recurring"
+                                    icon="fa-list"/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee"/>
+                                <field name="date" widget="date"/>
+                                <field name="type"/>
+                                <field name="addition" invisible="type != 'a'"/>
+                                <field name="deduction" invisible="type != 'd'"/>
+                                <field name="Recurring"/>
+                                <field name="date_from" invisible="not Recurring"/>
+                                <field name="date_to" invisible="not Recurring"/>
+                                <field name="conf_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="amount"
+                                       readonly="chek_vala == True or chek_vald == True"/>
+                                <field name="amount" invisible="1"/>
+                                <field name="notes"/>
+                                <field name="chek_vala" invisible="1"/>
+                                <field name="chek_vald" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_main_add_deduction_tree" model="ir.ui.view">
+            <field name="name">main.add.deduction.tree</field>
+            <field name="model">main.add.deduction</field>
+            <field name="arch" type="xml">
+                <list string="Addition and Deduction">
+                    <field name="employee"/>
+                    <field name="date" widget="date"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="type"/>
+                    <field name="amount"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="custom_addAndDed_action" model="ir.actions.act_window">
+            <field name="name">Addition and Deduction</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">main.add.deduction</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="custom_configration_action" model="ir.actions.act_window">
+            <field name="name">configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.mysetting</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="add_ded_menu_root"
+                  name="Addition and Deduction"
+                  action="custom_addAndDed_action"
+                  web_icon="addition_deduction_segmatek,static/description/icon.png"
+        />
+
+        <menuitem id="menu_add_ded_request"
+                  name="Addition and Deduction Request"
+                  parent="add_ded_menu_root"
+                  action="custom_addAndDed_action"
+                  sequence="1"
+        />
+
+        <menuitem id="menu_add_ded_config"
+                  name="Configuration"
+                  parent="add_ded_menu_root"
+                  action="custom_configration_action"
+                  sequence="3"
+                  groups="addition_deduction_segmatek.group_Manager"
+        />
+    </data>
+</odoo>

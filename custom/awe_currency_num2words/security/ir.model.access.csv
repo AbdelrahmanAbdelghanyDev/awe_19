@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_awe_currency_num2words_awe_currency_num2words,awe_currency_num2words.awe_currency_num2words,model_awe_currency_num2words_awe_currency_num2words,base.group_user,1,1,1,1

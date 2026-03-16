@@ -1,0 +1,176 @@
+<odoo>
+    <data>
+        <!-- Action for Cost Estimation Templates -->
+        <record id="action_cost_estimate_template" model="ir.actions.act_window">
+            <field name="name">Cost Estimation Templates</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cost.estimation.template</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click here to create your template.
+                </p>
+                <p>Use templates to create polished, professional cost estimates in minutes.
+                    Send these cost estimates by email and let your customers sign online.
+                    Use cross-selling and discounts to push and boost your sales.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action for Cost Estimations -->
+        <record id="action_cost_estimation" model="ir.actions.act_window">
+            <field name="name">Cost Estimations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">opportunity.cost.estimation</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!--  ======>menu_sales_config <=======   -->
+        <menuitem
+                action="action_cost_estimate_template"
+                id="menu_sale_cost_estimate_template"
+                name="Cost Estimation Templates"
+                parent="sale.menu_sales_config"
+                sequence="2"/>
+        <menuitem
+                action="action_cost_estimation"
+                id="menu_sale_cost_estimation"
+                name="Cost Estimations"
+                parent="sale.sale_order_menu"
+                sequence="5"/>
+
+        <!--     <menuitem  id="cost_estimation_menu" name="Cost Estimation" parent="crm.crm_menu_root" sequence="5"/>
+            <menuitem action="action_cost_estimate_template" id="menu_sale_cost_estimate_template" name="Cost Estimation Templates" parent="cost_estimation_menu" sequence="1"/>
+            <menuitem action="action_cost_estimation" id="menu_sale_cost_estimation" name="Cost Estimations" parent="cost_estimation_menu" sequence="2"/> -->
+
+
+        <record id="lead_product_form_view" model="ir.ui.view">
+            <field name="name">CRM Lead</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='extra']" position="after">
+                    <page name="Products" string="Products">
+                        <field name="pdt_line">
+                            <list editable="bottom">
+                                <field name="product_id"/>
+                                <field name="name"/>
+                                <field name="category"/>
+                                <field name="product_uom_qty"/>
+                                <field invisible="True" name="price_unit"/>
+                                <field invisible="True" name="market_price"/>
+                                <field invisible="True" name="qty_hand"/>
+                                <field name="uom_id"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="opportunity_product_form1_view" model="ir.ui.view">
+            <field name="name">CRM Lead</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <button name="action_sale_quotations_new" position="replace">
+                    <button class="oe_highlight" name="sale_action_quotations_new" string="New Quotation"
+                            type="object"/>
+                </button>
+            </field>
+        </record>
+        <record id="opportunity_product_form_view" model="ir.ui.view">
+            <field name="name">CRM Lead</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='lead']" position="after">
+                    <page name="products" string="Products">
+                        <field name="pdt_line">
+                            <list editable="bottom">
+                                <field name="product_id"/>
+                                <field name="name"/>
+                                <field name="category"/>
+                                <field name="product_uom_qty"/>
+                                <field invisible="True" name="price_unit"/>
+                                <field invisible="True" name="market_price"/>
+                                <field invisible="True" name="qty_hand"/>
+                                <field name="uom_id"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page name="brief" string="Brief">
+                        <group>
+                            <group>
+                                <field name="research_type"/>
+                                <field name="approach"/>
+                                <field name="methodology"/>
+                                <field name="number_of_legs"/>
+                            </group>
+                            <group>
+                                <field name="sample_size"/>
+                                <field name="gender"/>
+                                <field name="sec" string="SEC"/>
+                                <field name="age"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="region"/>
+                                <field name="usership"/>
+                                <field name="moub" string="MOUB"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+        <record id="custom_task_estimation_line_tree" model="ir.ui.view">
+            <field name="name">custom task estimation line tree</field>
+            <field name="model">custom.task.est.line</field>
+            <field name="arch" type="xml">
+                <list
+                        decoration-info="parent_cost==False"
+                        decoration-danger="actual_qty&gt;product_uom_qty or actual_unit_price&gt;price_unit"
+                        create="false"
+                        edit="false"
+                        delete="false">
+                    <field name="project_id"/>
+                    <field name="task_id"/>
+                    <field name="parent_cost"/>
+                    <field name="product_id"/>
+                    <field invisible="False" name="order_id"/>
+                    <field invisible="True" name="order_partner_id"/>
+                    <field name="name"/>
+                    <field invisible="True" name="salesman_id"/>
+                    <field name="product_uom_qty" string="Qty"/>
+<!--                    <field invisible="True" name="product_uom" string="Unit of Measure"/>-->
+                    <field name="price_unit" string="Unit Price"/>
+                    <field invisible="True" name="no_of_units" string="No. units"/>
+                    <field invisible="False" name="price_subtotal_new" string="Subtotal_1" sum="Total"/>
+                    <field invisible="True" name="no_of_waves" string="No. waves"/>
+                    <field invisible="True" name="tax_ids" widget="many2many_tags"/>
+                    <field invisible="True" name="price_subtotal" sum="Total" widget="monetary"/>
+                    <field name="actual_qty"/>
+                    <field name="actual_unit_price"/>
+                    <field name="actual_total" sum="Total_2"/>
+                </list>
+            </field>
+        </record>
+        <record id="sale_qutation_inherit" model="ir.ui.view">
+            <field name="name">Sale qutation view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field groups="custom_opportunity_cost_estimation_v11.group_viewer" name="opportunity_total_cost_2"
+                           string="Total cost" options="{'currency_field': 'currency_id'}" widget="monetary"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

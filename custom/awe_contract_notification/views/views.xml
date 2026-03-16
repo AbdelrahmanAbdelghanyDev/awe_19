@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+<!--         <record id="contract_notifications" model="ir.cron">-->
+<!--            <field name="name">Contract Notifications</field>-->
+<!--            <field name="interval_number">1</field>-->
+<!--            <field name="interval_type">days</field>-->
+<!--&lt;!&ndash;            <field name="numbercall">-1</field>&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="doall" eval="True"/>&ndash;&gt;-->
+<!--            <field name="model_id" ref="model_hr_contract"/>-->
+<!--            <field name="code">model.notify_scheduled()</field>-->
+<!--            <field name="state">code</field>-->
+<!--&lt;!&ndash;            <field name="doall" eval="True"/>&ndash;&gt;-->
+<!--        </record>-->
+         <record id="probation_notifications" model="ir.cron">
+            <field name="name">Probation Notifications</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="doall" eval="True"/>-->
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="code">model.get_probation_notification()</field>
+            <field name="state">code</field>
+<!--            <field name="doall" eval="True"/>-->
+        </record>
+
+    </data>
+</odoo>

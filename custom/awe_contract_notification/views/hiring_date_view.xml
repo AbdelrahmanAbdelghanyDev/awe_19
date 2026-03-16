@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="employee_hiring_date_view" model="ir.ui.view">
+            <field name="name">employee_hiring_date_view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='work_location_id']" position="after">
+                    <group string="Hiring Date">
+                        <field name="hiring_date"/>
+                    </group>
+
+                    <group string="Probation Date">
+                        <field name="probation_date"/>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+
+<!--        <record id="hiring_date_view" model="ir.ui.view">-->
+<!--            <field name="name">hiring_date_view</field>-->
+<!--            <field name="model">hr.contract</field>-->
+<!--            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//field[@name='hr_responsible_id']" position="after">-->
+<!--                    <field name="hiring_date"/>-->
+<!--                </xpath>-->
+
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

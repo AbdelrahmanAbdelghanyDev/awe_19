@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="days2convert_list_view" model="ir.ui.view">
+            <field name="name">days2convert.list.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="priority">1000</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="days_to_convert"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="days2convert_report_action" model="ir.actions.act_window">
+            <field name="name">Days2Convert Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">list</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('days2convert_list_view')})]
+            "/>
+            <field name="domain">[('opportunity_id', '!=' , False)]</field>
+        </record>
+        <menuitem id="days2convert_report_menu" parent="crm.crm_menu_report" action="days2convert_report_action"/>
+
+    </data>
+</odoo>

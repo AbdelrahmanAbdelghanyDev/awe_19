@@ -1,0 +1,46 @@
+<odoo>
+  <data>
+    <record id="custom_leads_template_form_view" model="ir.ui.view">
+      <field name="name">Custom Leads </field>
+      <field name="model">crm.lead</field>
+      <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='function']" position="after">
+            <field name="sector_id" string="Sector"/>
+        </xpath>
+      </field>
+    </record>
+
+
+    <record id="custom_opportunity_template_form_view" model="ir.ui.view">
+      <field name="name">Custom Opportunity </field>
+      <field name="model">crm.lead</field>
+      <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='team_id']" position="after">
+            <field name="sales_country_id"/>
+            <field name='lead_country_id'/>
+        </xpath>
+
+        <xpath expr="//field[@name='tag_ids']" position="after">
+            <field name="invoice_country_id"/>
+            <field name='work_country_id'/>
+        </xpath>
+      </field>
+    </record>
+
+
+     <record id="view_partner_structured_form1" model="ir.ui.view">
+        <field name="name">view_partner_structured_form1</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="sector_id"/>
+
+            </xpath>
+        </field>
+    </record>
+
+  </data>
+</odoo>

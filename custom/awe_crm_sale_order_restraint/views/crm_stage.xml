@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        <record id="not_draggable_kanban_inherit" model="ir.ui.view">
+            <field name="name">not_draggable_kanban_inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="records_draggable">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="is_sale_work_stage_form_inherit" model="ir.ui.view">
+            <field name="name">is_sale_work_stage_form_inherit</field>
+            <field name="model">crm.stage</field>
+            <field name="inherit_id" ref="crm.crm_stage_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='is_won']" position="before">
+                    <field name="is_sale"/>
+                    <field name="stage_seq"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="is_sale_work_stage_tree_inherit" model="ir.ui.view">
+            <field name="name">is_sale_work_stage_tree_inherit</field>
+            <field name="model">crm.stage</field>
+            <field name="inherit_id" ref="crm.crm_stage_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='is_won']" position="before">
+                    <field name="is_sale"/>
+                    <field name="stage_seq"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="form_inherit_for_sale_stage" model="ir.ui.view">
+            <field name="name">form_inherit_for_sale_stage</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stage_id']" position="after">
+                    <field name="is_sale_group" invisible="1"/>
+                    <field name="stage_seq" invisible="1"/>
+                </xpath>
+                <xpath expr="//header/field[@name='stage_id']" position="attributes">
+                    <attribute name="invisible">active == False or type == 'lead'</attribute>
+                    <attribute name="readonly">True</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="attributes">
+                    <attribute name="groups">awe_crm_sale_order_restraint.crm_sale_order_drag_group</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']" position="attributes">
+                     <attribute name="groups">awe_crm_sale_order_restraint.crm_sale_order_drag_group</attribute>
+                </xpath>
+                 <xpath expr="//header" position="inside">
+                     <button name="previous_stage" string="previous stage" type="object" class="oe_highlight"
+                             invisible="stage_seq == 'start' or is_sale_group == True"/>
+                     <button name="next_stage" string="next stage" type="object" class="oe_highlight"
+                             invisible="stage_seq == 'end' or is_sale_group == True"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

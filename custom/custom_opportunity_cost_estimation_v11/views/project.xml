@@ -1,0 +1,158 @@
+<odoo>
+    <data>
+
+        <record id="custom_project_edit_project" model="ir.ui.view">
+            <field name="name">custom_project_edit_project</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page" position="after">
+                    <page name="estimation_line" string="Estimation Line">
+
+                        <field name="tasks_estimations_ids_report">
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="product_id" string="Product"/>
+                                        <field name="name" string="Description"/>
+                                    </group>
+                                    <group>
+                                        <field name="product_uom_qty" string="Qty"/>
+                                        <field name="price_unit" string="Unit price"/>
+                                        <field name="price_subtotal_new" string="Estimated Total"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="actual_qty" string="Actual Qty"/>
+                                    <field name="actual_unit_price" string="Actual unit price"/>
+                                    <field name="actual_total" string="Actual Total"/>
+                                    <field name="company_id"/>
+<!--                                        <field name="product_uom_category_id"/>-->
+                                </group>
+                                <group>
+                                    <button name="show_details" string="Details" type="object"/>
+
+                                </group>
+                            </form>
+
+                            <list
+                                    decoration-info="parent_cost==False"
+                                    decoration-danger="actual_qty&gt;product_uom_qty or actual_unit_price&gt;price_unit"
+                                    decoration-success="is_used==False"
+                                    create="false"
+                                    edit="false"
+                                    delete="false"
+                                    editable="bottom"
+                                    options="{'no_create_edit': True, 'no_quick_create':True}">
+
+<!--                                <field invisible="1" name="project_id"/>-->
+                                <field context="{'parent_cost_id': parent_cost}" string="CE" name="parent_cost"
+                                       on_change="get_domain()"/>
+                                <field name="product_id"/>
+                                <field invisible="True" name="order_id"/>
+                                <field invisible="True" name="order_partner_id"/>
+                                <field invisible="True" name="name"/>
+                                <field invisible="True" name="salesman_id"/>
+                                <field name="product_uom_qty" string="Qty"/>
+<!--                                <field groups="product.group_uom" invisible="True" name="product_uom"-->
+<!--                                       string="Unit of Measure"/>-->
+                                <field name="price_unit" string="Unit Price"/>
+                                <field invisible="True" name="no_of_units" string="No. units"/>
+                                <field invisible="False" name="price_subtotal_new" string="Total Estimate Cost"
+                                       sum="Total"/>
+                                <field invisible="True" name="no_of_waves" string="No. waves"/>
+                                <field invisible="True" name="tax_ids" widget="many2many_tags"/>
+                                <field invisible="True" name="price_subtotal" sum="Total" widget="monetary"/>
+                                <field name="actual_qty" invisible="1"/>
+                                <field name="actual_unit_price" invisible="1"/>
+                                <field name="is_used" invisible="1"/>
+                                <field name="total_actual_qty" string="Total Actual Qty"/>
+                                <field name="total_actual_total" sum="Total_2" string="Total Actual Cost"/>
+                                <field name="company_id"/>
+<!--                                        <field name="product_uom_category_id"/>-->
+                                <button name="show_details" string="Details" type="object"/>
+
+                                <!-- <field name="quantity_test" widget="many2many_tags"
+                                                     context="{'default_line_id' : id, 'default_task_id':current_task_id}"
+                                                     domain="['&amp;', ('line_id', '=', id), ('task_id','=',current_task_id)]"><form><field name="name"/><field name="line_id"/><field name="task_id"/></form></field>-->
+                            </list>
+                        </field>
+                    </page>
+                    <!-- <page name="tasks_estimation_line" string="Tasks Estimation Line"><field name="tasks_estimations_ids"><tree editable="bottom" colors="blue:parent_cost==False;red:actual_qty>product_uom_qty or actual_unit_price>price_unit"><field name="project_id"/><field name="task_id"/><field name="parent_cost" on_change="get_domain()" context="{'parent_cost_id': parent_cost}"/><field name="product_id"/><field name="order_id" invisible='False'/><field name="order_partner_id" invisible='True'/><field name="name"/><field name="salesman_id" invisible='True'/><field name="product_uom_qty" string="Qty"/><field name="product_uom" string="Unit of Measure" groups="product.group_uom" invisible='True'/><field name="price_unit" string="Unit Price"/><field name="no_of_units" string="No. units" invisible='True'/><field name="price_subtotal_new" sum="Total" string="Subtotal_1" invisible='True'/><field name="no_of_waves" string="No. waves" invisible='True'/><field name="tax_id" widget="many2many_tags" invisible='True'/><field name="price_subtotal" sum="Total" widget="monetary" invisible='True'/><field name="actual_qty" invisible='True'/><field name="actual_unit_price" invisible='True'/></tree></field></page>-->
+                    <page name="tasks_details" string="Tasks Details">
+                        <form>
+                            <!-- <header>
+                              <button name="to_warehouse" string="Send WH" type="object"/>
+                            </header> -->
+                            <!-- <sheet> -->
+                            <field name="tasks_estimations_ids" widget="one2many_selectable">
+
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="product_id" string="Product"/>
+                                            <field name="name" string="Description"/>
+                                        </group>
+                                        <group>
+                                            <field name="product_uom_qty" string="Qty"/>
+                                            <field name="price_unit" string="Unit price"/>
+                                            <field name="price_subtotal_new" string="Estimated Cost"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <field name="actual_qty" string="Actual Qty"/>
+                                        <field name="actual_unit_price" string="Actual Unit Price"/>
+                                        <field name="actual_total" string="Actual Cost"/>
+                                        <field name="company_id"/>
+<!--                                        <field name="product_uom_category_id"/>-->
+                                    </group>
+                                </form>
+
+                                <list
+                                        decoration-info="parent_cost==False"
+                                        decoration-danger="actual_qty&gt;product_uom_qty or actual_unit_price&gt;price_unit"
+                                        create="false"
+                                        delete="false"
+                                        editable="bottom"
+                                        options="{'no_create_edit': True, 'no_quick_create':True}">
+                                    <!-- <field name="to_WH" string="To WH"/> -->
+                                    <field readonly="True" name="task_id" string="Task"/>
+                                    <field readonly="True" context="{'parent_cost_id': parent_cost}" string="CE"
+                                           name="parent_cost" on_change="get_domain()"/>
+
+
+                                    <field readonly="True" name="product_id"/>
+                                    <field readonly="True" invisible="True" name="order_id"/>
+                                    <field readonly="True" invisible="True" name="order_partner_id"/>
+                                    <field readonly="True" invisible="True" name="name"/>
+                                    <field readonly="True" invisible="True" name="salesman_id"/>
+                                    <field readonly="True" name="product_uom_qty" string="Qty"/>
+<!--                                    <field readonly="True" groups="product.group_uom" invisible="True"-->
+<!--                                           name="product_uom" string="Unit of Measure"/>-->
+                                    <field readonly="True" name="price_unit" string="Unit Price"/>
+                                    <field readonly="True" invisible="True" name="no_of_units" string="No. units"/>
+                                    <field readonly="True" invisible="False" name="price_subtotal_new"
+                                           string="Estimated Cost" sum="Total"/>
+                                    <field readonly="True" invisible="True" name="no_of_waves" string="No. waves"/>
+                                    <field readonly="True" invisible="True" name="tax_ids" widget="many2many_tags"/>
+                                    <field readonly="True" invisible="True" name="price_subtotal" sum="Total"
+                                           widget="monetary"/>
+                                    <field readonly="True" name="actual_qty" string="Actual Qty"/>
+                                    <field readonly="True" name="actual_unit_price" string="Actual Unit price"/>
+                                    <field readonly="True" name="actual_total" sum="Total_2" string="Actual Cost"/>
+                                    <field readonly="True" name="done_to_WH"/>
+                                    <field name="done_to_acct" string="Done ACCT"/>
+                                    <field name="done_to_expense" readonly="True"/>
+                                    <field name="company_id"/>
+<!--                                    <field name="product_uom_category_id"/>-->
+                                </list>
+                            </field>
+                            <!-- </sheet> -->
+                        </form>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="sale_order_inh_confirmation_date_group" model="ir.ui.view">
+            <field name="name">confirmation.date.group</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="before">
+                    <field name="check_confirmation_group" groups="awe_confirmation_date_group.confirmation_date_editable_group" invisible="1"/>
+                    <field name="check_confirmation_group_date" groups="awe_confirmation_date_group.confirmation_date_editable_group" force_save="1"
+                           invisible="check_confirmation_group != 'True'"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

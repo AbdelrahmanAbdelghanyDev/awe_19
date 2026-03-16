@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+         <record id="estimation_template_view_inherit" model="ir.ui.view">
+             <field name="name">estimation template view</field>
+             <field name="model">cost.estimation.template</field>
+             <field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.view_cost_estimate_template_form"/>
+             <field name="arch" type="xml">
+                <data>
+
+                    <xpath expr="//page" position="inside">
+                        <field name="template_sales_ids" invisible="1" />
+                    </xpath>
+
+                </data>
+            </field>
+         </record>
+
+
+
+    </data>
+</odoo>

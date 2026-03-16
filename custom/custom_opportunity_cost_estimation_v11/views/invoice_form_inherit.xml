@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+<!--         <record id="invoice_form_inherit" model="ir.ui.view">-->
+<!--             <field name="name">Invoice form inherit</field>-->
+<!--             <field name="model">account.move</field>-->
+<!--             <field name="inherit_id" ref="account.view_move_form"/>-->
+<!--             <field name="arch" type="xml">-->
+<!--                <data>-->
+<!--                    <field name="team_id" position="after">-->
+<!--&lt;!&ndash;                        <field name="tag_ids" widget="many2many_tags"/>&ndash;&gt;-->
+<!--                        <field name="revenue_team_id"/>-->
+<!--                        <field name="executive_team_id"/>-->
+<!--                    </field>-->
+<!--                </data>-->
+<!--            </field>-->
+<!--         </record>-->
+    </data>
+</odoo>

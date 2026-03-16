@@ -1,0 +1,73 @@
+<odoo>
+  <data>
+    <record id="custom_project_view_task_form2" model="ir.ui.view">
+      <field name="name">custom project.view_task_form2</field>
+      <field name="model">project.task</field>
+      <field name="inherit_id" ref="project.view_task_form2"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page[@name='description_page']" position="after">
+          <page name="estimation_line" string="Estimation Line">
+            <form>
+              <!-- <header>
+                <button name="to_warehouse" string="Send WH" type="object"/>
+              </header> -->
+              <!-- <sheet> -->
+                <field context="{'current_task_id':id, 'default_project_id':project_id}" name="estimation_ids" widget="one2many_selectable">
+
+                  <form>
+                    <group>
+                      <group>
+                        <field name="product_id" string="Product"/>
+                        <field name="name" string="Description"/>
+                      </group>
+                      <group>
+                        <field name="product_uom_qty" string="Qty"/>
+                        <field name="price_unit" string="Unit price"/>
+                        <field name="price_subtotal_new" string="Estimated Total"/>
+                      </group>
+                     </group>
+                     <group>
+                       <field name="actual_qty" string="Actual Qty"/>
+                       <field name="actual_unit_price" string="Actual unit price"/>
+                       <field name="actual_total" string="Actual Total"/>
+                                                       <field name="company_id"/>
+<!--                                        <field name="product_uom_category_id"/>-->
+                     </group>
+                  </form>
+
+                  <list decoration-info= "parent_cost==False" decoration-danger="actual_qty&gt;product_uom_qty or actual_unit_price&gt;price_unit" editable="bottom">
+                    <!-- <field name="to_WH" string="To WH"/> -->
+                    <field invisible="True" name="project_id" on_change="get_domain_2()"/>
+                    <field invisible="True" name="task_id"/>
+                    <field context="{'parent_cost_id': parent_cost}" name="parent_cost" string="CE" on_change="get_domain()"/>
+                    <field name="product_id"/>
+                    <field invisible="True" name="order_id"/>
+                    <field invisible="True" name="order_partner_id"/>
+                    <field invisible="True" name="name"/>
+                    <field invisible="True" name="salesman_id"/>
+                    <field invisible="False" name="product_uom_qty" string="Qty"/>
+                    <field invisible="True" groups="product.group_uom" name="product_uom" string="Unit of Measure"/>
+                    <field name="price_unit" string="Unit Price"/>
+                    <field invisible="True" name="no_of_units" string="No. units"/>
+                    <field invisible="False" name="price_subtotal_new" string="Estimate Total" sum="Total"/>
+                    <field invisible="True" name="no_of_waves" string="No. waves"/>
+                    <field invisible="True" name="tax_ids" widget="many2many_tags"/>
+                    <field invisible="True" name="price_subtotal" sum="Total" widget="monetary"/>
+                    <field name="actual_qty" string="Actual Qty"/>
+                    <field name="actual_unit_price" string="Actual Unit Price"/>
+                    <field name="actual_total" sum="Total_2" string="Actual Total"/>
+                    <field name="done_to_WH" string="Done WH"/>
+                    <field name="done_to_acct" string="Done ACCT"/>
+                    <field name="done_to_expense"/>
+                                                    <field name="company_id"/>
+<!--                                        <field name="product_uom_category_id"/>-->
+                  </list>
+                </field>
+              <!-- </sheet> -->
+            </form>
+          </page>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

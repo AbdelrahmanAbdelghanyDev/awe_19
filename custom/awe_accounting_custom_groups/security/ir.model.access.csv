@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_awe_accounting_custom_groups_awe_accounting_custom_groups,awe_accounting_custom_groups.awe_accounting_custom_groups,model_awe_accounting_custom_groups_awe_accounting_custom_groups,,1,0,0,0

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--  <template id="template_followup_report_custom"-->
+<!--            inherit_id="account_followup.template_followup_report"-->
+<!--            priority="20">-->
+
+<!--    &lt;!&ndash; Hide email subject and summary in PDF &ndash;&gt;-->
+<!--    <xpath expr="//div[contains(@class, 'o_account_reports_summary')]" position="attributes">-->
+<!--      <attribute name="t-if">context.get('print_mode') != True</attribute>-->
+<!--    </xpath>-->
+
+<!--    <xpath expr="//div[contains(@class, 'o_account_reports_email_subject_container')]" position="attributes">-->
+<!--      <attribute name="t-if">context.get('print_mode') != True</attribute>-->
+<!--    </xpath>-->
+
+<!--    <xpath expr="//div[contains(@class, 'o_account_reports_email_subject_edit')]" position="attributes">-->
+<!--      <attribute name="t-if">context.get('print_mode') != True</attribute>-->
+<!--    </xpath>-->
+
+<!--    <xpath expr="//div[contains(@class, 'o_account_reports_summary_edit')]" position="attributes">-->
+<!--      <attribute name="t-if">context.get('print_mode') != True</attribute>-->
+<!--    </xpath>-->
+
+<!--    &lt;!&ndash; Add customer name in PDF &ndash;&gt;-->
+<!--     <xpath expr="//div[contains(@class, 'o_account_reports_header')]" position="before">-->
+<!--      <t t-if="context.get('print_mode') == True">-->
+<!--        <div style="text-align: left; margin: 10px 0; font-weight: bold;">-->
+<!--          <t t-esc="partner.name" />-->
+<!--        </div>-->
+<!--      </t>-->
+<!--    </xpath>-->
+
+
+<!--  </template>-->
+</odoo>

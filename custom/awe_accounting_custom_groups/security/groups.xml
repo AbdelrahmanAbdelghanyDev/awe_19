@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="custom_accounting_groups">
+            <field name="name">Custom Accounting Groups</field>
+        </record>
+
+        <record id="group_post_button" model="res.groups">
+            <field name="name">Post Button Group</field>
+<!--            <field name="category_id" ref="custom_accounting_groups"/>-->
+        </record>
+
+        <record id="group_bank_reconcile_buttons" model="res.groups">
+            <field name="name">Bank Reconcile Buttons Group</field>
+<!--            <field name="category_id" ref="custom_accounting_groups"/>-->
+        </record>
+
+        <record id="group_reconcile_server_actions" model="res.groups">
+            <field name="name">(Reconcile,Un-reconcile) Server Actions Group</field>
+<!--            <field name="category_id" ref="custom_accounting_groups"/>-->
+        </record>
+
+    </data>
+</odoo>

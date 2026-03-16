@@ -1,0 +1,163 @@
+<odoo>
+	<data>
+
+		<!-- explicit list view definition -->
+		<record id="opportunity_cost_estimation_tree" model="ir.ui.view">
+			<field name="name">opportunity_cost_estimation.tree</field>
+			<field name="model">opportunity.cost.estimation</field>
+			<field name="arch" type="xml">
+				<list>
+					<field name="name"/>
+					<field name="pricelist_id" invisible="True"/>
+					<field name="currency_id" invisible="True"/>
+					<field name="company_id" invisible="True"/>
+					<field name="parent_opportunity" string="Opportunity"/>
+					<field name="partner_id" string="Customer"/>
+					<field name="amount_total" string="Total"/>
+					<field name="state" string="Status"/>
+					<field name="order_line" invisible="True" mode="list" context="{'default_parent_cost': id}"/>
+				</list>
+			</field>
+		</record>
+
+		<!-- explicit form view definition -->
+		<record id="opportunity_cost_estimation_form" model="ir.ui.view">
+			<field name="name">opportunity_cost_estimation.form</field>
+			<field name="model">opportunity.cost.estimation</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button invisible=" state in ['done', ' cancel'] "/>
+								class="oe_highlight" name="action_approve" string="Approve" type="object"/>
+						<button invisible="state == ' cancel'"
+								name="action_cancel" string="Cancel" type="object"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+					</header>
+
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" readonly="1"/>
+							</h1>
+						</div>
+
+						<group>
+							<group>
+								<field name="partner_id" string="Customer"/>
+								<field name="template_id" string="Estimation Template"/>
+								<field name="pricelist_id" invisible="True"/>
+								<field name="parent_opportunity" string="Source document"/>
+							</group>
+
+							<group>
+								<field name="date_order" string="Estimation Date"/>
+								<field name="validity_date"/>
+								<field name="company_id"/>
+								<field name="estimation_type" string="Estimation Type"/>
+							</group>
+						</group>
+
+						<group>
+							<notebook>
+
+								<page string="Estimation line">
+									<field name="order_line" mode="list"
+										   context="{'default_parent_cost': id}">
+										<list editable="bottom">
+
+											<field name="product_id"/>
+											<field name="order_id" invisible="True"/>
+											<field name="order_partner_id" invisible="True"/>
+											<field name="name"/>
+											<field name="salesman_id" invisible="True"/>
+
+											<field name="product_uom_qty" string="Qty"/>
+											<field name="no_of_units" string="Units"/>
+											<field name="price_unit" string="Unit Price"/>
+											<field name="price_subtotal_new" string="Subtotal" sum="Total"/>
+                                            <field name="tax_ids" widget="many2many_tags"/>
+											<field name="no_of_waves" string="Waves"/>
+											<field name="price_subtotal" widget="monetary" sum="Total" string="Total"/>
+
+											<field name="company_id"/>
+<!--											<field name="product_uom_category_id"/>-->
+
+										</list>
+									</field>
+
+									<group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+										<field name="amount_untaxed"
+											   widget="monetary"
+											   options="{'currency_field': 'currency_id'}"/>
+
+										<field name="amount_tax"
+											   widget="monetary"
+											   options="{'currency_field': 'currency_id'}"/>
+
+										<div class="oe_subtotal_footer_separator oe_inline o_td_label">
+											<label for="amount_total"/>
+										</div>
+
+										<field name="amount_total"
+											   class="oe_subtotal_footer_separator"
+											   nolabel="1"
+											   widget="monetary"
+											   options="{'currency_field': 'currency_id'}"/>
+									</group>
+								</page>
+
+								<page name="Products" string="Products">
+									<field name="pdt_line" invisible="True"/>
+
+									<field name="pdt_line_view">
+										<list editable="bottom">
+											<field name="product_id"/>
+											<field name="name"/>
+											<field name="category"/>
+											<field name="product_uom_qty"/>
+											<field name="price_unit" invisible="True"/>
+											<field name="market_price" invisible="True"/>
+											<field name="qty_hand" invisible="True"/>
+											<field name="uom_id"/>
+										</list>
+									</field>
+								</page>
+
+								<page name="brief" string="Brief">
+
+									<group>
+										<group>
+											<field name="research_type" readonly="True"/>
+											<field name="approach" readonly="True"/>
+											<field name="methodology" readonly="True"/>
+											<field name="number_of_legs" readonly="True"/>
+										</group>
+
+										<group>
+											<field name="sample_size" readonly="True"/>
+											<field name="gender" readonly="True"/>
+											<field name="sec" readonly="True" string="SEC"/>
+											<field name="age" readonly="True"/>
+										</group>
+									</group>
+
+									<group>
+										<group>
+											<field name="region" readonly="True"/>
+											<field name="usership" readonly="True"/>
+											<field name="moub" readonly="True" string="MOUB"/>
+										</group>
+									</group>
+
+								</page>
+
+							</notebook>
+						</group>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="confirmation_date_editable_group" model="res.groups">
+            <field name="name">Confirmation Date Editable</field>
+        </record>
+
+    </data>
+</odoo>

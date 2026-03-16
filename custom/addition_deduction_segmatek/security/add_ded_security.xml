@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="add_ded_module">
+            <field name="name">Addition And Deduction module</field>
+            <field name="description">User access level for this module</field>
+            <field name="sequence">9</field>
+        </record>
+
+        <record id="group_user" model="res.groups">
+            <field name="name">User (own documents)</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+<!--            <field name="users" eval="[(4, ref('base.user_root'))]"/>-->
+<!--            <field name="category_id" ref="addition_deduction_segmatek.add_ded_module"/>-->
+        </record>
+
+        <record id="group_viewer" model="res.groups">
+            <field name="name">User (all documents)</field>
+            <field name="implied_ids" eval="[(4, ref('addition_deduction_segmatek.group_user'))]"/>
+            <!-- <field name="users" eval="[(4, ref('base.user_root'))]"/> -->
+<!--            <field name="category_id" ref="addition_deduction_segmatek.add_ded_module"/>-->
+        </record>
+
+        <record id="group_first" model="res.groups">
+            <field name="name">First Approve</field>
+            <field name="implied_ids" eval="[(4, ref('addition_deduction_segmatek.group_viewer'))]"/>
+<!--            <field name="category_id" ref="addition_deduction_segmatek.add_ded_module"/>-->
+        </record>
+
+        <record id="group_sec" model="res.groups">
+            <field name="name">second Approve</field>
+            <field name="implied_ids" eval="[(4, ref('addition_deduction_segmatek.group_first'))]"/>
+<!--            <field name="category_id" ref="addition_deduction_segmatek.add_ded_module"/>-->
+        </record>
+
+        <record id="group_third" model="res.groups">
+            <field name="name">third Approve</field>
+            <field name="implied_ids" eval="[(4, ref('addition_deduction_segmatek.group_sec'))]"/>
+<!--            <field name="category_id" ref="addition_deduction_segmatek.add_ded_module"/>-->
+        </record>
+
+        <record id="group_Manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="implied_ids" eval="[(4, ref('addition_deduction_segmatek.group_third'))]"/>
+<!--            <field name="category_id" ref="addition_deduction_segmatek.add_ded_module"/>-->
+        </record>
+
+        <record model="ir.rule" id="pupils_rule">
+            <field name="name">Tutor only view his pupils</field>
+            <field name="model_id" ref="model_main_add_deduction"/>
+            <field name="groups" eval="[(4, ref('addition_deduction_segmatek.group_user'))]"/>
+            <field name="domain_force">[('current_user','=',user.id)]</field>
+        </record>
+
+        <record model="ir.rule" id="pupils_rule_all">
+            <field name="name">Tutor all view his pupils</field>
+            <field name="model_id" ref="model_main_add_deduction"/>
+            <field name="groups" eval="[(4, ref('addition_deduction_segmatek.group_viewer'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+    </data>
+</odoo>

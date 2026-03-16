@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_awe_confirmation_date_group_awe_confirmation_date_group,awe_confirmation_date_group.awe_confirmation_date_group,model_awe_confirmation_date_group_awe_confirmation_date_group,,1,0,0,0

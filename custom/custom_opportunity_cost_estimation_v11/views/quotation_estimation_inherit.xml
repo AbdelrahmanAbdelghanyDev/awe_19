@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+         <record id="estimation_quotation_view_inherit" model="ir.ui.view">
+             <field name="name">estimation quotation view</field>
+             <field name="model">sale.order</field>
+             <field name="inherit_id" ref="sale.view_order_form"/>
+             <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//page//field[@name='order_line']//list//field[@name='tax_ids']" position="attributes">
+                       <attribute name="invisible">True</attribute>
+                    </xpath>
+
+
+                    <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="replace">
+                        <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                        type="action" class="btn-primary" data-hotkey="q"
+                        />
+                    </xpath>
+                </data>
+            </field>
+         </record>
+    </data>
+</odoo>

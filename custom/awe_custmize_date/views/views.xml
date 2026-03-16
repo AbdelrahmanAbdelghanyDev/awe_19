@@ -1,0 +1,173 @@
+<odoo>
+    <data>
+
+        <record id="sale_form_inherit" model="ir.ui.view">
+            <field name="name">Sale form view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//field[@name='requested_date']" position="replace">-->
+<!--                    <field name="requested_date" widget="date"/>-->
+<!--                </xpath>-->
+
+                <xpath expr="//field[@name='commitment_date']" position="replace">
+                    <field name="commitment_date" widget="date"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="sales_form_inherit" model="ir.ui.view">
+            <field name="name">Sales form view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='date_order']" position="replace">
+                    <field name="date_order" invisible="state in ['sale', 'done', 'cancel']"
+                           widget="date"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="sale_tree_inherit" model="ir.ui.view">
+            <field name="name">Sale tree view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//field[@name='requested_date']" position="replace">-->
+<!--                    <field name="requested_date" widget="date"/>-->
+<!--                </xpath>-->
+
+                <xpath expr="//field[@name='commitment_date']" position="replace">
+                    <field name="commitment_date" widget="date"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="sale_qutation_inherit" model="ir.ui.view">
+            <field name="name">Sale qutation view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//field[@name='requested_date']" position="replace">-->
+<!--                    <field name="requested_date" widget="date"/>-->
+<!--                </xpath>-->
+
+                <xpath expr="//field[@name='commitment_date']" position="replace">
+                    <field name="commitment_date" widget="date"/>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field  name="opportunity_total_cost_2"
+                           string="Total cost" options="{'currency_field': 'currency_id'}" widget="monetary"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!--<record id="view_order_form_inherit_sale_stock_inherit_sale_order_dates" model="ir.ui.view">-->
+        <!--<field name="name">sale.order.form.inherit</field>-->
+        <!--<field name="model">sale.order</field>-->
+        <!--<field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<group name="sale_shipping" position="inside">-->
+        <!--<field name="requested_date" widget="date"/>-->
+        <!--<field name="commitment_date" widget="date"/>-->
+        <!--<field name="effective_date"/>-->
+        <!--</group>-->
+        <!--</field>-->
+        <!--</record>-->
+
+
+        <!--<record id="view_order_tree_date" model="ir.ui.view">-->
+        <!--<field name="model">sale.order</field>-->
+        <!--<field name="inherit_id" ref="sale.view_order_tree"/>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<field name="confirmation_date" position="after">-->
+        <!--<field name="requested_date" widget="date"/>-->
+        <!--<field name="commitment_date" widget="date"/>-->
+        <!--</field>-->
+        <!--</field>-->
+        <!--</record>-->
+
+        <!-- Add requested_date and commitment_date on quotation view -->
+        <!--<record id="view_quotation_tree_date" model="ir.ui.view">-->
+        <!--<field name="model">sale.order</field>-->
+        <!--<field name="inherit_id" ref="sale.view_quotation_tree"/>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<field name="date_order" position="after">-->
+        <!--<field name="requested_date" widget="date"/>-->
+        <!--<field name="commitment_date" widget="date"/>-->
+        <!--</field>-->
+        <!--</field>-->
+        <!--</record>-->
+
+
+        <!--form/sheet/notebook/page[2]/group/group[2]-->
+
+        <!-- explicit list view definition -->
+        <!--
+        <record model="ir.ui.view" id="awe_custmize_date.list">
+          <field name="name">awe_custmize_date list</field>
+          <field name="model">awe_custmize_date.awe_custmize_date</field>
+          <field name="arch" type="xml">
+            <tree>
+              <field name="name"/>
+              <field name="value"/>
+              <field name="value2"/>
+            </tree>
+          </field>
+        </record>
+        -->
+
+        <!-- actions opening views on models -->
+        <!--
+        <record model="ir.actions.act_window" id="awe_custmize_date.action_window">
+          <field name="name">awe_custmize_date window</field>
+          <field name="res_model">awe_custmize_date.awe_custmize_date</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+        -->
+
+        <!-- server action to the one above -->
+        <!--
+        <record model="ir.actions.server" id="awe_custmize_date.action_server">
+          <field name="name">awe_custmize_date server</field>
+          <field name="model_id" ref="model_awe_custmize_date_awe_custmize_date"/>
+          <field name="state">code</field>
+          <field name="code">
+            action = {
+              "type": "ir.actions.act_window",
+              "view_mode": "tree,form",
+              "res_model": self._name,
+            }
+          </field>
+        </record>
+        -->
+
+        <!-- Top menu item -->
+        <!--
+        <menuitem name="awe_custmize_date" id="awe_custmize_date.menu_root"/>
+        -->
+        <!-- menu categories -->
+        <!--
+        <menuitem name="Menu 1" id="awe_custmize_date.menu_1" parent="awe_custmize_date.menu_root"/>
+        <menuitem name="Menu 2" id="awe_custmize_date.menu_2" parent="awe_custmize_date.menu_root"/>
+        -->
+        <!-- actions -->
+        <!--
+        <menuitem name="List" id="awe_custmize_date.menu_1_list" parent="awe_custmize_date.menu_1"
+                  action="awe_custmize_date.action_window"/>
+        <menuitem name="Server to list" id="awe_custmize_date" parent="awe_custmize_date.menu_2"
+                  action="awe_custmize_date.action_server"/>
+        -->
+    </data>
+</odoo>
