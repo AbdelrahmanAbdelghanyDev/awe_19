@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <!-- Inherit Form View to Modify it -->
+       <record id="account_move_form_attachment_field" model="ir.ui.view">
+           <field name="name">account.move.form.attachment.field</field>
+           <field name="model">account.move</field>
+           <field name="inherit_id" ref="account.view_move_form"/>
+           <field name="arch" type="xml">
+
+               <xpath expr="//group[@id='header_left_group']" position="inside">
+                   <field name="attachments_ids" widget="many2many_binary"/>
+               </xpath>
+
+           </field>
+       </record>
+
+    </data>
+</odoo>

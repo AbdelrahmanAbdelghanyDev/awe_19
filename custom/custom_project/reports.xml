@@ -1,0 +1,184 @@
+<odoo>
+<data>
+
+<!-- ####################### Projects Report #################### -->
+    <report
+    id="reports_project"
+    model="project.project"
+    string="projects_report"
+    name="custom_project.report_project_view"
+    file="custom_project.report_project"
+    report_type="qweb-pdf" />
+
+    <!--                                         Add Css to Report                                       -->
+<!--    <template id="custom_project.product_template_report_template_layout" inherit_id="web.report_assets_common">-->
+<!--        <xpath expr="." position="inside">-->
+
+<!--                <link rel="stylesheet" href=""/>-->
+
+<!--        </xpath>-->
+<!--    </template>-->
+    <!--                 Report Template                         -->
+    <template id="report_project_view">
+      <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+          <t t-call="web.external_layout">
+            <div class="page">
+              <div class="oe_structure"/>
+              <h2>Daily Report</h2>
+              <table style="width:100%">
+                <tr>
+                  <th colspan="5"><span t-field="doc.name"/></th>
+                  <th colspan="2" >PROJECT START: <span t-field="doc.date_start"/></th>
+                  <th colspan="2" >APPROX. PROJECT END: <span t-field="doc.date"/></th>
+                  <th colspan="1">Place Holder</th>
+                </tr>
+                <tr>
+                  <th>Date</th>
+                  <th>Actual Start Time</th>
+                  <th>Actual End Time</th>
+                  <th>Travelling Time</th>
+                  <th>Team</th>
+                  <th style="width:2%">OT</th>
+                  <th>Task</th>
+                  <th>Remarks</th>
+                  <th style="width:8%">Status</th>
+                  <th style="width:33% !important;">Picture</th>
+                </tr>
+                  <t t-foreach="doc.task_ids" t-as="task">
+                    <tr>
+                      <th>
+                          <span t-field="task.date_start_splited"/><br></br>/<br></br><span t-field="task.date_end_splited"/>
+                      </th>
+                      <th><span t-field="task.time_start"/></th>
+                      <th><span t-field="task.time_end"/></th>
+                      <th><span t-field="task.traveling_time"/></th>
+                      <th>
+                          <span t-field="task.team_id.name"/><br></br>
+                          <t t-foreach="task.team_id.member_ids" t-as="member">
+                              <span t-field='member.name'/> /
+                          </t>
+                      </th>
+                      <th> </th>
+                      <th><span t-field="task.name"/></th>
+                      <th><span t-field="task.description"/></th>
+                      <th><span t-field="task.stage_id.name"/></th>
+                      <th style="width:33% !important;">
+                          <span t-field="task.original_image" t-field-options="{'widget':'image'}"/>
+                      </th>
+                    </tr>
+                  </t>
+              </table>
+            </div>
+          </t>
+        </t>
+      </t>
+    </template>
+
+
+
+
+
+
+<!-- ####################### Projects Report #################### -->
+ <!--    <report
+    id="reports_sales_project"
+    model="project.project"
+    string="sales_projects_report"
+    name="custom_project.report_sales_view"
+    file="custom_project.report_sales"
+    report_type="qweb-pdf" />
+ -->
+
+
+    <!--                 Report Template                         -->
+<!--     <template id="report_sales_view">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+
+                        <h2><span t-field="doc.name"/></h2>
+                            <table style="width:100%">
+                              <tr>
+                                <th style="width:3%">a.No</th>
+                                <th style="width:22%">DESCRIPTION</th>
+                                <th style="width:5%">Unit</th>
+                                <th style="width:6%">QUANTITY</th>
+                                <th style="width:6%">UNIT RATE</th>
+                                <th style="width:8%">AMOUNT IN UAE Dhs.</th>
+                                <th style="width:5%">COST OF MATERIAL</th>
+                                <th style="width:5%">TOTAL</th>
+                                <th style="width:5%">QOUTED</th>
+                                <th style="width:5%">T.PER</th>
+                                <th style="width:5%">HOURS</th>
+                                <th style="width:5%">H.T</th>
+                                <th style="width:5%">M.H.C</th>
+                                <th style="width:5%">qouted</th>
+                                <th style="width:5%">TOTAL</th>
+                                <th style="width:5%">M.H.Q</th>
+                              </tr>
+                            </table>
+
+                    </div>
+
+                </t>
+            </t>
+        </t>
+
+    </template> -->
+
+
+    <!-- ####################### Tasks Report #################### -->
+
+<!-- 
+    <report
+    id="reports_tasks"
+    model="project.task"
+    string="tasks_report"
+    name="custom_project.report_task_view"
+    file="custom_project.report_task"
+    report_type="qweb-pdf" />
+
+    <template id="report_task_view">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <h2>TODAY'S PLAN</h2>
+                            <table style="width:100%">
+                              <tr>
+                                <th style="width:20%">Date</th>
+                                <th style="width:30%">Task</th>
+                                <th style="width:20%">Team</th>
+                                <th style="width:10%">Expected Time</th>
+                                <th style="width:20%">Remarks</th>
+                              </tr>
+
+                              <tr>
+                                <th><span t-field="doc.today_date"/></th>
+                                <th><span t-field="doc.name"/></th>
+                                <th>
+                                    <span t-field="doc.team_id.name"/><br></br>
+                                    <t t-foreach="doc.team_id.member_ids" t-as="member">
+                                        <span t-field='member.name'/> /
+                                    </t>
+                                </th>
+                                <th><span t-field="doc.date_end"/></th>
+                                <th><span t-field="doc.description"/></th>
+
+
+                              </tr>
+
+
+                            </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template> -->
+
+</data>
+</odoo>

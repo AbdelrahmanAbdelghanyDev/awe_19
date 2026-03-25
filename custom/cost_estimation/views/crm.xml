@@ -1,0 +1,93 @@
+<odoo>
+    <data>
+        <record id="inherit_cost_estim_crm_form_w" model="ir.ui.view">
+            <field name="name">crm.lead.form</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_schedule_meeting']" position="after">
+                    <button class="oe_stat_button" type="object"
+                            name="action_smart_estimation" icon="fa-list"
+                            groups="cost_estimation.group_cost_est_viewer,cost_estimation.group_cost_est_user,cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app">
+                        <field name="estimation_count" widget="statinfo" string="Estimation(s)"/>
+                    </button>
+                    <field name="old" invisible="1"/>
+                    <field name="research_type_name" invisible="1"/>
+
+                </xpath>
+                <!--                <xpath expr="//button[@name='action_set_won_rainbowman']" position="attributes">-->
+                <!--                    <attribute name="invisible">1</attribute>-->
+                <!--                </xpath>-->
+                <!--                <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']" position="after">-->
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="after">
+                    <button name="action_estimation" string="New Estimation" type="object" class="oe_highlight"
+                            groups="cost_estimation.group_cost_est_viewer,cost_estimation.group_cost_est_user,cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app"/>
+                    <field name="quotation_restriction" invisible="1"/>
+                </xpath>
+                <xpath expr="//page[@name='lead']" position="after">
+                    <page string="Methodology" attrs="{'invisible': [('old','=',True)]}">
+                        <field name="product_line">
+                            <tree editable="bottom">
+                                <field name="description" force_save="1"/>
+                                <field name="research_type_id_crm" invisible="1"/>
+                                <field name="research_type_id_crm_name" invisible="1"/>
+<!--                                <field name="custom_company_id" invisible="1"/>-->
+                                <field name="product_id" domain="['&amp;','&amp;','|',('categ_id', 'ilike', research_type_id_crm_name)
+                                ,('categ_id.parent_id', 'ilike', research_type_id_crm_name),('sale_ok', '=', True)]"/>
+                                <field name="fw_country" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                                <field name="fw_city" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                                <field name="sec"
+                                       attrs="{'column_invisible': [('parent.research_type_name', '=', 'QN')]}"/>
+                                <field name="quantity"
+                                       attrs="{'column_invisible': [('parent.research_type_name', '=', 'QN')]}"/>
+                                <!--                                <field name="no_of_unit_attends"/>-->
+                                <field name="mp_of_respondants"
+                                       attrs="{'column_invisible': [('parent.research_type_name', '=', 'QN')]}"/>
+                                <field name="gender"
+                                       attrs="{'column_invisible': [('parent.research_type_name', '=', 'QN')]}"/>
+                                <field name="age"
+                                       attrs="{'column_invisible': [('parent.research_type_name', '=', 'QN')]}"/>
+                                <field name="data_capture"
+                                       attrs="{'column_invisible': [('parent.research_type_name', '=', 'QL')]}"/>
+                                <field name="quantity_qn"
+                                       attrs="{'column_invisible': [('parent.research_type_name', '=', 'QL')]}"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <!--                    <page string="Methodology (QN)" attrs="{'invisible':[('research_type_name','=','QL')]}">-->
+                    <!--                        <field name="product_line_qn" >-->
+                    <!--                            <tree editable="bottom">-->
+                    <!--                                <field name="description"/>-->
+                    <!--                                <field name="product_id" />-->
+                    <!--                                <field name="data_capture"/>-->
+                    <!--                                <field name="fw_country" options="{'no_quick_create': True, 'no_create_edit' : True}"/>-->
+                    <!--                                <field name="fw_city" options="{'no_quick_create': True, 'no_create_edit' : True}"/>-->
+                    <!--                                <field name="quantity"/>-->
+                    <!--                            </tree>-->
+                    <!--                        </field>-->
+                    <!--                    </page>-->
+                </xpath>
+            </field>
+        </record>
+        <!--        <record id="inherit_cost_estim_crm_quot_form" model="ir.ui.view">-->
+        <!--            <field name="name">crm.lead.form</field>-->
+        <!--            <field name="model">crm.lead</field>-->
+        <!--            <field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.opportunity_product_form1_view"/>-->
+        <!--            <field name="arch" type="xml">-->
+
+        <!--                <xpath expr="//button[@name='%(sale_crm.sale_action_quotations_new)d']" position="after">-->
+        <!--                    <field name="quotation_restriction" invisible="1"/>-->
+
+        <!--                </xpath>-->
+        <!--                <xpath expr="//button[@name='sale_action_quotations_new']" position="replace">-->
+        <!--                    <button string="New Quotation" name="%(sale_crm.sale_action_quotations_new)d" type="action"-->
+        <!--                            class="oe_highlight"-->
+        <!--                            context="{'search_default_partner_id': partner_id,-->
+        <!--                            'default_partner_id': partner_id,'default_team_id': team_id,'default_campaign_id': campaign_id,-->
+        <!--                            'default_medium_id': medium_id,'default_source_id': source_id}"-->
+        <!--                            attrs="{'invisible':[('quotation_restriction','=',True)]}"/>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+    </data>
+</odoo>

@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+         <record id="crm_methodology_view_inherit" model="ir.ui.view">
+             <field name="name">crm methodology view</field>
+             <field name="model">crm.lead</field>
+             <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+             <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='pdt_line']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('research_type_name', '!=','QN')]}</attribute>
+                    </xpath>
+
+                    <xpath expr="//page[@name='products']" position="inside">
+                        <field name="pdt_line_ql" attrs="{'invisible': [('research_type_name', '!=','QL')]}">
+                            <tree editable="bottom">
+                                <field name='pdt_crm_2_research_id' string="test2"  invisible="1" required="1"/>
+                                <field name="name"/>
+                                <field name="product_id" string="Methodology" domain="['&amp;','|',('categ_id', 'ilike', pdt_crm_2_research_id),('categ_id.parent_id', 'ilike', pdt_crm_2_research_id),('sale_ok', '=', True)]" required="1"/>
+                                <field name="fw_city_country" string="FW Country"/>
+                                <field name="fw_country" string="FW City"/>
+                                <field name="sec" string="SEC"/>
+                                <field name="no_of_units_attendees" string="No of Units"/>
+                                <field name="no_of_respondants"/>
+                                <field name="sample_size" readonly="True" invisible="True"/>
+                                <field name="gender"/>
+                                <field name="age"/>
+                                <field name="client_attendance" invisible="True"/>
+                            </tree>
+                        </field>
+
+                    </xpath>
+                     <xpath expr="//field[@name='pdt_line']/tree" position="replace">
+                         <tree editable="bottom">
+                            <field name='pdt_crm_research_id' string="test" invisible="1" />
+                            <field name="name"/>
+                            <field name="product_id" string="Methodology" domain="['&amp;','|',('categ_id', 'ilike', pdt_crm_research_id),('categ_id.parent_id', 'ilike', pdt_crm_research_id),('sale_ok', '=', True)]"/>
+                            <field name="data_capture" string="Data Capture"/>
+                            <field name="fw_city_country" string="FW Country"/>
+                            <field name="fw_country" string="FW City "/>
+                            <field name="product_uom_qty" string="SS"/>
+                         </tree>
+
+                     </xpath>
+
+
+                </data>
+            </field>
+         </record>
+
+
+        <record id="crm_lead_view_inherit_mobile" model="ir.ui.view">
+             <field name="name">crm lead methodology view mobile</field>
+             <field name="model">crm.lead</field>
+             <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+             <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='company_id']" position="after">
+                        <field name="research_type_id" string="Research Type" domain="[('name','in',['QL','QN'])]"/>
+                    </xpath>
+                </data>
+             </field>
+        </record>
+
+
+
+    </data>
+</odoo>

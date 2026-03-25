@@ -1,0 +1,14 @@
+<odoo>
+      <record id="account_budget_form_view_inherits" model="ir.ui.view">
+            <field name="name">account_budget_form_view_inherits</field>
+            <field name="model">account.budget.post</field>
+            <field name="inherit_id" ref="account_budget.view_budget_post_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="user_ids" widget="many2many_tags"/>
+                </xpath>
+
+            </field>
+        </record>
+</odoo>

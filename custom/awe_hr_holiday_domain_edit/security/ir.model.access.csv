@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_awe_hr_holiday_domain_edit_awe_hr_holiday_domain_edit,awe_hr_holiday_domain_edit.awe_hr_holiday_domain_edit,model_awe_hr_holiday_domain_edit_awe_hr_holiday_domain_edit,,1,0,0,0

@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_cost_estimation" model="ir.sequence">
+          <field name="name">seq cost estimation</field>
+          <field name="code">seq.cost.estimation</field>
+          <field name="prefix">BUD/</field>
+          <field name="padding">5</field>
+       </record>
+
+<!--        <function model="opportunity.cost.estimation" name="change_prefix"/>-->
+
+    </data>
+</odoo>

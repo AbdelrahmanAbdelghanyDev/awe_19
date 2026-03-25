@@ -1,0 +1,203 @@
+<odoo>
+    <data>
+        <!--        <record id="quotation_work_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">sale.form.inherit</field>-->
+        <!--            <field name="model">sale.order</field>-->
+        <!--            <field name="inherit_id" ref="new_awe_edits.custom_work_country_id_form_view"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='work_country_id']" position="attributes">-->
+        <!--                    <attribute name="invisible">1</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--        <record id="quotation_work_source_doc_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">sale.form.inherit</field>-->
+        <!--            <field name="model">sale.order</field>-->
+        <!--            <field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.custom_sale_view_order_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='parent_opportunity']" position="attributes">-->
+        <!--                    <attribute name="invisible">1</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="sale_order_wave_cost" model="ir.ui.view">
+            <field name="name">sale.order.wave.cost</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name='wave_cost' attrs="{'readonly': [('state', '==', 'done')]}"/>
+                    <field name='op_percentage' attrs="{'readonly': [('state', '==', 'done')]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+<xpath expr="//field[@name='client_order_ref']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+ <xpath expr="//field[@name='fiscal_position_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+<xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+<xpath expr="//field[@name='invoice_status']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+<xpath expr="//field[@name='origin']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+<xpath expr="//field[@name='opportunity_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+<xpath expr="//field[@name='campaign_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+<xpath expr="//field[@name='medium_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+<xpath expr="//field[@name='source_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                </xpath>
+
+
+            </field>
+        </record>
+
+        <!--        <record id="quotation_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">Quotation.form.inherit</field>-->
+        <!--            <field name="model">sale.order</field>-->
+        <!--            <field name="inherit_id" ref="sale.view_order_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='payment_term_id']" position="after">-->
+        <!--                    <field name="work_country_id" string="Field Work Country"/>-->
+        <!--                    <field name='wave_cost'/>-->
+        <!--                    <field name="parent_opportunity" string="Source Document"/>-->
+        <!--                    <field name="cost_estimation_ref" attrs="{'invisible': [('cost_estimation_ref', '=', False)]}"-->
+        <!--                           readonly="1"/>-->
+        <!--                    <field name="total_margin" attrs="{'invisible': [('cost_estimation_ref', '=', False)]}"-->
+        <!--                           readonly="1" widget="monetary" options="{'currency_field': 'budget_currency_x'}"/>-->
+        <!--                    <field name="margin_percent" attrs="{'invisible': [('cost_estimation_ref', '=', False)]}"-->
+        <!--                           readonly="1"/>-->
+        <!--                    <field name="total_cost" attrs="{'invisible': [('cost_estimation_ref', '=', False)]}" readonly="1"-->
+        <!--                           widget="monetary" options="{'currency_field': 'budget_currency_x'}"/>-->
+        <!--&lt;!&ndash;                    <field name="wave_cost" attrs="{'invisible': [('cost_estimation_ref', '=', False)]}" readonly="1"&ndash;&gt;-->
+        <!--&lt;!&ndash;                           widget="monetary" options="{'currency_field': 'budget_currency_x'}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <field name="budget_total_x" string="Cost (budget currency)" widget="monetary" readonly="True"&ndash;&gt;-->
+        <!--&lt;!&ndash;                           attrs="{'invisible': [('budget_total', '&gt;', 0),('budget_total_x', '=', 0)]}"/>&ndash;&gt;-->
+        <!--                    <field name="budget_currency_x" attrs="{'invisible': [('cost_estimation_ref', '=', False)]}"/>-->
+
+        <!--                </xpath>-->
+        <!--                <xpath expr="//group[@name='technical']" position="attributes">-->
+        <!--                    <attribute name="groups">base.group_user</attribute>-->
+        <!--                </xpath>-->
+
+        <!--            </field>-->
+        <!--        </record>-->
+        <record id="quotation_cost_inherit" model="ir.ui.view">
+            <field name="name">Quotation.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_crm.sale_view_inherit123"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='opportunity_id']" position="attributes">
+                    <attribute name="groups">base.group_user</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="quotation_inherit_v11" model="ir.ui.view">
+            <field name="name">Quotation.form.v11.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.custom_sale_view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='opportunity_total_cost_2']" position="replace">
+                    <field groups="custom_opportunity_cost_estimation_v11.group_viewer" name="opportunity_total_cost_2"
+                           string="Total cost" options="{'currency_field': 'currency_id'}"
+                           attrs="{'invisible': [('opportunity_cost_estimation','=',[])]}" widget="monetary"/>
+                </xpath>
+                <xpath expr="//field[@name='opportunity_cost_estimation']" position="replace">
+                    <!--                    <attribute name="invisible">[('opportunity_cost_estimation','=','')]</attribute>-->
+                    <field groups="custom_opportunity_cost_estimation_v11.group_viewer"
+                           attrs="{
+        'invisible': [('opportunity_cost_estimation','=', [])],
+        'readonly': [('state', '=', 'done')]
+    }"
+                           name="opportunity_cost_estimation" string="Cost Estimation" widget="many2many_tags"/>
+
+                </xpath>
+
+            </field>
+        </record>
+        <record id="quotation_inherit_awe" model="ir.ui.view">
+            <field name="name">Quotation.form.awe.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="awe_cost_estimation.awe_sale_view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='budget_currency']" position="replace">
+                    <field name="budget_currency" attrs="{'invisible': [('opportunity_cost_estimation','=',[])]}"/>
+                </xpath>
+                <xpath expr="//field[@name='budget_total']" position="replace">
+                    <field name="budget_total" string="Cost (budget currency)" widget="monetary" readonly="True"
+                           attrs="{'invisible': [('budget_total','=', 0)]}"/>
+
+                    <!--                    <attribute name="invisible">[('opportunity_cost_estimation','=',[])]</attribute>-->
+                </xpath>
+            </field>
+        </record>
+        <record id="quotation_inherit_awe2" model="ir.ui.view">
+            <field name="name">Quotation.form.awe2.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="awe_cost_estimation.awe_sale_view_order_form_2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='margin_after_travel']" position="replace">
+                    <field readonly="True" name="margin_after_travel" string="CP After Travel" force_save="1"
+                           attrs="{'invisible': [('margin_after_travel','=',0)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='margin_percentage_after']" position="replace">
+                    <field readonly="True" name="margin_percentage_after" string="CM After Travel"
+                           attrs="{'invisible': [('margin_percentage_after','=','-Inf %')]}"/>
+
+                    <field name="untaxed_company_currency"/>
+                </xpath>
+                <xpath expr="//field[@name='margin']" position="replace">
+                    <field readonly="True" name="margin" string="Contribution Profit"
+                           attrs="{'invisible': [('opportunity_cost_estimation','=',[])]}"/>
+
+                </xpath>
+                <xpath expr="//field[@name='margin_percentage']" position="replace">
+                    <field readonly="True" name="margin_percentage" string="Contribution Margin"
+                           attrs="{'invisible': [('margin_percentage','=','-Inf %')]}"/>
+
+                </xpath>
+                <xpath expr="//field[@name='third_party_cost']" position="after">
+                    <field readonly="True" name="margin_x" string="Contribution Profit" force_save="1"
+                           options="{'currency_field': 'budget_currency_x'}"
+                           attrs="{'invisible': [('opportunity_cost_estimation','!=',[])]}"/>
+                    <field readonly="True" name="margin_percentage_x" string="Contribution Margin" force_save="1"
+                           attrs="{'invisible': [('margin_percentage','!=','-Inf %')]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='travel_expenses']" position="after">
+
+                    <field readonly="True" name="margin_after_travel_x" string="CP After Travel" force_save="1"
+                           options="{'currency_field': 'budget_currency_x'}"
+                           attrs="{'invisible': [('margin_after_travel','!=',0)]}"/>
+                    <field readonly="True" name="margin_percentage_after_x" string="CM After Travel" force_save="1"
+                           attrs="{'invisible': [('margin_percentage_after','!=','-Inf %')]}"/>
+
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+custom_executive_team,executive team,model_executive_team,custom_opportunity_cost_estimation.group_user,1,1,1,1
+custom_revenue_team,revenue team,model_revenue_team,custom_opportunity_cost_estimation.group_user,1,1,1,1
+custom_project_objective,project objective,model_project_objective,custom_opportunity_cost_estimation.group_user,1,1,1,1
+custom_data_capture,data capture,model_data_capture,custom_opportunity_cost_estimation.group_user,1,1,1,1
+custom_research_type,research type,model_research_type,custom_opportunity_cost_estimation.group_user,1,1,1,1
+custom_crm_product_line,crm.product_line,model_crm_product_line,custom_opportunity_cost_estimation.group_user,1,1,1,1

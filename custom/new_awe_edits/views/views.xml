@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="custom_work_country_id_form_view2" model="ir.ui.view">
+            <field name="name">Work country</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="work_country_id" string="Field Work Country" attrs="{'readonly': [('state', '==', 'done')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

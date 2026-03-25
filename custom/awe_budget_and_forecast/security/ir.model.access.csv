@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_budget_forecast,access_budget_forecast,model_budget_forecast,,1,1,1,1
+access_budget_forecast_line,access_budget_forecast_line,model_budget_forecast_line,,1,1,1,1
+access_comparison_line,access_comparison_line,model_comparison_line,,1,1,1,1
+access_sales_bu_total,access_sales_bu_total,model_sales_bu_total,,1,1,1,1
+access_rev_bu_total,access_rev_bu_total,model_rev_bu_total,,1,1,1,1

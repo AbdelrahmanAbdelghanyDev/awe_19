@@ -1,0 +1,52 @@
+<odoo>
+  <data>
+   <!-- Inherit Form View to Modify it -->
+      <record id="hr_expense_sheet_form_inherit" model="ir.ui.view">
+       <field name="name">hr.expense.sheet.form.inherit</field>
+       <field name="model">hr.expense.sheet</field>
+       <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+       <field name="arch" type="xml">
+           <xpath expr="//button[@name='action_sheet_move_create']" position="attributes">
+               <attribute name="string">Create Journal Entries</attribute>
+           </xpath>
+           <xpath expr="//field[@name='payment_mode']" position="before">
+               <field name="partner_id" required="1" attrs="{'readonly':[('state','=','approve')]}"/>
+           </xpath>
+
+           <xpath expr="//field[@name='employee_id']" position="attributes">
+               <attribute name="invisible">True</attribute>
+           </xpath>
+
+           <xpath expr="//field[@name='user_id']" position="replace">
+               <field name="manager_partner_id"/>
+               <field name="attachments_ids" widget="many2many_binary"/>
+           </xpath>
+
+           <xpath expr="//field[@name='expense_line_ids']" position="attributes">
+               <attribute name="context">{'form_view_ref' : 'hr_expense.hr_expense_view_form_without_header',
+                   'default_company_id': company_id, 'default_partner_id': partner_id}</attribute>
+           </xpath>
+
+           <xpath expr="//field[@name='expense_line_ids']/tree/field[@name='product_id']" position="before">
+               <field name="partner_id"/>
+           </xpath>
+
+       </field>
+   </record>
+
+      <!-- Inherit Form View to Modify it -->
+      <record id="res_partner_is_employee" model="ir.ui.view">
+          <field name="name">res.partner.is.employee</field>
+          <field name="model">res.partner</field>
+          <field name="inherit_id" ref="base.view_partner_form"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='vat']" position="after">
+                  <field name="is_employee"/>
+              </xpath>
+
+          </field>
+      </record>
+
+  </data>
+</odoo>

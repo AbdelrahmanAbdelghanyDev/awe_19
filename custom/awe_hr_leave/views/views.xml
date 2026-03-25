@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="confirm_all_allocation_action" model="ir.actions.server">
+            <field name="name">Confirm All</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.action_confirm()
+            </field>
+        </record>
+
+        <record id="refuse_all_allocation_action" model="ir.actions.server">
+            <field name="name">Refuse All</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.action_refuse()
+            </field>
+        </record>
+
+        <record id="draft_all_allocation_action" model="ir.actions.server">
+            <field name="name">Draft All</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.action_draft()
+            </field>
+        </record>
+
+        <record id="validate_all_allocation_action" model="ir.actions.server">
+            <field name="name">Validate All</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.action_validate()
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

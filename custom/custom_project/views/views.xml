@@ -1,0 +1,356 @@
+<odoo>
+    <data>
+
+        <!--        <record id="custom_sale_order_teams_finance_team" model="ir.ui.view">-->
+        <!--            <field name="name">custom sale order teams finance team</field>-->
+        <!--            <field name="model">sale.order</field>-->
+        <!--            <field name="groups_id" eval="[(6,0, [ref('custom_project.group_finance_team')])]"/>-->
+
+        <!--            <field name="inherit_id" ref="sale.view_order_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+
+        <!--                <xpath expr="//field[@name='revenue_team_id']" position="attributes">-->
+        <!--                    <attribute name="readonly">0</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='team_id']" position="attributes">-->
+        <!--                    <attribute name="readonly">0</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!-- Project Form View -->
+        <record id="custom_project_template_form_view" model="ir.ui.view">
+            <field name="name">custom.project.template.form.view</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <!--                                <xpath expr="//notebook/page[last()]" position="after">-->
+
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="mon"/>
+                    <field name="date_start"/>
+                    <field name="date"/>
+                </xpath>
+
+
+<!--                <xpath expr="//page[@name='settings']/group/field[@name='partner_id']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="internl_pro_name" placeholder="Internal Project Name"/>
+                </xpath>
+
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="custom_project_template_tree_view" model="ir.ui.view">
+            <field name="name">custom.project.template.tree.view</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="internl_pro_name"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Task Form View -->
+        <record id="custom_task_template_form_view2" model="ir.ui.view">
+            <field name="name">custom.task.template.form.view</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='project_id']" position="after">
+                                        <field name="original_image" widget='image' class="oe_avatar"
+                           options='{"preview_image":"medium_image"}'/>
+
+                </xpath>
+<!--                <xpath expr="//div[@class='oe_title']" position="inside">-->
+
+
+<!--                </xpath>-->
+                <xpath expr="//field[@name='date_deadline']" position="after">
+<!--                    <field name="date_start" string="FW Starting date"/>-->
+                    <field name="date_end" string="FW Ending date"/>
+                    <field name="traveling_time" string="Target(month of completion)" required="1" force_save="1"/>
+                    <field name='team_id' invisible="True"/>
+                    <field name='executive_person'/>
+                    <field name="user_check" invisible="1"/>
+                    <field name='Revenue_bu' attrs="{'readonly': [('user_check', '=', False)]}"/>
+                    <field name='Sales_bu' attrs="{'readonly': [('user_check', '=', False)]}"/>
+                </xpath>
+<!--                <xpath expr="//field[@name='planned_date_begin']" position="replace"></xpath>-->
+                <field name="planned_date_begin" position="after">
+                    <field name="date_end1" string="FW Ending date"/>
+                </field>
+                <xpath expr="//field[@name='date_deadline']" position="attributes">
+                    <attribute name="string">Rev Date</attribute>
+                </xpath>
+
+
+                <!--<xpath expr="//field[@name='estimation_ids']//tree//field[@name='actual_total']" position="attributes">-->
+                <!--<attribute name="string">Sample Size</attribute>-->
+                <!--</xpath>-->
+
+
+                <!--<xpath expr="//notebook/page[@name='description_page']/page/group/group/field[@name='planned_hours']" position="attributes">-->
+                <!--<attribute name="string">Sample Size</attribute>-->
+                <!--</xpath>-->
+
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_task_form2_inheritted">
+            <field name="name">project.task.form.inheritted</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="groups_id" eval="[(6,0, (ref('hr_timesheet.group_hr_timesheet_user'),))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='planned_hours']" position="replace">
+                    <field name="planned_hours" widget="float_time" string="Sample Size"/>
+                </xpath>
+
+                <xpath expr="//field[@name='unit_amount']" position="replace">
+                    <field name="unit_amount" string="Sample Size" widget="float_time"/>
+                </xpath>
+<!--                <xpath expr="//button[@name='toggle_active']" position="attributes">-->
+<!--                    <attribute name="groups">custom_project.group_finance_team</attribute>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+        <!--<record model="ir.ui.view" id="view_task_form2_inherited">-->
+        <!--<field name="name">project.task.form.inherited</field>-->
+        <!--<field name="model">project.task</field>-->
+        <!--<field name="inherit_id" ref="project.view_task_form2" />-->
+        <!--<field name="groups_id" eval="[(6,0, (ref('hr_timesheet.group_hr_timesheet_user'),))]"/>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<xpath expr="//notebook/page[@name='description_page']" position="after">-->
+        <!--<page string="Timesheets" attrs="{'invisible': [('project_id', '=', False)]}">-->
+        <!--<group>-->
+        <!--<group>-->
+        <!--<field name="planned_hours" widget="float_time"/>-->
+        <!--</group>-->
+        <!--<group>-->
+        <!--<field name="progress" widget="progressbar"/>-->
+        <!--</group>-->
+        <!--</group>-->
+        <!--<field name="timesheet_ids" context="{'default_project_id': project_id}">-->
+        <!--<tree editable="bottom" string="Timesheet Activities" default_order="date">-->
+        <!--<field name="date"/>-->
+        <!--<field name="user_id" invisible="1"/>-->
+        <!--<field name="employee_id" required="1"/>-->
+        <!--<field name="name"/>-->
+        <!--<field name="unit_amount" string="Duration" widget="float_time"/>-->
+        <!--<field name="project_id" invisible="1"/>-->
+        <!--</tree>-->
+        <!--</field>-->
+        <!--<group>-->
+        <!--<group class="oe_subtotal_footer oe_right" name="project_hours">-->
+        <!--<field name="effective_hours" widget="float_time" />-->
+        <!--<field name="children_hours" widget="float_time" attrs="{'invisible' : [('children_hours', '=', 0.0)]}" />-->
+        <!--<field name="total_hours_spent" widget="float_time" class="oe_subtotal_footer_separator" attrs="{'invisible' : [('children_hours', '=', 0.0)]}" />-->
+        <!--<field name="remaining_hours" widget="float_time" class="oe_subtotal_footer_separator" readonly="1"/>-->
+        <!--</group>-->
+        <!--</group>-->
+        <!--</page>-->
+        <!--</xpath>-->
+        <!--</field>-->
+        <!--</record>-->
+
+
+        <!--<record id="custom_task_template_form22_view" model="ir.ui.view">-->
+        <!--<field name="name">custom.task.template.form22.view</field>-->
+        <!--<field name="model">project.task</field>-->
+        <!--<field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.custom_project_view_task_form2"/>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<xpath expr="//field[@name='actual_total']" position="attributes">-->
+        <!--<attribute name="string">Sample Size</attribute>-->
+        <!--</xpath>-->
+        <!--</field>-->
+        <!--</record>-->
+
+
+        <!--<record model="ir.ui.view" id="view_task_form2_inheritted">-->
+        <!--<field name="name">project.task.form.inheritted</field>-->
+        <!--<field name="model">project.task</field>-->
+        <!--<field name="inherit_id" ref="project.view_task_form2"/>-->
+        <!--<field name="groups_id" eval="[(6,0, (ref('hr_timesheet.group_hr_timesheet_user'),))]"/>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<xpath expr="//notebook/page[@name='description_page']" position="after">-->
+        <!--<page string="Timesheets" attrs="{'invisible': [('project_id', '=', False)]}">-->
+        <!--<group>-->
+        <!--<group>-->
+        <!--<field name="planned_hours" widget="float_time" string="Sample Size"/>-->
+        <!--</group>-->
+        <!--</group>-->
+        <!--</page>-->
+        <!--</xpath>-->
+        <!--</field>-->
+        <!--</record>-->
+
+
+        <!--<record model="ir.ui.view" id="view_task_form2_inheritted">-->
+        <!--<field name="name">project.task.form.inheritted</field>-->
+        <!--<field name="model">project.task</field>-->
+        <!--<field name="inherit_id" ref="project.view_task_form2" />-->
+        <!--<field name="groups_id" eval="[(6,0, (ref('hr_timesheet.group_hr_timesheet_user'),))]"/>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<xpath expr="//notebook/page[@name='description_page']" position="after">-->
+        <!--<page string="Timesheets" attrs="{'invisible': [('project_id', '=', False)]}">-->
+        <!--<group>-->
+        <!--<group>-->
+        <!--<field name="planned_hours" widget="float_time" string="Sample Size"/>-->
+        <!--</group>-->
+        <!--</group>-->
+        <!--</page>-->
+        <!--</xpath>-->
+        <!--</field>-->
+        <!--</record>-->
+
+
+        <!--<record id="view_task_tree2_inheritted" model="ir.ui.view">-->
+        <!--<field name="name">project.task.tree.inheritted</field>-->
+        <!--<field name="model">project.task</field>-->
+        <!--<field name="inherit_id" ref="project.view_task_tree2" />-->
+        <!--&lt;!&ndash;<field eval="2" name="priority"/>&ndash;&gt;-->
+        <!--<field name="arch" type="xml">-->
+        <!--<xpath expr="//field[@name='user_id']" position="after">-->
+
+        <!--&lt;!&ndash;<field name="planned_hours" position="attributes">&ndash;&gt;-->
+        <!--<field name="planned_hours" string="Sample Size"/>-->
+        <!--&lt;!&ndash;<attribute name="string">Sample Size</attribute>&ndash;&gt;-->
+        <!--&lt;!&ndash;</field>&ndash;&gt;-->
+        <!--</xpath>-->
+        <!--</field>-->
+        <!--</record>-->
+
+        <!--  Task Tree view Inherited -->
+        <record id="custom_task_template_tree_view" model="ir.ui.view">
+            <field name="name">custom.task.template.tree.view</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//field[@name='user_id']" position="replace">-->
+<!--                    <field name="user_id" invisible="True"/>-->
+<!--                </xpath>-->
+                <xpath expr="//field[@name='project_id']" position="after">
+                    <field name="team_id"/>
+                    <field name="date_end"/>
+                    <field name="description"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Repair Form View -->
+        <!--        <record id="custom_repair_template_form_view" model="ir.ui.view">-->
+        <!--            <field name="name">custom.repair.template.form.view</field>-->
+        <!--            <field name="model">mrp.repair</field>-->
+        <!--            <field name="inherit_id" ref="mrp_repair.view_repair_order_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='guarantee_limit']" position="after">-->
+        <!--                    <field name="project_id"/>-->
+        <!--                </xpath>-->
+
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--Inherit quotations search view-->
+        <record id="view_project_taskr_inherit_search" model="ir.ui.view">
+            <field name="name">project.task.search.expand.filter</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <!-- This field will show up on the default filters
+                         &lt; is the XML encoding for < and &gt; is the XML encoding for > -->
+                    <filter string="Today" name="today" domain="[('today_flag', '=', True)]"/>
+
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="custom_project_list_view">
+            <field name="name">custom.project.list.view</field>
+            <field name="model">project.task.teams</field>
+            <field name="arch" type="xml">
+                <tree string='List Details'>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record id="custom_project_template_action" model="ir.actions.act_window">
+            <field name="name">Teams</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.task.teams</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new Team.
+                </p>
+            </field>
+        </record>
+
+        <!-- explicit Form view definition -->
+        <record id="custom_project_details_form_view" model="ir.ui.view">
+            <field name="name">project.task.teams.form</field>
+            <field name="model">project.task.teams</field>
+            <field name="arch" type="xml">
+                <form string="_form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="member_ids"/>
+                        </group>
+
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit Form view definition -->
+        <record id="members_details_form_view" model="ir.ui.view">
+            <field name="name">members.details.form.view</field>
+            <field name="model">team.members</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name="Teams" id="custom_project.menu_1" parent="project.menu_main_pm"
+                  groups="project.group_project_manager"/>
+
+
+        <!-- actions -->
+
+        <menuitem name="Teams" id="custom_project.menu_1_list" parent="custom_project.menu_1"
+                  action="custom_project_template_action" groups="project.group_project_manager"/>
+
+
+    </data>
+</odoo>
