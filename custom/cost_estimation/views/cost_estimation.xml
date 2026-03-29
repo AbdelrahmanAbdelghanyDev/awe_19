@@ -6,18 +6,17 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-
                 <xpath expr="//notebook/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']"
                        position="inside">
                     <field name="new_client"/>
                 </xpath>
-
             </field>
         </record>
+
         <record id="crm_methodology_view_new_est_button_inherit" model="ir.ui.view">
             <field name="name">crm methodology view</field>
             <field name="model">crm.lead</field>
-            <field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.opportunity_cost_estimation"/>
+            <field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.opportunity_cost_estimationn"/>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='new_cost_estimation']" position="attributes">
                     <attribute name="invisible">1</attribute>
@@ -25,20 +24,19 @@
             </field>
         </record>
 
-
         <record id="crm_methodology_view_page_prod_inherit" model="ir.ui.view">
             <field name="name">crm methodology view</field>
             <field name="model">crm.lead</field>
             <field name="inherit_id" ref="crm.crm_lead_view_form"/>
             <field name="arch" type="xml">
                 <data>
-
                     <xpath expr="//page[@name='products']" position="attributes">
-                        <attribute name="attrs">{'invisible': [('old','=',False)]}</attribute>
+                        <attribute name="invisible">old == False</attribute>
                     </xpath>
                 </data>
             </field>
         </record>
+
         <record id="cost_estimation_form" model="ir.ui.view">
             <field name="name">cost.estimation.form</field>
             <field name="model">cost.estimation</field>
@@ -46,44 +44,45 @@
                 <form string="Cost Estimation">
                     <header>
                         <button name="button_compute" string="Compute" type="object" class="oe_highlight"
-                                states="draft,first_approval,second_approval"
+                                invisible="state not in ['draft', 'first_approval', 'second_approval']"
                                 groups="cost_estimation.group_cost_est_user,cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app"/>
-                        <button name="submit" string="Submit" type="object" class="oe_highlight" states="draft"
+                        <button name="submit" string="Submit" type="object" class="oe_highlight"
+                                invisible="state != 'draft'"
                                 groups="cost_estimation.group_cost_est_user,cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app"/>
                         <button name="approve_1" string="Approve" type="object" class="oe_highlight"
-                                states="first_approval"
+                                invisible="state != 'first_approval'"
                                 groups="cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app"/>
                         <button name="reject_1" string="Reject" type="object" class="oe_highlight"
-                                states="first_approval"
+                                invisible="state != 'first_approval'"
                                 groups="cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app"/>
                         <button name="approve_2" string="Approve" type="object" class="oe_highlight"
-                                states="second_approval" groups="cost_estimation.group_cost_est_2nd_app"/>
+                                invisible="state != 'second_approval'"
+                                groups="cost_estimation.group_cost_est_2nd_app"/>
                         <button name="reject_2" string="Reject" type="object" class="oe_highlight"
-                                states="second_approval" groups="cost_estimation.group_cost_est_2nd_app"/>
+                                invisible="state != 'second_approval'"
+                                groups="cost_estimation.group_cost_est_2nd_app"/>
 
                         <button name="create_quotation" string="Create Quotation" type="object" class="oe_highlight"
-                                states="approved"
+                                invisible="state != 'approved'"
                                 groups="cost_estimation.group_cost_est_user,cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app"/>
                         <button name="cancel" style="background-color:red" string="Cancel" type="object"
-                                class="oe_highlight" states="approved"
+                                class="oe_highlight" invisible="state != 'approved'"
                                 groups="cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app"/>
 
-                        <!--                        <button name="set_draft" string="Set To Draft" type="object" class="oe_highlight" />-->
                         <button name="set_draft" string="Set To Draft" type="object" class="oe_highlight"
-                                states="rejected"
+                                invisible="state != 'rejected'"
                                 groups="cost_estimation.group_cost_est_user,cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app"/>
                         <field name="state" widget="statusbar"
                                statusbar_visible="draft,first_approval,second_approval,approved"/>
                     </header>
-                    <div class="oe_button_box" name="button_box" attrs="{'invisible': [('quotations_count', '=', 0)]}">
+
+                    <div class="oe_button_box" name="button_box" invisible="quotations_count == 0">
                         <button type="object"
                                 name="action_view_quotation"
                                 class="oe_stat_button"
                                 icon="fa-shopping-cart">
                             <field name="quotations_count" widget="statinfo" string="Quotations"/>
-
                         </button>
-
                     </div>
 
                     <div class="oe_title">
@@ -91,6 +90,7 @@
                             <field name="seq"/>
                         </h1>
                     </div>
+
                     <group>
                         <group>
                             <field name="hide_create_quotation" invisible="1"/>
@@ -99,204 +99,201 @@
                             <field name="sales_team" options="{'no_open': True}"/>
                             <field name="sales_person"/>
                             <field name="price_list" options="{'no_open': True}"
-                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="fx" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                   readonly="state != 'draft'"/>
+                            <field name="fx" readonly="state != 'draft'"/>
                             <field name="currency_id" invisible="1"/>
                         </group>
                         <group>
                             <field name="estimate_date"/>
                             <field name="company_id" options="{'no_open': True}"
-                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="sale_order" attrs="{'invisible': [('sale_order', '=', False)]}"/>
+                                   readonly="state != 'draft'"/>
+                            <field name="sale_order" invisible="not sale_order"/>
                             <field name="t_margin" force_save="1"/>
                             <field name="t_margin_percentage" force_save="1"/>
                             <field name="research_type_name" invisible="1"/>
                             <field name="research_type"
                                    options="{'no_quick_create': True, 'no_create_edit' : True,'no_open': True}"/>
-                            <field name="waves" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="cost_of_waves" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="cpi_x" force_save="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="waves" readonly="state != 'draft'"/>
+                            <field name="cost_of_waves" readonly="state != 'draft'"/>
+                            <field name="cpi_x" force_save="1" readonly="state != 'draft'"/>
                             <field name="third_party_cost" force_save="1"
-                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                   readonly="state != 'draft'"/>
                             <field name="travel_expenses" force_save="1"
-                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="markup" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                   readonly="state != 'draft'"/>
+                            <field name="markup" readonly="state != 'draft'"/>
                         </group>
                         <group>
                             <field name="cost_estimation_line_access" invisible="1"/>
                         </group>
                     </group>
+
                     <group>
                         <notebook>
                             <page string="Estimation Line">
                                 <field name="cost_estimation_line">
-                                    <tree delete="0" create="1" editable="1">
+                                    <list delete="0" create="1" edit="1">
                                         <field name="cost_estimation_line_access" invisible="1" force_save="1"/>
                                         <field name="cost_estimation_line_user_access" invisible="1" force_save="1"/>
                                         <field name="salable_product"
                                                options="{'no_quick_create': True, 'no_create_edit' : True,'no_open': True}"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
                                         <field name="sp_desc"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
                                         <field name="sp_quant"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
                                         <field name="cost_item" domain="[('cost_ok', '=', True)]"
                                                options="{'no_quick_create': True, 'no_create_edit' : True}"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
                                         <field name="cost_item_uom_id" optional="hide"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
                                         <field name="cost_item_is_true" invisible="1"/>
 
                                         <field name="cost_item_description"
-                                               attrs="{
-                                                     'readonly': ['|',('parent.state', '!=', 'draft'),('cost_estimation_line_user_access', '=', False)],
-                                                     'required': [('cost_item_is_true', '=', True)]}"
+                                               readonly="parent.state != 'draft' or cost_estimation_line_user_access == False"
+                                               required="cost_item_is_true == True"
                                                force_save="1"/>
                                         <field name="cost_item_type"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
                                         <field name="cost_item_quant_sp"
-                                               attrs="{'readonly': ['|',('parent.state', '!=', 'draft'),('cost_estimation_line_user_access', '=', False)]}" force_save="1"/>
+                                               readonly="parent.state != 'draft' or cost_estimation_line_user_access == False"
+                                               force_save="1"/>
                                         <field name="cost_item_cost_currency"
-                                               attrs="{'readonly': ['|',('parent.state', '!=', 'draft'),('cost_estimation_line_user_access', '=', False)]}" force_save="1"/>
+                                               readonly="parent.state != 'draft' or cost_estimation_line_user_access == False"
+                                               force_save="1"/>
                                         <field name="fx" invisible="1"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
                                         <field name="taxes" widget="many2many_tags"
                                                options="{'no_quick_create': True, 'no_create_edit' : True}"
                                                optional="hide"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
                                         <field name="cost_item_unit_cost" readonly="1" force_save="1"/>
                                         <field name="cost_item_cost_sp"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
 
                                         <field name="total_cost_item_quantity" optional="hide"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
                                         <field name="total_cost_item_cost"
-                                               attrs="{'readonly': ['|',('cost_estimation_line_access', '=', False),('cost_estimation_line_user_access', '=', False)]}"
+                                               readonly="cost_estimation_line_access == False or cost_estimation_line_user_access == False"
                                                force_save="1"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
+
                             <page string="Methodology">
                                 <field name="products_line">
-                                    <tree editable="bottom" create="false">
+                                    <list editable="bottom" create="false">
                                         <field name="salable_product"
                                                options="{'no_quick_create': True, 'no_create_edit' : True,'no_open': True}"/>
                                         <field name="sp_desc"/>
                                         <field name="cost_item_description"/>
-                                        <field name="fw_city" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"
+                                        <field name="fw_city" readonly="parent.state != 'draft'"
                                                options="{'no_quick_create': True, 'no_create_edit' : True,'no_open': True}"/>
                                         <field name="sec"
-                                               attrs="{'readonly': [('parent.state', '!=', 'draft')],'column_invisible': [('parent.research_type_name', '!=', 'QL')]}"/>
+                                               readonly="parent.state != 'draft'"
+                                               column_invisible="parent.research_type_name != 'QL'"/>
                                         <field name="gender"
-                                               attrs="{'readonly': [('parent.state', '!=', 'draft')],'column_invisible': [('parent.research_type_name', '!=', 'QL')]}"/>
+                                               readonly="parent.state != 'draft'"
+                                               column_invisible="parent.research_type_name != 'QL'"/>
                                         <field name="age"
-                                               attrs="{'readonly': [('parent.state', '!=', 'draft')],'column_invisible': [('parent.research_type_name', '!=', 'QL')]}"/>
+                                               readonly="parent.state != 'draft'"
+                                               column_invisible="parent.research_type_name != 'QL'"/>
                                         <field name="sp_quant" force_save="1"
-                                               attrs="{'readonly': [('parent.state', '!=', 'draft')],'column_invisible': [('parent.research_type_name', '!=', 'QN')]}"/>
+                                               readonly="parent.state != 'draft'"
+                                               column_invisible="parent.research_type_name != 'QN'"/>
                                         <field name="sp_quant_ql" force_save="1"
-                                               attrs="{'readonly': [('parent.state', '!=', 'draft')],'column_invisible': [('parent.research_type_name', '!=', 'QL')]}"/>
+                                               readonly="parent.state != 'draft'"
+                                               column_invisible="parent.research_type_name != 'QL'"/>
                                         <field name="unit_of_measure"/>
                                         <field name="unit_cost"/>
                                         <field name="taxes" widget="many2many_tags"
-                                               attrs="{'readonly': [('parent.state', '!=', 'draft')]}"
+                                               readonly="parent.state != 'draft'"
                                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                                         <field name="total_cost"/>
                                         <field name="margin"
-                                               attrs="{'readonly': [('parent.state', '!=', 'second_approval')]}"/>
+                                               readonly="parent.state != 'second_approval'"/>
                                         <field name="unit_price"/>
                                         <field name="subtotal"/>
                                         <field name="subtotal_taxed" force_save="1" invisible="1"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
-                            <page name="brief" string="Brief">
-                                <group attrs="{'invisible': [('research_type_name', '!=', 'QN')]}">
-                                    <group>
-                                        <!--                                        <field name="research_type" readonly="True"/>-->
-                                        <!--                                        <field name="approach" readonly="True"/>-->
-                                        <!--                                        <field name="methodology" readonly="True"/>-->
-                                        <!--                                        <field name="number_of_legs" readonly="True"/>-->
-                                        <field name="objective" string="Objective"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
-                                        <field name="methodology" string="Methodology"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
-                                        <field name="criteria_usage" string="Criteria / Usage"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
-                                        <field name="sample_size_text" string="Sample Size"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
 
+                            <page name="brief" string="Brief">
+                                <group invisible="research_type_name != 'QN'">
+                                    <group>
+                                        <field name="objective" string="Objective"
+                                               invisible="research_type_name != 'QN'"/>
+                                        <field name="methodology" string="Methodology"
+                                               invisible="research_type_name != 'QN'"/>
+                                        <field name="criteria_usage" string="Criteria / Usage"
+                                               invisible="research_type_name != 'QN'"/>
+                                        <field name="sample_size_text" string="Sample Size"
+                                               invisible="research_type_name != 'QN'"/>
                                     </group>
                                     <group>
-                                        <!--                                        <field name="sample_size" readonly="True"/>-->
-                                        <!--                                        <field name="gender" readonly="True"/>-->
-                                        <!--                                        <field name="sec" readonly="True" string="SEC"/>-->
-                                        <!--                                        <field name="age" readonly="True"/>-->
                                         <field name="sample_struct_per_reg"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
+                                               invisible="research_type_name != 'QN'"/>
                                         <field name="sample_struct_per_sec"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
+                                               invisible="research_type_name != 'QN'"/>
                                         <field name="sample_struct_per_age"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
+                                               invisible="research_type_name != 'QN'"/>
                                         <field name="sample_struct_per_gen"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
+                                               invisible="research_type_name != 'QN'"/>
                                         <field name="sample_struct_per_bra"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
+                                               invisible="research_type_name != 'QN'"/>
                                     </group>
                                 </group>
-                                <group attrs="{'invisible': [('research_type_name', '!=', 'QN')]}">
+                                <group invisible="research_type_name != 'QN'">
                                     <group>
-                                        <!--                                        <field name="region" readonly="True"/>-->
-                                        <!--                                        <field name="usership" readonly="True"/>-->
-                                        <!--                                        <field name="moub" readonly="True" string="MOUB"/>-->
                                         <field name="length_of_interview" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
+                                               invisible="research_type_name != 'QN'"/>
                                         <field name="details" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QN')]}"/>
+                                               invisible="research_type_name != 'QN'"/>
                                     </group>
                                 </group>
-                                <group attrs="{'invisible': [('research_type_name', '!=', 'QL')]}">
+                                <group invisible="research_type_name != 'QL'">
                                     <group>
                                         <field readonly="True" name="translation"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                         <field name="other_translation" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
-
+                                               invisible="research_type_name != 'QL'"/>
                                     </group>
                                     <group>
                                         <field name="no_of_client_attendees" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                         <field name="no_of_units_attendees" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                         <field name="client_attendence_region_ids" widget="many2many_tags" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                         <field name="viewing_facility" readonly="True"
                                                string="Viewing Facility outside Capital City"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                     </group>
                                     <group>
                                         <field name="transcript" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                         <field name="ex_transcript" string="Extended Transcripts" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                         <field name="transcript_lang" string="Transcripts Language" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                         <field name="printing_material" string="Printing Material" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                         <field name="details_ql" readonly="1"
-                                               attrs="{'invisible': [('research_type_name', '!=', 'QL')]}"/>
+                                               invisible="research_type_name != 'QL'"/>
                                     </group>
                                 </group>
                             </page>
+
                             <page string="Notes">
                                 <group>
                                     <field name="notes"/>
@@ -304,6 +301,7 @@
                             </page>
                         </notebook>
                     </group>
+
                     <group name="note_group" col="6">
                         <group class="oe_subtotal_footer oe_right" colspan="2" name="total_cost_item">
                             <field name="total_material_cost" widget="monetary"
@@ -327,13 +325,13 @@
                         </group>
                         <div class="oe_clear"/>
                     </group>
+
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>
                         <field name="message_ids" widget="mail_thread"/>
                         <field name="activity_ids" widget="mail_activity"/>
                     </div>
                 </form>
-
             </field>
         </record>
 
@@ -341,8 +339,8 @@
             <field name="name">cost.estimation.tree</field>
             <field name="model">cost.estimation</field>
             <field name="arch" type="xml">
-                <tree string="Cost Estimation" decoration-danger="state =='cancelled'"
-                      decoration-success="state=='approved'" create="false" delete="false" duplicate="false">
+                <list string="Cost Estimation" decoration-danger="state == 'cancelled'"
+                      decoration-success="state == 'approved'" create="false" delete="false" duplicate="false">
                     <field name="seq"/>
                     <field name="customer"/>
                     <field name="opportunity"/>
@@ -353,17 +351,17 @@
                     <field name="t_margin_percentage"/>
                     <field name="state"/>
                     <field name="total_cost"/>
-                </tree>
+                </list>
             </field>
         </record>
-
 
         <record id="action_cost_estimation" model="ir.actions.act_window">
             <field name="name">Cost Estimation</field>
             <field name="res_model">cost.estimation</field>
-            <field name="view_mode">tree,form</field>
-            <field name="context">{'tree_view_ref':'cost_estimation.cost_estimation_tree'}</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'list_view_ref':'cost_estimation.cost_estimation_tree'}</field>
         </record>
+
         <record id="cost_estimation_form_action" model="ir.actions.act_window">
             <field name="name">New Estimation</field>
             <field name="type">ir.actions.act_window</field>
@@ -371,22 +369,11 @@
             <field name="view_mode">form</field>
             <field name="view_id" ref="cost_estimation_form"/>
         </record>
-        <!--        <record id="action_cost_estimation" model="ir.actions.act_window">-->
-        <!--            <field name="name">Cost Estimation</field>-->
-        <!--            <field name="type">ir.actions.act_window</field>-->
-        <!--            <field name="res_model">cost.estimation</field>-->
-        <!--            <field name="view_mode">tree,form</field>-->
-        <!--&lt;!&ndash;            <field name="view_id" ref="cost_estimation_form"/>&ndash;&gt;-->
-        <!--        </record>-->
+
         <menuitem id="cost_estimation_menu"
                   parent="crm.crm_menu_root"
                   action="action_cost_estimation"
                   sequence="24"/>
-
-        <!--        <menuitem id="cost_estimation_menu2"-->
-        <!--                  parent="crm.crm_menu_root"-->
-        <!--                  action="action_cost_estimation2"-->
-        <!--                  sequence="24"/>-->
 
         <record id="seq_cost_estimation" model="ir.sequence">
             <field name="name">seq</field>
@@ -397,18 +384,15 @@
             <field name="implementation">no_gap</field>
         </record>
 
-        <!--new -->
         <!-- ======================================================================================= -->
-
         <record id="view_cost_estimate_template_form" model="ir.ui.view">
             <field name="name">cost.estimate.template.form</field>
             <field name="model">cost.estimation.template</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Cost Estimate Template">
                     <sheet>
-                        <button class="oe_highlight oe_right" name="open_template" string="Edit Template"
-                                type="object"/>
+<!--                        <button class="oe_highlight oe_right" name="open_template" string="Edit Template"-->
+<!--                                type="object"/>-->
                         <div class="oe_title">
                             <label class="oe_edit_only" for="name"/>
                             <h1>
@@ -422,8 +406,6 @@
                                     <field class="oe_inline" name="number_of_days"/>days
                                 </div>
                             </group>
-                            <!-- <group><label for="number_of_days"/><div id="Estimation duration"><field name="number_of_days" string="Estimation duration" class="oe_inline"/>days
-                                       </div></group>-->
                         </group>
                         <notebook>
                             <page string="Lines">
@@ -433,47 +415,37 @@
                                             <group>
                                                 <field name="product_id"/>
                                                 <field name="company_id" invisible="1"/>
-                                                <field name="product_uom_category_id" invisible="1"/>
-
-                                                <!--                        <field groups="sale.group_sale_layout" name="layout_category_id"/>-->
                                                 <label for="product_uom_qty"/>
                                                 <div>
                                                     <field class="oe_inline" name="product_uom_qty"/>
                                                 </div>
                                                 <field invisible="1" name="price_unit"/>
-                                                <!--                        <label for="discount" groups="sale.group_discount_per_so_line"/>-->
-                                                <!--                        <div groups="sale.group_discount_per_so_line">-->
-                                                <!--                          <field class="oe_inline" name="discount"/>%%</div>-->
                                             </group>
                                         </group>
                                         <notebook colspan="4">
                                             <page string="Description">
                                                 <field name="name"/>
                                             </page>
-                                            <page string="Website Description">
-                                                <field name="website_description"/>
-                                            </page>
+<!--                                            <page string="Website Description">-->
+<!--                                                <field name="website_description"/>-->
+<!--                                            </page>-->
                                         </notebook>
                                     </form>
-                                    <tree editable="bottom" string="Cost estimation Template Lines">
+                                    <list editable="bottom" string="Cost estimation Template Lines">
                                         <field name="sequence" widget="handle"/>
                                         <field name="product_id"/>
                                         <field name="company_id" invisible="1"/>
-                                        <field name="product_uom_category_id" invisible="1"/>
-                                        <!--                    <field groups="sale.group_sale_layout" name="layout_category_id"/>-->
                                         <field name="name"/>
                                         <field name="product_uom_qty"/>
                                         <field groups="product.group_uom" name="product_uom_id"/>
-                                        <!--                    <field groups="sale.group_discount_per_so_line" name="discount"/>-->
                                         <field name="price_unit"/>
-                                        <field invisible="1" name="website_description"/>
+<!--                                        <field invisible="1" name="website_description"/>-->
                                         <field name="my_price_subtotal" readonly="0"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
-                            <!-- <page string="Suggested Products"><field name="options"><tree string="Cost estimations Template Lines" editable="bottom"><field name="product_id"/><field name="layout_category_id" groups="sale.group_sale_layout"/><field name="name"/><field name="quantity"/><field name="uom_id" groups="product.group_uom"/><field name="price_unit" invisible="1"/><field name="discount" groups="sale.group_discount_per_so_line"/><field name="website_description" invisible="1"/></tree></field></page><page string="Other Settings"><group><field name="require_payment" widget="radio"/><field name="mail_template_id"/></group></page>-->
                         </notebook>
-                        <field invisible="1" name="website_description"/>
+<!--                        <field invisible="1" name="website_description"/>-->
                         <field name="note" nolabel="1"
                                placeholder="An administrator can set up default Terms and conditions in your Company settings."/>
                     </sheet>
@@ -484,20 +456,18 @@
         <record id="view_cost_estimate_template_tree" model="ir.ui.view">
             <field name="name">cost.estimate.template.tree</field>
             <field name="model">cost.estimation.template</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
-                <tree string="Cost Estimate Template">
+                <list string="Cost Estimate Template">
                     <field name="name"/>
-                </tree>
+                </list>
             </field>
         </record>
-
 
         <record id="action_cost_estimate_template" model="ir.actions.act_window">
             <field name="name">Cost Estimation Templates</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">cost.estimation.template</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Click here to create your template.
                 </p>
@@ -507,8 +477,5 @@
                 </p>
             </field>
         </record>
-
     </data>
 </odoo>
-
-

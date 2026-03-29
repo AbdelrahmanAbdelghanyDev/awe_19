@@ -16,7 +16,7 @@
               </xpath>
 
               <xpath expr="//button[@name='button_cancel']" position="replace">
-                  <button name="button_cancel" attrs="{'invisible': [('cancel_visibility', '=', True)]}" string="Cancel" type="object"/>
+                  <button name="button_cancel" invisible="cancel_visibility == True" string="Cancel" type="object"/>
               </xpath>
 
 <!--              <xpath expr="//button[@name='button_cancel']" position="attributes">-->

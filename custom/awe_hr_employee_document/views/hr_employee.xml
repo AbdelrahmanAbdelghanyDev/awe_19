@@ -10,10 +10,10 @@
                     <page name="employee_documents" string="Documents">
                         <group>
                             <field name="document_ids">
-                                <tree>
+                                <list>
                                     <field name="type_id"/>
                                     <field name="done"/>
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </page>

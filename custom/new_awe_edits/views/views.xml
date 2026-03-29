@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='payment_term_id']" position="after">
-                    <field name="work_country_id" string="Field Work Country" attrs="{'readonly': [('state', '==', 'done')]}"/>
+                    <field name="work_country_id" string="Field Work Country" readonly="state == 'done'"/>
                 </xpath>
             </field>
         </record>

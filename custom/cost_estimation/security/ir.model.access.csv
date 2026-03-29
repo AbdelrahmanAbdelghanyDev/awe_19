@@ -31,8 +31,6 @@ access_cost_estimation_line_2nd,cost.estimation.line,model_cost_estimation_line,
 access_cost_estimation_2nd,cost.estimation,model_cost_estimation,group_cost_est_2nd_app,1,1,1,1
 access_products_line_2nd,products.line,model_products_line,group_cost_est_2nd_app,1,1,1,1
 
-access_account_budget_post_1st,account.budget.post,account_budget.model_account_budget_post,group_cost_est_1st_app,1,1,1,1
-access_account_budget_post_2nd,account.budget.post,account_budget.model_account_budget_post,group_cost_est_2nd_app,1,1,1,1
-access_account_budget_post_usr,account.budget.post,account_budget.model_account_budget_post,group_cost_est_user,1,1,1,1
+
 
 

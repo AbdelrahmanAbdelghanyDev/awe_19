@@ -18,7 +18,7 @@ class ProductCanBeCost(models.Model):
 
     cost_estimation = fields.One2many('cost.estimation.products','idx')
     cost_item_type = fields.Selection([('material', 'Material'),('labour', 'Labour'),('overhead', 'Overhead')], string="CI Type")
-    budgetary_position = fields.Many2one('account.budget.post', string='Budgetary Position')
+    # budgetary_position = fields.Many2one('account.budget.post', string='Budgetary Position')
     methodology_id = fields.Boolean(string="Methodology", default=False)
 
 

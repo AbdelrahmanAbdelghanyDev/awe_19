@@ -76,7 +76,7 @@ class ProductImage(models.Model):
     today_date = fields.Date(
         'Today',
         readonly=True,
-        default=lambda self: fields.datetime.now()
+        default=lambda self: fields.Datetime.now()
     )
     today_flag = fields.Boolean('Today Flag',
                                 default=False,

@@ -7,12 +7,12 @@
              <field name="arch" type="xml">
                 <data>
                     <xpath expr="//field[@name='pdt_line']" position="attributes">
-                        <attribute name="attrs">{'invisible': [('research_type_name', '!=','QN')]}</attribute>
+                        <attribute name="invisible">research_type_name != 'QN'</attribute>
                     </xpath>
 
                     <xpath expr="//page[@name='products']" position="inside">
-                        <field name="pdt_line_ql" attrs="{'invisible': [('research_type_name', '!=','QL')]}">
-                            <tree editable="bottom">
+                        <field name="pdt_line_ql" invisible="research_type_name != 'QL'">
+                            <list editable="bottom">
                                 <field name='pdt_crm_2_research_id' string="test2"  invisible="1" required="1"/>
                                 <field name="name"/>
                                 <field name="product_id" string="Methodology" domain="['&amp;','|',('categ_id', 'ilike', pdt_crm_2_research_id),('categ_id.parent_id', 'ilike', pdt_crm_2_research_id),('sale_ok', '=', True)]" required="1"/>
@@ -25,12 +25,12 @@
                                 <field name="gender"/>
                                 <field name="age"/>
                                 <field name="client_attendance" invisible="True"/>
-                            </tree>
+                            </list>
                         </field>
 
                     </xpath>
-                     <xpath expr="//field[@name='pdt_line']/tree" position="replace">
-                         <tree editable="bottom">
+                     <xpath expr="//field[@name='pdt_line']/list" position="replace">
+                         <list editable="bottom">
                             <field name='pdt_crm_research_id' string="test" invisible="1" />
                             <field name="name"/>
                             <field name="product_id" string="Methodology" domain="['&amp;','|',('categ_id', 'ilike', pdt_crm_research_id),('categ_id.parent_id', 'ilike', pdt_crm_research_id),('sale_ok', '=', True)]"/>
@@ -38,7 +38,7 @@
                             <field name="fw_city_country" string="FW Country"/>
                             <field name="fw_country" string="FW City "/>
                             <field name="product_uom_qty" string="SS"/>
-                         </tree>
+                         </list>
 
                      </xpath>
 

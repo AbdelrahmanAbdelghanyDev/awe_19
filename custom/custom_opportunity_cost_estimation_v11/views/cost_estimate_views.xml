@@ -158,6 +158,102 @@
 				</form>
 			</field>
 		</record>
+		<!-- related to Cost Estimation button -->
+		<record id="custom_opportunity_cost_estimation_opportunity_cost_estimation_tree" model="ir.actions.act_window">
+			<field name="name">New estimate</field>
+			<field name="res_model">opportunity.cost.estimation</field>
+			<field name="domain">[('parent_opportunity', '=', active_id)]</field>
+			<field name="context">{'search_default_opportunity_id': [active_id],'default_parent_opportunity':active_id
+				,'default_opportunity_id': active_id, 'default_parent_id': active_id,}
+			</field>
+		</record>
+		<record id="opportunity_cost_estimationn" model="ir.ui.view">
+			<field name="name">opportunity cost estimation</field>
+			<field name="model">crm.lead</field>
+			<field name="inherit_id" ref="crm.crm_lead_view_form"/>
+			<field name="arch" type="xml">
+				<data>
+					<xpath expr="//button[@name='action_set_won_rainbowman']" position="before">
+						<button class="oe_highlight" name="new_cost_estimation" string="New Budget" type="object"/>
+					</xpath>
+					<xpath expr="//button[@name='action_schedule_meeting']" position="after">
+						<!-- <field invisible="True" name="fake_id"/> -->
+						<field invisible="True" name="research_type"/>
+						<field invisible="True" name="approach"/>
+						<field invisible="True" name="methodology"/>
+						<field invisible="True" name="number_of_legs"/>
+						<field invisible="True" name="sample_size"/>
+						<field invisible="True" name="age"/>
+						<field invisible="True" name="gender"/>
+						<field invisible="True" name="sec"/>
+						<field invisible="True" name="region"/>
+						<field invisible="True" name="usership"/>
+						<field invisible="True" name="moub"/>
+						<button class="btn btn-sm oe_stat_button"
+								context="{
+    'default_opportunity_id': id,
+    'default_partner_id': partner_id,
+    'default_research_type': research_type,
+    'default_approach': approach,
+    'default_methodology': methodology,
+    'default_number_of_legs': number_of_legs,
+    'default_sample_size': sample_size,
+    'default_age': age,
+    'default_gender': gender,
+    'default_sec': sec,
+    'default_region': region,
+    'default_usership': usership,
+    'default_moub': moub
+}" icon="fa-pencil-square-o"
+								name="%(custom_opportunity_cost_estimation_opportunity_cost_estimation_tree)d"
+								type="action">
+							<div class="o_form_field o_stat_info">
+								<span class="o_stat_value">
+									<field name="cost_estimation_number"/>
+								</span>
+								<span class="o_stat_text">Estimation(s)</span>
+							</div>
+						</button>
+					</xpath>
+				</data>
+			</field>
+		</record>
 
+		<!-- end -->
+		<record id="custom_sale_view_order_form" model="ir.ui.view">
+			<field name="name">sale view order form</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+				<data>
+					<xpath expr="//field[@name='partner_id']" position="after">
+						<!--            <field name="project_objective" string="Project Objective"/>-->
+						<field name="project_type" string="Project Type"/>
+						<field name="sector_id"/>
+					</xpath>
+					<xpath expr="//field[@name='payment_term_id']" position="after">
+						<field name="parent_opportunity" string="Source Document"
+							   readonly="state =='done'"/>
+						<field groups="custom_opportunity_cost_estimation_v11.group_viewer"
+							   name="opportunity_cost_estimation" string="Cost Estimation" widget="many2many_tags"/>
+						<field invisible="True" name="opportunity_total_cost" string="Total Cost"/>
+						<field groups="custom_opportunity_cost_estimation_v11.group_viewer"
+							   name="opportunity_total_cost_2" string="Total cost"/>
+					</xpath>
+
+					<xpath expr="//field[@name='payment_term_id']" position="attributes">
+						<attribute name="readonly">state == 'done'</attribute>
+
+					</xpath>
+				</data>
+			</field>
+		</record>
+
+		<record id="action_cost_estimation" model="ir.actions.act_window">
+			<field name="name">Cost Estimations</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">opportunity.cost.estimation</field>
+			<field name="view_mode">list,form</field>
+		</record>
 	</data>
 </odoo>

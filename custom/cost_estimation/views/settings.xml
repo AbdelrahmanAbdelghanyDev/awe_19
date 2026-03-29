@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6 o_setting_box" id="cancel_non_conf_ce"
-                                 attrs="{'invisible': ['|',('one_approved_cost_est', '=', False),('multiple_cost_estimate', '=', False)]}">
+                                 invisible="one_approved_cost_est == False or multiple_cost_estimate == False"
                                 <div class="o_setting_left_pane">
                                     <field name="cancel_non_conf_ce"/>
                                 </div>

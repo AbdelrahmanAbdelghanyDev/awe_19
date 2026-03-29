@@ -26,10 +26,10 @@
                             type="object"
                             class="oe_stat_button"
                             icon="fa-calendar"
-                            attrs="{'invisible': [('show_leaves','=', False)]}"
+                            invisible="show_leaves == False"
                             groups="base.group_user"
                             help="Remaining leaves">
-                        <field string="Leaves Left" name="leaves_count" widget="statinfo"/>
+<!--                        <field string="Leaves Left" name="leaves_count" widget="statinfo"/>-->
                     </button>
 
                 </xpath>

@@ -455,7 +455,7 @@ class SaleOrderLineInhd(models.Model):
             'quantity': self.product_uom_qty,
             'discount': self.discount,
             'price_unit': self.price_unit,
-            'tax_ids': [(6, 0, self.tax_id.ids)],
+            'tax_ids': [(6, 0, self.tax_ids.ids)],
             'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
             'sale_line_ids': [(4, self.id)],
         }

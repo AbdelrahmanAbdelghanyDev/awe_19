@@ -12,7 +12,7 @@ class QuotationOrderLine(models.Model):
 
     @api.constrains('estim_line')
     def _const_estim_line(self):
-        self.tax_id = self.estim_line.taxes.ids
+        self.tax_ids = self.estim_line.taxes.ids
 
     estimation_id = fields.Many2one('cost.estimation.template')
 

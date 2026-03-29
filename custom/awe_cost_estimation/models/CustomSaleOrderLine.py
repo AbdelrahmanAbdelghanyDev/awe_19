@@ -44,7 +44,7 @@ class CustomSaleOrderLine(models.Model):
             i.price_subtotal_new = \
                 i.no_of_units * i.product_uom_qty * i.price_unit
 
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'no_of_waves', 'price_subtotal_new',
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_ids', 'no_of_waves', 'price_subtotal_new',
                  'no_of_units')
     def _compute_amount(self):
         """
@@ -52,7 +52,7 @@ class CustomSaleOrderLine(models.Model):
         """
         for line in self:
             price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
-            taxes = line.tax_id.compute_all(
+            taxes = line.tax_ids.compute_all(
                 price * line.no_of_units * line.no_of_waves,
                 line.order_id.currency_id,
                 line.product_uom_qty,

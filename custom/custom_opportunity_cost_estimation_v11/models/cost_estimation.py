@@ -134,7 +134,7 @@ class OpportunityCostEstimation(models.Model):
                 if order.company_id.tax_calculation_rounding_method == 'round_globally':
                     price = line.price_unit * \
                         (1 - (line.discount or 0.0) / 100.0)
-                    taxes = line.tax_id.compute_all(
+                    taxes = line.tax_ids.compute_all(
                         price,
                         line.order_id.currency_id,
                         line.product_uom_qty,
@@ -455,6 +455,7 @@ class CostEstimationLine(models.Model):
     def _onchange_product_id(self):
         self.ensure_one()
         if self.product_id:
+            allowed_uoms = self.product_id.uom_id | self.product_id.uom_ids
             name = self.product_id.name_get()[0][1]
             if self.product_id.description_sale:
                 name += '\n' + self.product_id.description_sale
@@ -463,7 +464,7 @@ class CostEstimationLine(models.Model):
             self.price_unit = 0
             self.product_uom_id = self.product_id.uom_id.id
             self.website_description = self.product_id.quote_description or self.product_id.website_description or ''
-            domain = {'product_uom_id': [('category_id', '=', self.product_id.uom_id.category_id.id)]}
+            domain = {'product_uom_id': [('id', 'in', allowed_uoms.ids)]}
             return {'domain': domain}
 
     @api.onchange('product_uom_id')
@@ -476,5 +477,4 @@ class CostEstimationLine(models.Model):
     def _my_actual_total(self):
         for i in self:
             i.my_price_subtotal = i.product_uom_qty * i.price_unit
-
 

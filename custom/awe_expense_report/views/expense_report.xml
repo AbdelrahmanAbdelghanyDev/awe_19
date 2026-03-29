@@ -1,64 +1,64 @@
 <odoo>
-    <template id="report_expense_sheet_inherit_multiline_fields" inherit_id="hr_expense.report_expense_sheet">
+<!--    <template id="report_expense_sheet_inherit_multiline_fields" inherit_id="hr_expense.report_expense_sheet">-->
 
-        <xpath expr="//div[@class='row mt32 mb32']" position="replace">
-            <div class="row mt32 mb32">
-                <!-- Partner (new field) -->
-                <div class="col-2">
-                    <div><strong>Partner:</strong></div>
-                    <div>
-                        <span t-field="o.partner_id.name"
-                              style="word-wrap: break-word; word-break: break-word;"/>
+<!--        <xpath expr="//div[@class='row mt32 mb32']" position="replace">-->
+<!--            <div class="row mt32 mb32">-->
+<!--                &lt;!&ndash; Partner (new field) &ndash;&gt;-->
+<!--                <div class="col-2">-->
+<!--                    <div><strong>Partner:</strong></div>-->
+<!--                    <div>-->
+<!--                        <span t-field="o.partner_id.name"-->
+<!--                              style="word-wrap: break-word; word-break: break-word;"/>-->
 
 
-                    </div>
-                </div>
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="col-2">
-                    <div><strong>Employee:</strong></div>
-                    <div>
-                        <span t-field="o.employee_id.name"
-                              style="word-wrap: break-word; word-break: break-word;"/>
-                    </div>
-                </div>
+<!--                <div class="col-2">-->
+<!--                    <div><strong>Employee:</strong></div>-->
+<!--                    <div>-->
+<!--                        <span t-field="o.employee_id.name"-->
+<!--                              style="word-wrap: break-word; word-break: break-word;"/>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!-- Date -->
-                <div class="col-2">
-                    <div><strong>Date:</strong></div>
-                    <div>
-                        <span t-field="o.accounting_date"
-                              style="word-wrap: break-word; word-break: break-word;"/>
-                    </div>
-                </div>
+<!--                &lt;!&ndash; Date &ndash;&gt;-->
+<!--                <div class="col-2">-->
+<!--                    <div><strong>Date:</strong></div>-->
+<!--                    <div>-->
+<!--                        <span t-field="o.accounting_date"-->
+<!--                              style="word-wrap: break-word; word-break: break-word;"/>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!-- Description -->
-                <div class="col-2">
-                    <div><strong>Description:</strong></div>
-                    <div>
-                        <span t-field="o.name"
-                              style="word-wrap: break-word; word-break: break-word;"/>
-                    </div>
-                </div>
+<!--                &lt;!&ndash; Description &ndash;&gt;-->
+<!--                <div class="col-2">-->
+<!--                    <div><strong>Description:</strong></div>-->
+<!--                    <div>-->
+<!--                        <span t-field="o.name"-->
+<!--                              style="word-wrap: break-word; word-break: break-word;"/>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!-- Validated By -->
-                <div class="col-2">
-                    <div><strong>Validated By:</strong></div>
-                    <div>
-                        <span t-field="o.user_id"
-                              style="word-wrap: break-word; word-break: break-word;"/>
-                    </div>
-                </div>
+<!--                &lt;!&ndash; Validated By &ndash;&gt;-->
+<!--                <div class="col-2">-->
+<!--                    <div><strong>Validated By:</strong></div>-->
+<!--                    <div>-->
+<!--                        <span t-field="o.user_id"-->
+<!--                              style="word-wrap: break-word; word-break: break-word;"/>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!-- Payment By -->
-                <div class="col-2">
-                    <div><strong>Payment By:</strong></div>
-                    <div>
-                        <span t-field="o.payment_mode"
-                              style="word-wrap: break-word; word-break: break-word;"/>
-                    </div>
-                </div>
-            </div>
-        </xpath>
+<!--                &lt;!&ndash; Payment By &ndash;&gt;-->
+<!--                <div class="col-2">-->
+<!--                    <div><strong>Payment By:</strong></div>-->
+<!--                    <div>-->
+<!--                        <span t-field="o.payment_mode"-->
+<!--                              style="word-wrap: break-word; word-break: break-word;"/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </xpath>-->
 
-    </template>
+<!--    </template>-->
 </odoo>

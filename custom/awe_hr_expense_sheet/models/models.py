@@ -10,23 +10,23 @@ class Partner(models.Model):
 
 
 
-class HrExpenseSheet(models.Model):
-    _inherit = 'hr.expense.sheet'
-
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Partner", required=True,
-                                 domain=[('is_employee', '=', True)])
-    manager_partner_id = fields.Many2one(comodel_name="res.partner", string="Manager",
-                                 domain=[('is_employee', '=', True)])
-
-    employee_id = fields.Many2one('hr.employee', string="Employee", required=False)
-
-    attachments_ids = fields.Many2many('ir.attachment')
-
-    def action_sheet_move_create(self):
-        res = super().action_sheet_move_create()
-        for move in res.values():
-            move.attachments_ids = self.attachments_ids.ids
-        return res
+# class HrExpenseSheet(models.Model):
+#     _inherit = 'hr.expense.sheet'
+#
+#     partner_id = fields.Many2one(comodel_name="res.partner", string="Partner", required=True,
+#                                  domain=[('is_employee', '=', True)])
+#     manager_partner_id = fields.Many2one(comodel_name="res.partner", string="Manager",
+#                                  domain=[('is_employee', '=', True)])
+#
+#     employee_id = fields.Many2one('hr.employee', string="Employee", required=False)
+#
+#     attachments_ids = fields.Many2many('ir.attachment')
+#
+#     def action_sheet_move_create(self):
+#         res = super().action_sheet_move_create()
+#         for move in res.values():
+#             move.attachments_ids = self.attachments_ids.ids
+#         return res
 
 
 class HrExpense(models.Model):

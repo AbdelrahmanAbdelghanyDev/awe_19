@@ -14,44 +14,47 @@
                         <field name="is_true"/>
                         <label for="is_true"/>
                     </div>
-
                     <div>
                         <field name="methodology_id"/>
                         <label for="methodology_id"/>
                     </div>
                 </xpath>
+
                 <xpath expr="//page[@name='general_information']" position="after">
-                    <page string="Cost Estimation" attrs="{'invisible': [('cost_ok', '=', True)]}">
-                        <field name="cost_estimation" >
-                            <tree editable="bottom">
+                    <page string="Cost Estimation" invisible="cost_ok == True">
+                        <field name="cost_estimation">
+                            <list editable="bottom">
                                 <field name="product_id" domain="[('cost_ok', '=', True)]"/>
                                 <field name="access_description" invisible="1"/>
                                 <field name="description"
-                                       attrs="{'readonly': [('access_description', '=', False)]}" force_save="1"/>
+                                       readonly="access_description == False"
+                                       force_save="1"/>
                                 <field name="qty"/>
                                 <field name="uom"/>
                                 <field name="cost_item_type"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
-                    <page string="Cost Estimation Configuration" attrs="{'invisible': [('cost_ok', '=', False)]}">
+
+                    <page string="Cost Estimation Configuration" invisible="cost_ok == False">
                         <group>
-                            <field name="cost_item_type" attrs="{'invisible': [('cost_ok', '=', False)], 'required': [('cost_ok','=',True)]}"/>
-                        <field name="budgetary_position" attrs="{'invisible': [('cost_ok', '=', False)], 'required': [('cost_ok','=',True)]}"/>
+                            <field name="cost_item_type"
+                                   invisible="cost_ok == False"
+                                   required="cost_ok == True"/>
+<!--                            <field name="budgetary_position"-->
+<!--                                   invisible="cost_ok == False"-->
+<!--                                   required="cost_ok == True"/>-->
                         </group>
                     </page>
                 </xpath>
-<!--                <xpath expr="//field[@name='type']" position="after">-->
-<!--                    -->
-<!--                </xpath>-->
             </field>
         </record>
+
         <record id="inherit_product_cost_form" model="ir.ui.view">
             <field name="name">product.product.form</field>
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
-
                 <xpath expr="//label[@for='purchase_ok']" position="after">
                     <div>
                         <field name="cost_ok"/>
@@ -62,16 +65,17 @@
                         <label for="methodology_id"/>
                     </div>
                 </xpath>
+
                 <xpath expr="//page[@name='general_information']" position="after">
-                    <page string="Cost Estimation" attrs="{'invisible': [('cost_ok', '=', True)]}">
-                        <field name="cost_estimation" >
-                            <tree editable="bottom">
-                                <field name="product_id" domain="[('cost_ok', '=', True)] " force_save="1"/>
+                    <page string="Cost Estimation" invisible="cost_ok == True">
+                        <field name="cost_estimation">
+                            <list editable="bottom">
+                                <field name="product_id" domain="[('cost_ok', '=', True)]" force_save="1"/>
                                 <field name="description"/>
                                 <field name="qty"/>
                                 <field name="uom"/>
                                 <field name="cost_item_type"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                 </xpath>

@@ -2,7 +2,7 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-from odoo.addons import decimal_precision as dp
+# from odoo.addons import decimal_precision as dp
 
 SEC = [
     ('A', 'A'),
@@ -424,7 +424,7 @@ class ProductsLine(models.Model):
 
 class CostEstimationLine(models.Model):
     _name = 'cost.estimation.line'
-    _rec_name = 'budgetary_position'
+    # _rec_name = 'budgetary_position'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     # def write(self, vals):
@@ -449,7 +449,7 @@ class CostEstimationLine(models.Model):
         parent.message_post(body=f'Line {self.display_name} Ci Unit Cost(Currency)'
                                  f' Changed from {old_value} -> {new_value}')
 
-    budgetary_position = fields.Many2one('account.budget.post', string='Budgetary Position')
+    # budgetary_position = fields.Many2one('account.budget.post', string='Budgetary Position')
 
     cost_estimation_line_user_access = fields.Boolean(
         string='Line Access',
@@ -457,18 +457,18 @@ class CostEstimationLine(models.Model):
         store=False
     )
 
-    def _compute_line_access(self):
-        """Allow editing only for users listed in related account.budget.post.user_ids."""
-        current_user = self.env.user
-        for line in self:
-            line.cost_estimation_line_user_access = (
-                    current_user in line.budgetary_position.user_ids
-            )
+    # def _compute_line_access(self):
+    #     """Allow editing only for users listed in related account.budget.post.user_ids."""
+    #     current_user = self.env.user
+    #     for line in self:
+    #         line.cost_estimation_line_user_access = (
+    #                 current_user in line.budgetary_position.user_ids
+    #         )
 
-    @api.onchange('cost_item')
-    def onchange_cost_item_budget(self):
-        if self.cost_item.budgetary_position:
-            self.budgetary_position = self.cost_item.budgetary_position.id
+    # @api.onchange('cost_item')
+    # def onchange_cost_item_budget(self):
+    #     if self.cost_item.budgetary_position:
+    #         self.budgetary_position = self.cost_item.budgetary_position.id
 
     # self.crm_id.message_post(body=message, subject="Stage Changes", attachment_ids=self.attachment.ids)
 
@@ -596,9 +596,9 @@ class CostEstimationLine(models.Model):
     _name = "cost.estimate.line"
     _inherit = "sale.order.template.line"
 
-    price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'), default =0)
+    price_unit = fields.Float('Unit Price', required=True, digits=(16,4), default =0)
 
-    product_uom_qty = fields.Float('Quantity', required=True, digits=dp.get_precision('Product UoS'), default=0)
+    product_uom_qty = fields.Float('Quantity', required=True, digits=(16,4), default=0)
 
     product_id = fields.Many2one('product.product', 'Product', domain=([]),
                                  required=True)
@@ -611,6 +611,7 @@ class CostEstimationLine(models.Model):
     def _onchange_product_id(self):
         self.ensure_one()
         if self.product_id:
+            allowed_uoms = self.product_id.uom_id | self.product_id.uom_ids
             name = self.product_id.name_get()[0][1]
             if self.product_id.description_sale:
                 name += '\n' + self.product_id.description_sale
@@ -619,7 +620,7 @@ class CostEstimationLine(models.Model):
             self.price_unit = 0
             self.product_uom_id = self.product_id.uom_id.id
             self.website_description = self.product_id.quote_description or self.product_id.website_description or ''
-            domain = {'product_uom_id': [('category_id', '=', self.product_id.uom_id.category_id.id)]}
+            domain = {'product_uom_id': [('id', 'in', allowed_uoms.ids)]}
             return {'domain': domain}
 
     @api.onchange('product_uom_id')
@@ -632,6 +633,3 @@ class CostEstimationLine(models.Model):
     def _my_actual_total(self):
         for i in self:
             i.my_price_subtotal = i.product_uom_qty * i.price_unit
-
-
-    product_uom_category_id = fields.Many2one('uom.category', related='product_id.uom_id.category_id')

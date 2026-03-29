@@ -246,8 +246,8 @@ class CustomTaskEstimationLine(models.Model):
             return {'domain': {'product_uom': []}}
 
         vals = {}
-        domain = {'product_uom': [
-            ('category_id', '=', self.product_id.uom_id.category_id.id)]}
+        allowed_uoms = self.product_id.uom_id | self.product_id.uom_ids
+        domain = {'product_uom': [('id', 'in', allowed_uoms.ids)]}
         if not self.product_uom or (self.product_id.uom_id.id != self.product_uom.id):
             vals['product_uom'] = self.product_id.uom_id
             vals['product_uom_qty'] = 1.0
@@ -295,7 +295,7 @@ class CustomTaskEstimationLine(models.Model):
             vals['price_unit'] = \
                 self.env['account.tax']._fix_tax_included_price_company(
                     self._get_display_price(product),
-                    product.taxes_id, self.tax_id,
+                    product.taxes_id, self.tax_ids,
                     self.company_id
             )
 
@@ -358,8 +358,8 @@ class CustomProjectEstimationLine(models.Model):
             return {'domain': {'product_uom': []}}
 
         vals = {}
-        domain = {'product_uom': [
-            ('category_id', '=', self.product_id.uom_id.category_id.id)]}
+        allowed_uoms = self.product_id.uom_id | self.product_id.uom_ids
+        domain = {'product_uom': [('id', 'in', allowed_uoms.ids)]}
         if not self.product_uom or (self.product_id.uom_id.id != self.product_uom.id):
             vals['product_uom'] = self.product_id.uom_id
             vals['product_uom_qty'] = 1.0
@@ -405,7 +405,7 @@ class CustomProjectEstimationLine(models.Model):
             vals['price_unit'] =\
                 self.env['account.tax']._fix_tax_included_price_company(
                     self._get_display_price(product), product.taxes_id,
-                    self.tax_id,
+                    self.tax_ids,
                     self.company_id
             )
 
