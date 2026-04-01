@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <record id="project_milestone_setting_record" model="project.milestone.setting">
+            <field name="name">Project milestone setting</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<odoo>
+
+    <data>
+<!--        <record id="cost_estimation2_form_view" model="ir.ui.view">-->
+<!--            <field name="name">cost.estimation.form.view</field>-->
+<!--            <field name="model">cost.estimation</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="cost_estimation_line" position="attributes">-->
+<!--                    <attribute name="attrs">{"readonly": [["state", "=", "first_approval"]]}</attribute>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

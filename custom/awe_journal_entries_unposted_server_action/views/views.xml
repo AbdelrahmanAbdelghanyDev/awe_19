@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record model="ir.actions.server" id="awe_server_action_set_unposted">
+            <field name="name">Un-Posted</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records: records._set_unposted_status_action()
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record id="crm_lead_form_inheritedd" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='lead_partner']//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{"no_open": True, "no_create": True}</attribute>
+<!--                    <attribute name="widget"></attribute>-->
+                </xpath>
+                 <xpath expr="//group[@name='opportunity_partner']//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{"no_open": True, "no_create": True}</attribute>
+<!--                     <attribute name="widget"></attribute>-->
+                </xpath>
+
+<!--                <xpath expr="//group[@name='lead_partner']//field[@name='partner_id']" position="attributes">&ndash;&gt;-->
+<!--                    <attribute name="options">{"no_open": True, "no_create": True}</attribute>-->
+<!--                    <attribute name="widget"></attribute>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+    </data>
+</odoo>

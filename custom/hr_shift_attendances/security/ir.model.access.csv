@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_shift_attendances_hr_shift_attendances,hr_shift_attendances.hr_shift_attendances,model_hr_shift_attendances_hr_shift_attendances,,1,0,0,0

@@ -1,0 +1,32 @@
+<odoo>
+
+
+    <record id="delete_cost_estimation" model="res.groups">
+        <field name="name">Cost Estimation Delete</field>
+    </record>
+
+<!--    <record id="cost_est_rule" model="ir.rule">-->
+<!--        <field name="name">Delete Cost Estimation </field>-->
+<!--        <field ref="cost_estimation.model_cost_estimation" name="model_id"/>-->
+<!--        <field name="domain_force">[(1,'=',1)]</field>-->
+<!--        <field name="perm_unlink" eval="True"/>-->
+<!--        <field name="groups" eval="[(4, ref('awe_group.delete_cost_estimation'))]"/>-->
+<!--    </record>-->
+<!--    <record id="cost_est_rule_not_del" model="ir.rule">-->
+<!--        <field name="name">Not Delete Cost Estimation </field>-->
+<!--        <field ref="cost_estimation.model_cost_estimation" name="model_id"/>-->
+<!--        <field name="domain_force">[(1,'=',1)]</field>-->
+<!--        <field name="perm_unlink" eval="False"/>-->
+<!--&lt;!&ndash;        <field name="groups" eval="[(4, ref('awe_group.delete_cost_estimation'))]"/>&ndash;&gt;-->
+<!--    </record>-->
+<!--        <record id="cost_estimation2_form_view" model="ir.ui.view">-->
+<!--            <field name="name">cost.estimation.form.view</field>-->
+<!--            <field name="model">cost.estimation</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="cost_estimation_line" position="attributes">-->
+<!--                    <attribute name="attrs">{"readonly": [["state", "=", "first_approval"]]}</attribute>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+
+</odoo>

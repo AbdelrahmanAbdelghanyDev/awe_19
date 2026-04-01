@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_milestone_setting,access.project.milestone.setting,model_project_milestone_setting,base.group_user,1,1,0,0
+access_other_project_milestone_setting_line,access.other.project.milestone.setting.line,model_other_project_milestone_setting_line,base.group_user,1,1,1,1
+access_adhoc_project_milestone_setting_line,access.adhoc.project.milestone.setting.line,model_adhoc_project_milestone_setting_line,base.group_user,1,1,1,1
+access_project_milestone_line,access.project.milestone.line,model_project_milestone_line,base.group_user,1,1,1,1

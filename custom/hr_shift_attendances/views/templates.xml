@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="attendance_notification_email_template" model="mail.template">
+            <field name="name">Attendance Notification</field>
+            <!--<field name="email_from">${object.company_id and object.company_id.email or ''}</field>-->
+            <!--<field name="subject">Congratz ${object.name}</field>-->
+            <!--<field name="email_to">${object.email|safe}</field>-->
+            <field name="subject">Attendance notification</field>
+            <field name="lang">${object.lang}</field>
+
+             <field name="model_id" ref="model_hr_attendance"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+	      <p><strong>Dear ${object.employee_id}</strong>,<br/><br/>
+	      Your chick in<br/>
+	      ${object.check_in}<br/>
+	      Your chick out<br/>
+	      ${object.check_out}<br/></p>
+              Regards,<br/>
+              ${object.company_id.name}
+	    ]]>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <record id="awe_official_name.awe_ksa_invoice" model="ir.actions.report">-->
+<!--        <field name="groups_ids" eval="[(4, ref('awe_official_name.group_invoice_arabic'))]"/>-->
+
+<!--    </record>-->
+</odoo>

@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record id="cost_estimation_line_inherit" model="ir.ui.view">
+            <field name="name">cost.estimation.line.inherit</field>
+            <field name="model">cost.estimation</field>
+            <field name="inherit_id" ref="cost_estimation.cost_estimation_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='estimate_date']" position="after">
+                    <label for="budget_date_from"/>
+                    <div>
+                        <field name="budget_date_from" class="oe_inline"
+                               readonly="state != 'draft'"/>
+                        To
+                        <field name="budget_date_to" class="oe_inline"
+                               readonly="state != 'draft'"/>
+                    </div>
+<!--                    <field name="budget"/>-->
+                </xpath>
+
+                <xpath expr="//page/field[@name='cost_estimation_line']/list/field[@name='total_cost_item_cost']"
+                       position="after">
+<!--                    <field name="budgetary_position" options="{'no_quick_create': True, 'no_create_edit' : True}"-->
+<!--                           readonly="cost_estimation_line_access == False"-->
+<!--                           force_save="1"/>-->
+                </xpath>
+
+                <xpath expr="//button[@name='create_quotation']" position="replace">
+                    <button name="create_quotation" string="Create Quotation" type="object" class="oe_highlight"
+                            invisible="state != 'approved' or hide_create_quotation == True"
+                            groups="cost_estimation.group_cost_est_user,cost_estimation.group_cost_est_1st_app,cost_estimation.group_cost_est_2nd_app"/>
+                </xpath>
+            </field>
+        </record>
+
+<!--        <record id="inherit_product_template_cost_form_budg" model="ir.ui.view">-->
+<!--            <field name="name">product.template.form</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            <field name="inherit_id" ref="cost_estimation.inherit_product_template_cost_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='cost_estimation']/list/field[@name='cost_item_type']" position="after">-->
+<!--                    <field name="budgetary_position"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="inherit_product_cost_form_budg" model="ir.ui.view">-->
+<!--            <field name="name">product.product.form</field>-->
+<!--            <field name="model">product.product</field>-->
+<!--            <field name="inherit_id" ref="cost_estimation.inherit_product_cost_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='cost_estimation']/list/field[@name='cost_item_type']" position="after">-->
+<!--                    <field name="budgetary_position"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

@@ -1,0 +1,91 @@
+<odoo>
+    <data>
+        <!--cost accounts views-->
+        <record model="ir.ui.view" id="cost_accounts_form_view">
+            <field name="name">cost.accounts.form</field>
+            <field name="model">cost_accounts</field>
+            <field name="arch" type="xml">
+                <form string="Project Closure Accounts">
+                    <sheet>
+                        <group class="">
+                            <!--<field name="type" widget="radio"/>-->
+                            <field name="original_acc_id" style="width: 300px"/>
+                            <field name="corresponding_acc_id" style="width: 300px"/>
+                            <field name="description" style="width: 400px"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="cost_accounts_tree_view">
+            <field name="name">cost.accounts.tree</field>
+            <field name="model">cost_accounts</field>
+            <field name="arch" type="xml">
+                <list string="Cost / WIP Accounts list">
+                    <!--<field name="type"/>-->
+                    <field name="original_acc_id"/>
+                    <field name="corresponding_acc_id"/>
+                    <field name="description"/>
+                </list>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="cost_accounts_action">
+            <field name="name">Cost / WIP Accounts</field>
+            <field name="res_model">cost_accounts</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create project Cost / WIP accounts</p>
+            </field>
+        </record>
+
+        <!--revenue accounts views-->
+        <record model="ir.ui.view" id="revenue_accounts_form_view">
+            <field name="name">revenue.accounts.form</field>
+            <field name="model">revenue_accounts</field>
+            <field name="arch" type="xml">
+                <form string="Revenue Accounts">
+                    <sheet>
+                        <group class="">
+                            <field name="revenue_acc_id" style="width: 300px"/>
+                            <field name="accrued_acc_id" style="width: 300px"/>
+                            <field name="tag" style="width: 300px"/>
+                            <field name="company_id" style="width: 300px"/>
+                            <field name="description" style="width: 400px"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="revenue_accounts_tree_view">
+            <field name="name">revenue.accounts.tree</field>
+            <field name="model">revenue_accounts</field>
+            <field name="arch" type="xml">
+                <list string="Revenue Accounts list">
+                    <field name="revenue_acc_id"/>
+                    <field name="accrued_acc_id"/>
+                    <field name="tag"/>
+                    <field name="company_id"/>
+                    <field name="description"/>
+                </list>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="revenue_accounts_action">
+            <field name="name">Revenue Accounts</field>
+            <field name="res_model">revenue_accounts</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create project Revenue accounts</p>
+            </field>
+        </record>
+        <!--menu items-->
+        <menuitem id="project_cost_menu" name="Project Cost" parent="account.menu_finance_configuration" sequence="6"/>
+        <menuitem id="project_revenue_menu" name="Project Revenue" parent="account.menu_finance_configuration" sequence="7"/>
+        <menuitem id="project_cost_accounts_menu" name="Cost / WIP Accounts" parent="project_cost_menu" action="cost_accounts_action" groups="project_closure_accounts.group_project_task_cost"/>
+        <menuitem id="project_revenue_accounts_menu" name="Revenue Accounts" parent="project_revenue_menu" action="revenue_accounts_action" groups="project_closure_accounts.group_project_task_revenue"/>
+    </data>
+</odoo>

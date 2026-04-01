@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="group_so_attachment_uploader" model="res.groups">
+    <field name="name">Delete Sales Order And CRM Attachments</field>
+  </record>
+</odoo>

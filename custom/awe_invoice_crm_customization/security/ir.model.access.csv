@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_awe_crm_customization_awe_crm_customization,awe_crm_customization.awe_crm_customization,model_awe_crm_customization_awe_crm_customization,,1,0,0,0

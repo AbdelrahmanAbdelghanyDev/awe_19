@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record id="product_template_asset_fields_form_inherit" model="ir.ui.view">
+            <field name="name">product.template.asset.fields</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='options']" position="inside">
+                    <div>
+                        <field name="is_asset"/>
+                        <label for="is_asset"/>
+                    </div>
+                </xpath>
+                <xpath expr="//page[@name='general_information']//field[@name='categ_id']/.." position="inside">
+                    <field name="location_id_custom"
+                           invisible="is_asset != True"
+                           required="is_asset == True"/>
+                    <field name="country_id_custom"
+                           invisible="is_asset != True"
+                           required="is_asset == True"/>
+                    <field name="department_id_custom"
+                           invisible="is_asset != True"
+                           required="is_asset == True"/>
+                    <field name="code_custom"
+                           invisible="is_asset != True"
+                           required="is_asset == True"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_barcode_edit" model="ir.ui.view">
+            <field name="name">product.template.barcode.edit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="replace">
+                    <field name="is_asset" invisible="1"/>
+                    <field name="barcode"
+                           invisible="product_variant_count > 1"
+                           readonly="is_asset != False"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

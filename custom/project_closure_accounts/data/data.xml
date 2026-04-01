@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+    <!--<data>-->
+    <data noupdate="1">
+        <record id="currency_rate_cron" forcecreate="True" model="ir.cron">
+            <field name="name">Currency Rate</field>
+            <field name="model_id" ref="model_project_task"/>
+            <!--<field name="active" eval="True" />-->
+            <field name="user_id" ref="base.user_root"/>
+            <field name="state">code</field>
+            <field name="code">model.get_old_converted_revenue()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+<!--            <field name="numbercall">1</field>-->
+<!--            <field name="nextcall" >2018-07-05 00:00:01</field>-->
+<!--            <field name="doall" eval="False"/>-->
+        </record>
+    </data>
+</odoo>

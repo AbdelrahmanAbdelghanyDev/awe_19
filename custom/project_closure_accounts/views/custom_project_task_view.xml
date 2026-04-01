@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record id="project_task_view_form_custom2" model="ir.ui.view">
+            <field name="name">project_task_view_form_custom</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="post_journals" string="Cost Recog." type="object" class="oe_highlight"
+                            groups="project_closure_accounts.group_project_task_cost"
+                            invisible="is_cost_button_clicked == True or stage_id != 7"/> <!--7 completed-->
+                    <button name="close_revenue" string="Revenue Recog." type="object" class="oe_highlight"
+                            invisible="is_revenue_button_clicked == True or stage_id != 7"/> <!--7 completed-->
+                    <!--<button name="get_old_converted_revenue" string="old converted revenue" type="object" class="oe_highlight" groups="project_closure_accounts.group_project_task_revenue"/>-->
+                </xpath>
+
+                <xpath expr="//field[@name='user_ids']" position="after">
+                    <field name="is_cost_button_clicked" invisible="1" groups="project_closure_accounts.group_project_task_cost"/>
+                    <field name="is_revenue_button_clicked" string="Recognized"/>
+                    <field name="revenue" readonly="1"/>
+                    <field name="original_currency_id" readonly="1"/>
+                    <field name="converted_revenue" readonly="0"/>
+                    <field name="tag_id" readonly="0"/>
+                    <field name="order_date" widget="date"/>
+                    <field name="date_start" widget="date"/>
+                </xpath>
+                <xpath expr="//field[@name='date_deadline']" position="after">
+                    <field name="cost_date"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="project_task_view_kanban_custom" model="ir.ui.view">
+            <field name="name">project_task_view_kanban_custom</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_ids']" position="after">
+                    <field name="converted_revenue"/>
+                </xpath>
+                <xpath expr="//progressbar" position="attributes">
+                    <attribute name="sum_field">converted_revenue</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

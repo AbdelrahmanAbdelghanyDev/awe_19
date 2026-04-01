@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="leave_approval_cycle" model="ir.ui.view">
+            <field name="name">leave_approval_cycle</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="employee_manager" invisible="1"/>
+                    <field name="second_approved" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_approve']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_approve']" position="replace">
+                    <button string="Manager Approve" name="manager_approve" type="object" class="oe_highlight"
+                            invisible="state != 'confirm' or employee_manager != uid"/>
+                    <button string="Hr Approve" name="final_approve" type="object" class="oe_highlight"
+                            invisible="state != 'validate1' or second_approved != False"
+                            groups="awe_leaves_approve.leave_approve_group"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+      <record id="custom_purchase_order_tree" model="ir.ui.view">
+          <field name="name">custom.purchase.order.tree</field>
+          <field name="model">purchase.order</field>
+          <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='amount_total']" position="after">
+                  <field name="bills_untaxed_total"/>
+                  <field name="bills_total"/>
+                  <field name="remaining_untaxed_amount"/>
+                  <field name="remaining_amount"/>
+              </xpath>
+
+          </field>
+      </record>
+  </data>
+</odoo>

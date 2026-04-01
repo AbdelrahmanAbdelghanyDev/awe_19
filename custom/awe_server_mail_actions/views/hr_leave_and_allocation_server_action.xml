@@ -1,0 +1,12 @@
+<odoo>
+  <data>
+   <record id="action_hr_leave_approved_server_action" model="ir.actions.server">
+    <field name="name"> Approved</field>
+    <field name="type">ir.actions.server</field>
+    <field name="state">code</field>
+    <field name="model_id" ref="awe_server_mail_actions.model_hr_holidays" />
+    <field name="binding_model_id" ref="awe_server_mail_actions.model_hr_holidays" />
+    <field name="code">records.approve_server_Action()</field>
+</record>
+  </data>
+</odoo>

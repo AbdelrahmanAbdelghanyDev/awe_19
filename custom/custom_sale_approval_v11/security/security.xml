@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sale_approval_categ" model="ir.module.category">
+            <field name="name">Sales Approval</field>
+            <field name="sequence" eval="1"/>
+        </record>
+
+        <record id="group_sale_approval_agent" model="res.groups">
+            <field name="name">Agent</field>
+<!--            <field name="category_id" ref="custom_sale_approval_v11.sale_approval_categ"/>-->
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_sale_approval_officer" model="res.groups">
+            <field name="name">Senior</field>
+<!--            <field name="category_id" ref="custom_sale_approval_v11.sale_approval_categ"/>-->
+            <field name="implied_ids" eval="[(4, ref('custom_sale_approval_v11.group_sale_approval_agent'))]"/>
+        </record>
+
+        <record id="group_sale_approval_manager" model="res.groups">
+            <field name="name">Manager</field>
+<!--            <field name="category_id" ref="custom_sale_approval_v11.sale_approval_categ"/>-->
+            <field name="implied_ids" eval="[(4, ref('custom_sale_approval_v11.group_sale_approval_officer'))]"/>
+        </record>
+
+
+    </data>
+</odoo>

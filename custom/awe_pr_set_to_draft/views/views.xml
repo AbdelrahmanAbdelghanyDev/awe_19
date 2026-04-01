@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+
+        <record id="sales_pr_set_to_draft_form_inherit" model="ir.ui.view">
+            <field name="name">sales_pr_set_to_draft_form_inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+                   <button name="pr_set_to_draft" string="PR Set to Draft"  type="object"
+                                groups="awe_pr_set_to_draft.pr_draft_group" invisible="state == 'draft'"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

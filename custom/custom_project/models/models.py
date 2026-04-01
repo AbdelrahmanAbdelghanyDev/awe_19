@@ -95,7 +95,7 @@ class ProductImage(models.Model):
         print('x',self)
         groups_list = []
         self.user_check = False
-        for rec in self.env.user.groups_id:
+        for rec in self.env.user.group_ids:
             groups_list.append(rec.name)
         print('groups_list',groups_list)
         if "Finance Team" not in groups_list:
@@ -108,7 +108,7 @@ class ProductImage(models.Model):
     @api.constrains('active')
     def onch_active(self):
         groups_list = []
-        for rec in self.env.user.groups_id:
+        for rec in self.env.user.group_ids:
             groups_list.append(rec.name)
         print('groups_list',groups_list)
         for line in self:

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_invoice_pivot">
+            <field name="name">account.move.pivot</field>
+            <field name="model">account.move</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="paid_bills" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

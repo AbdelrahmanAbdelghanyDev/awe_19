@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_generate_days">
+            <field name="name">wizard_generate_days.form</field>
+            <field name="model">wizard.generate.days</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Generate All days for Employees">
+                  <group>
+                      <field name="employees_ids" widget="many2many_tags"/>
+                      <field name="start_date"/>
+                      <field name="end_date"/>
+                      <field name="check_weekends" widget=""/>
+                      <field name="check_vacations" widget=""/>
+                      <field name="check_pub_holidays" widget=""/>
+                      <field name="check_absence" widget=""/>
+                  </group>
+                  <footer>
+                    <button name="action_generate_days" string="Generate" type="object" />
+                      or
+                    <button string="Cancel" special="cancel"/>
+                  </footer>
+              </form>
+            </field>
+        </record>
+
+        <!--Action for wizard-->
+        <record id="action_wizard_generate_days" model="ir.actions.act_window">
+            <field name="name">Generate Days Wizard</field>
+            <field name="res_model">wizard.generate.days</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+<!--<act_window-->
+            <!--id="action_wiz_generate_days"-->
+            <!--res_model="wizard.generate.days"-->
+            <!--src_model="hr.attendance"-->
+            <!--target="new"-->
+            <!--name="Generate Days"-->
+            <!--view_mode="form"/>-->
+        <menuitem id="menu_wizard_generate_days" name="Generate Days" parent="hr_attendance.menu_hr_attendance_root" action="action_wizard_generate_days"/>
+
+
+    </data>
+</odoo>

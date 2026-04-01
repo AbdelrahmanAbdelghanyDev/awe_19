@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+<!--        <record id="budget_cost_est_inherit" model="ir.ui.view">-->
+<!--            <field name="name">crossovered.budget.inherit</field>-->
+<!--            <field name="model">crossovered.budget</field>-->
+<!--            <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='user_id']" position="after">-->
+<!--                    <field name="cost_estimation_id" invisible="'cost_estimation_id == False" />-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

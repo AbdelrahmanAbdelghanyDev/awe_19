@@ -1,0 +1,135 @@
+<odoo>
+    <data>
+
+        <!-- Invoice Report Inherit -->
+        <template id="sales_report_inh_temp"
+                  inherit_id="account.report_invoice_document"
+                  priority="16">
+
+            <!-- ADDRESS SECTION -->
+            <xpath expr="//t[@t-set='address']" position="replace">
+                <div class="row" style="margin-top:-10px;font-size:11px">
+                    <div class="col-6">
+
+                        <t t-if="o.company_id.name == 'AWE KSA'">
+                            <div>
+                                <img t-if="o.l10n_sa_qr_code_str"
+                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"/>
+                            </div>
+                        </t>
+
+                    </div>
+
+                    <div name="invoice_address" class="col-6">
+
+                        <t t-if="o.company_id.name == 'AWE Egypt'">
+                            <div>
+                                <h5>Platform Group - Awe Research</h5>
+                                <div><span t-field="o.company_id.Research_office"/></div>
+                                <div><span t-field="o.company_id.operations_office"/></div>
+                                <div>T. <span t-field="o.company_id.mobile"/></div>
+                                <div><a href="http://www.aweresearch.com">www.aweresearch.com</a></div>
+                                <div>CR Number: <span t-field="o.company_id.cr_number"/></div>
+                                <div>VAT Number: <span t-field="o.company_id.vat"/></div>
+                                <div>TAX File Number: <span t-field="o.company_id.TAX_File_Number"/></div>
+                            </div>
+                        </t>
+
+                        <t t-if="o.company_id.name == 'AWE UAE'">
+                            <div>
+                                <h4>Platform For Marketing Management LLC</h4>
+                                <div><span t-field="o.company_id.street"/></div>
+                                <div>T. <span t-field="o.company_id.mobile"/></div>
+                                <div><a href="http://www.aweresearch.com">www.aweresearch.com</a></div>
+                                <div>CR Number: <span t-field="o.company_id.cr_number"/></div>
+                                <div>TRN Number: <span t-field="o.company_id.TRN_Number"/></div>
+                            </div>
+                        </t>
+
+                        <t t-if="o.company_id.name == 'AWE KSA'">
+                            <div>
+                                <h4>Awesome Research</h4>
+                                <div><span t-field="o.company_id.street"/></div>
+                                <div>T. <span t-field="o.company_id.mobile"/></div>
+                                <div><a href="http://www.aweresearch.com">www.aweresearch.com</a></div>
+                                <div>CR Number: <span t-field="o.company_id.cr_number"/></div>
+                                <div>VAT Number: <span t-field="o.company_id.vat"/></div>
+                            </div>
+                        </t>
+
+                    </div>
+                </div>
+            </xpath>
+
+            <!-- PAGE CONTENT -->
+            <xpath expr="//div[hasclass('page')]" position="replace">
+                <div class="page" style="font-size:11px">
+
+                    <div class="row">
+                        <div class="col-9">
+                            <strong>To:</strong>
+                            <address t-field="o.partner_id"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+
+                            <div t-if="o.partner_id.vat">
+                                <strong>VAT Number:</strong> <span t-field="o.partner_id.vat"/>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div t-if="o.invoice_date">
+                                <strong>Invoice Date:</strong> <span t-field="o.invoice_date"/>
+                            </div>
+                            <div t-if="o.name">
+                                <strong>Invoice No.:</strong> <span t-field="o.name"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 t-if="o.move_type != 'out_refund'">Tax Invoice</h2>
+                    <h2 t-if="o.move_type == 'out_refund'">Credit Note</h2>
+
+                    <!-- Lines -->
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th class="text-right">Quantity</th>
+                                <th class="text-right">Unit Price</th>
+                                <th class="text-right">Taxes</th>
+                                <th class="text-right">Amount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                <td><span t-field="l.name"/></td>
+                                <td class="text-right">
+                                    <span t-field="l.quantity"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.price_unit"/>
+                                </td>
+                                <td>
+                                    <span t-foreach="l.tax_ids" t-as="x">
+                                        <span t-field="x.name"/><br/>
+                                    </span>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.price_subtotal"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- TAX TOTALS (standard call) -->
+                    <t t-call="account.document_tax_totals"/>
+
+                </div>
+            </xpath>
+
+        </template>
+
+    </data>
+</odoo>

@@ -11,7 +11,7 @@ class new_awe_edits(models.Model):
     work_country_id = fields.Many2one('res.country', 'Work Country')
 
     def write(self, values):
-        if self.env.ref('custom_project.group_finance_team') not in self.env.user.groups_id:
+        if not self.env.user.has_group('custom_project.group_finance_team'):
             if 'third_party_cost' in values.keys():
                 raise AccessDenied
         return super(new_awe_edits, self).write(values)

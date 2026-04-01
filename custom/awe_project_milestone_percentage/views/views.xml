@@ -1,0 +1,138 @@
+<odoo>
+
+      <record id="action_assign_milestones" model="ir.actions.server">
+          <field name="name">Assign Milestones</field>
+          <field name="model_id" ref="project.model_project_task"/>
+          <field name="state">code</field>
+          <field name="code">
+              if records:
+              action = records.create_project_milestones()
+          </field>
+          <field name="binding_model_id" ref="project.model_project_task"/>
+      </record>
+
+      <record id="project_milestone_report_action" model="ir.actions.act_window">
+          <field name="name">Project Milestone Report</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">project.milestone.line</field>
+          <field name="view_mode">pivot</field>
+      </record>
+
+      <!-- This Menu Item must have a parent and an action -->
+      <menuitem id="project_milestone_report_item" name="Project Milestone Report"
+                parent="project.menu_project_report" action="project_milestone_report_action" sequence="50"/>
+      <!-- Inherit Form View to Modify it -->
+      <record id="sale_order_project_type" model="ir.ui.view">
+          <field name="name">sale.order.project.type</field>
+          <field name="model">sale.order</field>
+          <field name="inherit_id" ref="sale.view_order_form"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='payment_term_id']" position="after">
+                  <field name="project_type_2" readonly="state !='draft'"/>
+              </xpath>
+
+          </field>
+      </record>
+      <!-- Inherit Form View to Modify it -->
+<!--      <record id="revenue_team_analytic_tags" model="ir.ui.view">-->
+<!--          <field name="name">revenue team analytic tags</field>-->
+<!--          <field name="model">revenue.team</field>-->
+<!--          <field name="inherit_id" ref="awe_cost_estimation.Revenue_teams_form"/>-->
+<!--          <field name="arch" type="xml">-->
+
+<!--&lt;!&ndash;              <xpath expr="//field[@name='alias_contact']" position="after">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <field name="analytic_tag_ids" widget="many2many_tags"/>&ndash;&gt;-->
+<!--&lt;!&ndash;              </xpath>&ndash;&gt;-->
+
+<!--          </field>-->
+<!--      </record>-->
+
+      <!-- Inherit Form View to Modify it -->
+      <record id="project_milestone_view" model="ir.ui.view">
+          <field name="name">project milestone view</field>
+          <field name="model">project.task</field>
+          <field name="inherit_id" ref="project.view_task_form2"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//header" position="inside">
+                  <button name="stage_revenue" string="Stage Revenue Recog" type="object"/>
+              </xpath>
+
+<!--              <xpath expr="//field[@name='legend_done']" position="after">-->
+<!--                  <field name="project_type" readonly="1"/>-->
+<!--              </xpath>-->
+
+              <xpath expr="//notebook" position="inside">
+                  <page string="Project Milestones">
+                      <group>
+                          <field name="milestone_ids">
+                              <list delete="false" create="false" editable="bottom" decoration-success="account_move_id">
+                                  <field name="task_type_stage_id" readonly="1"/>
+                                  <field name="percentage" readonly="1"/>
+                                  <field name="planned_revenue" readonly="1"/>
+                                  <field name="poc_date" readonly="account_move_id != False"/>
+                                  <field name="margin_after_travel" readonly="1"/>
+                                  <field name="planned_cost" readonly="1"/>
+                                  <field name="account_move_id" readonly="1"/>
+                                  <field name="project_id" invisible="1"/>
+                                  <field name="revenue_team_id" invisible="1"/>
+                                  <field name="partner_id" invisible="1"/>
+                                  <field name="project_type" invisible="1"/>
+                                  <field name="sales_bu" invisible="1"/>
+                                  <field name="company_id" invisible="1"/>
+                              </list>
+                          </field>
+                      </group>
+                  </page>
+              </xpath>
+
+          </field>
+      </record>
+
+      <!--      forth create form view-->
+      <record id="project_milestone_setting_form" model="ir.ui.view">
+          <field name="name">project milestone setting form view</field>
+          <field name="model">project.milestone.setting</field>
+          <field name="arch" type="xml">
+              <form create="0" delete="0">
+                  <sheet>
+                      <group>
+                          <field name="name" readonly="1"/>
+                      </group>
+                      <group>
+                          <field name="adhoc_line_ids">
+                              <list editable="bottom">
+                                  <field name="sequence" widget="handle" optional="show"/>
+                                  <field name="task_type_stage_id"/>
+                                  <field name="percentage"/>
+                              </list>
+                          </field>
+                      </group>
+                      <group>
+                          <field name="other_line_ids">
+                              <list editable="bottom">
+                                  <field name="sequence" widget="handle" optional="show"/>
+                                  <field name="task_type_stage_id"/>
+                                  <field name="percentage"/>
+                              </list>
+                          </field>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+
+      <!--      third link action with selected record -->
+      <record id="project_milestone_setting_action" model="ir.actions.act_window">
+          <field name="name">Project Milestone Setting</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">project.milestone.setting</field>
+          <field name="view_mode">form</field>
+          <field name="res_id" ref="project_milestone_setting_record"/>
+      </record>
+
+      <!--    second create menu item -->
+      <menuitem id="project_milestone_setting_menu" name="Project Milestone Setting"
+                parent="project.menu_project_config" action="project_milestone_setting_action" sequence="20"/>
+</odoo>

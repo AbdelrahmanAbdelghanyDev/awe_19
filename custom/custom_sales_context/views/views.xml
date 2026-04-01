@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="change_odoo_context" model="ir.ui.view">
+            <field name="name">change odoo context</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='partner_id']" position="replace">
+                    <field name="partner_id"
+                           string="Customer"
+                           domain="[('customer_rank', '>', 0)]"
+                           context="{
+                                'search_default_customer': 1,
+                                'default_name': partner_name,
+                                'default_street': street,
+                                'default_street2': street2,
+                                'default_city': city,
+                                'default_state_id': state_id,
+                                'default_zip': zip,
+                                'default_country_id': country_id,
+                                'default_function': function,
+                                'default_phone': phone,
+                                'default_email': email_from,
+                                'default_team_id': team_id,
+                                'default_website': website
+                           }"/>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="change_create_invoice_button" model="ir.ui.view">
+            <field name="name">Create Invoice Button</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="replace">
+                    <field name="fully_invoiced" invisible="1"/>
+                    <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                            type="action" context="{'default_advance_payment_method': 'percentage'}" class="btn-primary"
+                            invisible="invoice_status != 'to invoice' or fully_invoiced == True"/>
+
+                    <button name="create_invoice_new" string="Create Invoice"
+                            type="object" class="btn-primary"
+                            invisible="invoice_status != 'invoiced' or fully_invoiced == False"/>
+                </xpath>
+
+<!--                <xpath expr="//field[@name='order_line']/list/field[@name='analytic_tag_ids']" position="attributes">-->
+<!--                    <attribute name="optional">show</attribute>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>

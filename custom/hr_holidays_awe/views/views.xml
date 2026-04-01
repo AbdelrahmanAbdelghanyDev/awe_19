@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+<!--        <record id="edit_holiday_status_form" model="ir.ui.view">-->
+<!--            <field name="name">hr.holidays.status form</field>-->
+<!--            <field name="model">hr.holidays.status</field>-->
+<!--            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <group name="description" position="inside">-->
+<!--                    <field name="is_annual_leave"/>-->
+<!--                </group>-->
+<!--                <group name="options" position="after">-->
+<!--                    <group name="request_boundaries" string="Request boundaries">-->
+<!--                        <field name="days_before"/>-->
+<!--                        <field name="days_after"/>-->
+<!--                    </group>-->
+<!--                </group>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--	<record id="edit_holiday_cust_form" model="ir.ui.view">-->
+<!--            <field name="name">hr.holidays.status form</field>-->
+<!--            <field name="model">hr.holidays</field>-->
+<!--            <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="holiday_status_id" position="after">-->
+<!--                    <field name="date_from_alloca" attrs="{'invisible': [('type', '=', 'remove')]}"/>-->
+<!--                    <field name="date_to_alloca" attrs="{'invisible': [('type', '=', 'remove')]}"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

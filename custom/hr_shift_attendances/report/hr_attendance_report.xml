@@ -1,0 +1,29 @@
+<odoo>
+
+    <record id="paperformat_euro_lowmargin" model="report.paperformat">
+        <field name="name">European A4 low margin</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">80</field>
+    </record>
+
+    <report
+        id="report_hr_attendance"
+        model="hr.attendance"
+        string="HR Attendance Report"
+        report_type="qweb-pdf"
+        name="hr_custom_attendances.hr_attendance_template"
+        file="hr_custom_attendances.hr_attendance_template"
+        paperformat="hr_custom_attendances.paperformat_euro_lowmargin"
+        print_report_name="'HR Attendance - %s' % (object.name).replace('/','')"
+    />
+</odoo>

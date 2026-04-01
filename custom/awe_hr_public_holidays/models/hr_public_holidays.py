@@ -4,7 +4,7 @@
 
 from datetime import date
 from odoo import fields, models, api, _
-from odoo.exceptions import Warning as UserError
+from odoo.exceptions import  UserError
 
 
 class HrPublicHolidays(models.Model):
@@ -68,7 +68,7 @@ class HrPublicHolidays(models.Model):
         return result
 
     @api.model
-    @api.returns('hr.holidays.public.line')
+    # @api.returns('hr.holidays.public.line')
     def get_holidays_list(self, year, employee_id=None):
         """
         Returns recordset of hr.holidays.public.line

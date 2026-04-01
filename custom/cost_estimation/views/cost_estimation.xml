@@ -13,16 +13,16 @@
             </field>
         </record>
 
-        <record id="crm_methodology_view_new_est_button_inherit" model="ir.ui.view">
-            <field name="name">crm methodology view</field>
-            <field name="model">crm.lead</field>
-            <field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.opportunity_cost_estimationn"/>
-            <field name="arch" type="xml">
-                <xpath expr="//button[@name='new_cost_estimation']" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath>
-            </field>
-        </record>
+<!--        <record id="crm_methodology_view_new_est_button_inherit" model="ir.ui.view">-->
+<!--            <field name="name">crm methodology view</field>-->
+<!--            <field name="model">crm.lead</field>-->
+<!--            <field name="inherit_id" ref="custom_opportunity_cost_estimation_v11.opportunity_cost_estimationn"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//button[@name='new_cost_estimation']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <record id="crm_methodology_view_page_prod_inherit" model="ir.ui.view">
             <field name="name">crm methodology view</field>

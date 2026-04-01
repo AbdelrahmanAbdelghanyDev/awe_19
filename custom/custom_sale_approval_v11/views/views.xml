@@ -1,0 +1,76 @@
+<odoo>
+  <data>
+
+    <record id="sale.action_orders" model="ir.actions.act_window">
+      <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel', 'rejected', 'officer_approval',
+          'manager_approval'))]
+      </field>
+    </record>
+
+    <record id="sale.action_quotations" model="ir.actions.act_window">
+      <field name="domain">[('state','in',('draft','sent','cancel','rejected', 'officer_approval',
+          'manager_approval'))]
+      </field>
+    </record>
+
+    <record id="sales_auto_crm_view_order_form_inherit" model="ir.ui.view">
+      <field name="name">custom.crm.view.order.form.inherit</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='action_confirm']" position="after">
+          <button name="action_button_reject" string="Reject" type="object"
+                  invisible="state != 'officer_approval'"
+                  groups="custom_sale_approval_v11.group_sale_approval_officer"
+                  class="btn-primary"/>
+
+          <button name="action_button_reject" string="Reject" type="object"
+                  invisible="state != 'manager_approval'"
+                  groups="custom_sale_approval_v11.group_sale_approval_manager"
+                  class="btn-primary"/>
+
+          <button name="action_button_request_for_approval" type="object"
+                  string="Request for Approval"
+                  invisible="state != 'draft'"
+                  groups="custom_sale_approval_v11.group_sale_approval_agent"
+                  class="btn-primary"/>
+
+          <button name="action_button_request_for_approval" type="object"
+                  string="Request for Approval"
+                  invisible="state != 'officer_approval'"
+                  groups="custom_sale_approval_v11.group_sale_approval_officer"
+                  class="btn-primary"/>
+        </xpath>
+
+        <xpath expr="//button[@name='action_confirm']" position="replace">
+          <button name="action_confirm"
+                  invisible="state not in ('sent','officer_approval','manager_approval')"
+                  string="Confirm Sale"
+                  type="object"
+                  class="btn-primary"/>
+        </xpath>
+
+        <xpath expr="//field[@name='note']" position="attributes">
+          <attribute name="required">state == 'rejected'</attribute>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.custom.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+          <xpath expr="//block" position="before">
+            <h2>Sales Approval</h2>
+            <group>
+              <field name="managerrequired"/>
+              <field name="officerrequired"/>
+            </group>
+          </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

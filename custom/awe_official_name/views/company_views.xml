@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_company_form_inh_form" model="ir.ui.view">
+            <field name="name">res.company.inh.fom</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[last()]" position="after">
+                    <page name="print_details" string="Print details">
+                        <group string="Company Details">
+                            <field name="Research_office"/>
+                            <field name="operations_office"/>
+                            <field name="cr_number"/>
+                            <field name="TAX_File_Number"/>
+                            <field name="TRN_Number"/>
+                            <field name="PO_Box"/>
+                        </group>
+                        <group string="Company accounts data ( Egypt ) ">
+                            <field name="Account_Name"/>
+                            <field name="Account_No_EGP"/>
+                            <field name="IBAN_No_EGP"/>
+                            <field name="Account_No_USD"/>
+                            <field name="IBAN_No_USD"/>
+                            <field name="QNB_ALAHLI_SWIFT_CODE"/>
+                            <field name="Account_Name2"/>
+                            <field name="Account_No_EGP2"/>
+                            <field name="EGP_IBAN"/>
+                            <field name="Account_No_USD2"/>
+                            <field name="USD_IBAN"/>
+                            <field name="SWIFT_CODE"/>
+
+                        </group>
+                        <group string="Company accounts data ( UAE ) ">
+                            <field name="Account_number_AED"/>
+                            <field name="Account_number_USD"/>
+                            <field name="Account_Name_UAE"/>
+                            <field name="bank"/>
+                            <field name="Branch_name"/>
+                            <field name="Swift"/>
+                            <field name="IBAN_AED"/>
+                            <field name="IBAN_USD"/>
+                        </group>
+                        <group string="Company accounts data ( KSA ) ">
+                            <field name="Account_No"/>
+                            <field name="IBAN_ksa"/>
+                            <field name="SHB_SWIFT_CODE"/>
+                            <field name="Account_No2"/>
+                            <field name="IBAN_ksa2"/>
+                            <field name="SHB_SWIFT_CODE2"/>
+                        </group>
+                    </page>
+                    <page name="print_details_ar" string="Print details ( Ar ) ">
+                        <group string="Company Details">
+                            <field name="company_name_ar"/>
+                            <field name="address_ar"/>
+                            <field name="mobile_ar"/>
+                            <field name="tax_number_ar"/>
+                            <field name="tax_number2_ar"/>
+                            <field name="file_number"/>
+                        </group>
+                    </page>
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

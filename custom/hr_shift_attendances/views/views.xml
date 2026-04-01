@@ -1,0 +1,96 @@
+<odoo>
+  <data>
+    <record id="hr_attendance_add_working_hour" model="ir.ui.view">
+        <field name="name">hr.attendance.add.working.hour</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="/list" position="attributes">
+                <attribute name="decoration-info">remarks in ('Day off','Leave')</attribute>
+                <attribute name="decoration-danger">remarks in ('Absent','Holiday') or is_late == True or is_early == True</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='check_out']" position='after'>
+                <field name='custom_date' string="Date"/>
+                <field name='custom_in' string="Check in"/>
+                <field name='custom_out' string="Check out"/>
+                <field name='working_hours_per_day' string="Total working Time"
+                       widget="float_time" sum="Total"/>
+                <field name="custom_normal_hours" string="Normal working time"
+                       widget="float_time" sum="Total"/>
+                <field name="custom_over_time_1" string="OT 4:00,21:00"
+                       widget="float_time" sum="Total" invisible="1"/>
+                <field name="custom_over_time_2" string="OT 21:00,4:00"
+                       widget="float_time" sum="Total" invisible="1"/>
+                <field name="custom_over_time_3" string="SOT"
+                       widget="float_time" sum="Total" invisible="1"/>
+                <field name='is_late_time'
+                       widget="float_time" sum="Total"/>
+                <field name='is_early_time'
+                       widget="float_time" sum="Total"/>
+                <field name="remarks" invisible="1"/>
+                <field name="display_remarks"/>
+                <field name='is_early' invisible="1"/>
+                <field name='is_late' invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='check_in']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='check_out']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='is_late']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='is_early']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_attendance_add_remarks" model="ir.ui.view">
+        <field name="name">hr.attendance.add.remarks</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='check_out']" position="after">
+                <field name="remarks" invisible="1"/>
+                <field name="display_remarks"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="resource_calendar_Attendance_add_time" model="ir.ui.view">
+        <field name="name">resource.calendar.attendance.add.time</field>
+        <field name="model">resource.calendar.attendance</field>
+        <field name="inherit_id" ref="resource.view_resource_calendar_attendance_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_to']" position='after'>
+                <field name='late_time'/>
+                <field name='early_time'/>
+                <field name='working_hours' widget="float_time"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="abc_test" model="ir.ui.view">
+        <field name="name">abc test</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook/page[1]/field/list/field[@name='number_of_hours']" position='replace'>
+                <field name="number_of_hours" sum="Total Worked Hours."/>
+            </xpath>
+            <xpath expr="//field[@name='contract_id']" position="replace">
+                <field name="contract_id"
+                       domain="[('employee_id','=',employee_id), ('state', '=', 'open')]"
+                       context="{'default_employee_id': employee_id}"/>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,72 @@
+<odoo>
+<data>
+    <!-- template use to render a Registration Badge -->
+    <template id="hr_attendance_template">
+        <t t-call="web.external_layout">
+
+                <div class="container">
+                    <div class="page">
+                        <div class="row" style="border-top:1px solid black;">
+                            <table class="table">
+                                <thead style="border:1px solid black">
+                                   <tr style="border:1px solid black">
+                                       <th style="border:1px solid black">Employee</th>
+                                       <th style="border:1px solid black">Date</th>
+                                       <th style="border:1px solid black">Check In</th>
+                                       <th style="border:1px solid black">Check Out</th>
+                                       <th style="border:1px solid black">Total Working Time</th>
+                                       <th style="border:1px solid black">Normal Working Time</th>
+                                       <th style="border:1px solid black">Late In</th>
+                                       <th style="border:1px solid black">Early Out</th>
+                                       <th style="border:1px solid black">Remarks</th>
+                                   </tr>
+                                </thead>
+                                <!--<t t-foreach="o.line_ids" t-as="x">-->
+                                <t t-foreach="docs" t-as="o">
+                                    <tr style="border-bottom:1px solid black">
+                                        <td style="border:1px solid black"><div t-field="o.employee_id.name"/></td>
+                                        <td style="border:1px solid black"><div t-field="o.custom_date"/></td>
+                                        <td style="border:1px solid black"><div t-field="o.custom_in"/></td>
+                                        <td style="border:1px solid black"><div t-field="o.custom_out"/></td>
+                                        <td style="border:1px solid black"><div t-field="o.working_hours_per_day"/></td>
+                                        <td style="border:1px solid black"><div t-field="o.custom_normal_hours"/></td>
+                                        <td style="border:1px solid black"><div t-field="o.is_late_time"/></td>
+                                        <td style="border:1px solid black"><div t-field="o.is_early_time"/></td>
+                                        <td style="border:1px solid black"><div t-field="o.display_remarks"/></td>
+                                    </tr>
+                                </t>
+                                <!--</t>-->
+                                <!--<tr style="border:1px solid black">-->
+                                    <!--<td style="border-right:1px solid black"><b>Total Debit</b></td>-->
+                                    <!--<td colspan="3" style="border:1px solid black"><b>Total Credit</b></td>-->
+                                    <!--&lt;!&ndash;<td style="border:1px solid black" colspan="2"><b>Total</b></td>&ndash;&gt;-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--&lt;!&ndash;<t t-set="total" t-value="totalCredit-totalDebit"/>&ndash;&gt;-->
+                                    <!--<td style="border:1px solid black"><div t-esc="totalDebit" /></td>-->
+                                    <!--<td colspan="3" style="border:1px solid black" ><div t-esc="totalCredit"/></td>-->
+                                    <!--&lt;!&ndash;<td style="border:1px solid black" colspan="2"><div t-esc="total"/></td>&ndash;&gt;-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td colspan="2"> مشرف مالي <br/>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</td>-->
+                                    <!--<td> المحاسب <br/>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</td>-->
+                                    <!--<td> إعداد <br/>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</td>-->
+                                <!--</tr>-->
+                            </table>
+                        <!--</div>-->
+                            <!--<div class="row text-center" style="page-break-after:always">-->
+                                <!--<div class="col-lg-6" style=" float: right;"><br/> إعداد <br/><br/>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+                                <!--<div class="col-lg-6" style=" float: right;"><br/> المحاسب <br/><br/>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+                                <!--<div class="col-lg-6" style="float: right"><br/> مشرف مالي <br/><br/>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </t>
+        <!--</t>-->
+    </template>
+</data>
+</odoo>

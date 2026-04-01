@@ -6,10 +6,10 @@
             <field name="name">hr.holidays.public.tree</field>
             <field name="model">hr.holidays.public</field>
             <field name="arch" type="xml">
-                <tree string="Public Holidays">
+                <list string="Public Holidays">
                     <field name="year"/>
                     <field name="country_id"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -25,7 +25,7 @@
                     <newline />
                     <group string="Public Holidays">
                         <field name="line_ids" nolabel="1">
-                            <tree string="Public Holidays"
+                            <list string="Public Holidays"
                                 editable="top">
                                 <field name="date" />
                                 <field name="name" />
@@ -33,7 +33,7 @@
                                 <field name="state_ids" widget="many2many_tags"
                                     domain="[('country_id','=',parent.country_id)]" />
                                 <field name="variable" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </form>
@@ -43,7 +43,7 @@
         <record id="open_public_holidays_view" model="ir.actions.act_window">
             <field name="name">Public Holidays</field>
             <field name="res_model">hr.holidays.public</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <menuitem action="open_public_holidays_view"

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_holidays_user_first,hr.holidays.user.first,model_hr_holidays,hr_holidays_awe.group_hr_holidays_first,1,1,1,1
+access_resource_calendar_leaves_user_first,resource_calendar_leaves_user.first,resource.model_resource_calendar_leaves,hr_holidays_awe.group_hr_holidays_first,1,1,1,1
+access_calendar_event_hr_user_first,calendar.event.hr.user.first,calendar.model_calendar_event,hr_holidays_awe.group_hr_holidays_first,1,1,1,1
+access_calendar_attendee_hr_user_first,calendar.attendee.hr.user.first,calendar.model_calendar_attendee,hr_holidays_awe.group_hr_holidays_first,1,1,1,1

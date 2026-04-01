@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_hr_holidays_first" model="res.groups">
+        <field name="name">First</field>
+<!--        <field name="category_id" ref="base.module_category_hr_holidays"/>-->
+        <field name="implied_ids" eval="[(4, ref('hr.group_hr_user'))]"/>
+    </record>
+
+    <record id="leaves_first" model="ir.rule">
+        <field name="name">Leaves First</field>
+        <field name="model_id" ref="hr_holidays.model_hr_leave"/>
+        <field name="domain_force">
+            ['|',('employee_id.user_id','=',user.id),('employee_id.parent_id.user_id','=',user.id)]
+        </field>
+        <field name="groups" eval="[(4,ref('hr_holidays_awe.group_hr_holidays_first'))]"/>
+    </record>
+
+<!--    <menuitem-->
+<!--            id="hr_holidays.menu_open_department_leave_approve"-->
+<!--            name="Leaves"-->
+<!--            parent="hr_holidays.menu_hr_holidays_approvals"-->
+<!--            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays_awe.group_hr_holidays_first"-->
+<!--            action="hr_holidays.open_department_holidays_approve"-->
+<!--            sequence="1"/>-->
+
+<!--    <menuitem-->
+<!--            id="hr_holidays.menu_open_department_leave_allocation_approve"-->
+<!--            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays_awe.group_hr_holidays_first"-->
+<!--            name="Leaves Allocation"-->
+<!--            parent="hr_holidays.menu_hr_holidays_approvals"-->
+<!--            action="hr_holidays.open_department_holidays_allocation_approve"-->
+<!--            sequence="2"/>-->
+    <menuitem
+            id="hr_holidays.menu_hr_holidays_approvals"
+            name="Leaves to Approve"
+            parent="hr_holidays.menu_hr_holidays_root"
+            sequence="3"
+            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays_awe.group_hr_holidays_first"/>
+    <menuitem
+            id="hr_holidays.menu_hr_holidays_report"
+            name="Reporting"
+            parent="hr_holidays.menu_hr_holidays_root"
+            sequence="99"
+            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays_awe.group_hr_holidays_first"/>
+
+<!--    <menuitem-->
+<!--            id="hr_holidays.menu_open_employee_leave"-->
+<!--            name="Leave Details"-->
+<!--            parent="hr_holidays.menu_hr_holidays_report"-->
+<!--            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays_awe.group_hr_holidays_first"-->
+<!--            action="hr_holidays.open_employee_leaves"-->
+<!--            sequence="4"/>-->
+
+
+</odoo>

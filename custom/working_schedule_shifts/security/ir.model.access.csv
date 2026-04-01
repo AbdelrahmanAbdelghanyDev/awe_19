@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_working_schedule_shifts_calendar_month_day,working_schedule_shifts.calendar_month_day,model_calendar_month_day,,1,0,0,0
+access_working_schedule_shifts_calendar_month,working_schedule_shifts.calendar_month,model_calendar_month,,1,0,0,0

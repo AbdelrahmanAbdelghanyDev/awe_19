@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="merge_cost_estimation_server_action" model="ir.actions.server">
+            <field name="name">Merge</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="cost_estimation.model_cost_estimation"/>
+            <field name="binding_model_id" ref="cost_estimation.model_cost_estimation"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.merge_cost_estimation_lines()
+            </field>
+        </record>
+    </data>
+</odoo>

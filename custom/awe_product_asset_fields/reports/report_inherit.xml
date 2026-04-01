@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="UNIQUE_ID" inherit_id="product.report_simple_label">
+            <xpath expr="//td[2]" position="replace">
+                <td style="border: 2px solid black; text-align: left;" class="col-xs-7">
+                    <h4>
+                        <strong t-if="product.country_id_custom">
+                            Country:
+                            <span t-esc="product.country_id_custom.name"/>
+                        </strong>
+                        <br/>
+                        <strong t-if="product.department_id_custom">
+                            Department:
+                            <span t-esc="product.department_id_custom.name"/>
+                        </strong>
+                        <br/>
+                        <strong t-if="product.location_id_custom">
+                            Location:
+                            <span t-esc="product.location_id_custom.name"/>
+                        </strong>
+                    </h4>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

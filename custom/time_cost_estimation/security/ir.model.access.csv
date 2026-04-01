@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_time_cost_line,access.product.time.cost.line,model_product_time_cost_line,base.group_user,1,1,1,1
+access_time_estimation_line,access.time.estimation.line,model_time_estimation_line,base.group_user,1,1,1,0
+access_admin_time_estimation_line,access.time.estimation.line,model_time_estimation_line,base.group_system,1,1,1,1
+access_estimation_methodology,access.estimation.methodology,model_estimation_methodology,base.group_user,1,1,1,1

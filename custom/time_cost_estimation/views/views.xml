@@ -1,0 +1,139 @@
+<odoo>
+  <data>
+      <record id="product_template_time_cost" model="ir.ui.view">
+            <field name="name">product.template.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='product_variant_count']" position="after">
+                    <field name="cost_ok" invisible="1"/>
+                </xpath>
+
+
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page string="Time Estimation"  invisible=" cost_ok == True ">
+                        <field name="time_estimation_ids">
+                            <list editable="bottom">
+                                <field name="product_id" domain="[('cost_ok', '=', True)]"/>
+                                <field name="description"/>
+                                <field name="qty"/>
+                                <field name="uom"/>
+                                <field name="cost_item_type"/>
+<!--                                <field name="budgetary_position"/>-->
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+      <record id="product_product_time_cost" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='product_variant_count']" position="after">
+                    <field name="cost_ok" invisible="1"/>
+                </xpath>
+
+
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page string="Time Estimation" invisible="cost_ok == True">
+                        <field name="time_estimation_ids">
+                            <list editable="bottom">
+                                <field name="product_id" domain="[('cost_ok', '=', True)]"/>
+                                <field name="description"/>
+                                <field name="qty"/>
+                                <field name="uom"/>
+                                <field name="cost_item_type"/>
+<!--                                <field name="budgetary_position"/>-->
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+      <record id="similar_estimation_tree" model="ir.ui.view">
+          <field name="name">Similar Methodology Estimation tree</field>
+          <field name="model">cost.estimation</field>
+          <field name="arch" type="xml">
+              <list>
+                  <field name="seq"/>
+                  <field name="customer"/>
+                  <field name="cpi"/>
+              </list>
+          </field>
+      </record>
+
+      <!-- Inherit Form View to Modify it -->
+      <record id="cost_estimation_inherit" model="ir.ui.view">
+          <field name="name">cost.estimation.inherit</field>
+          <field name="model">cost.estimation</field>
+          <field name="inherit_id" ref="cost_estimation.cost_estimation_form"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//div[@name='button_box']" position="inside">
+                  <button name="get_same_methodology_estimation" type="object" class="oe_stat_button" icon="fa-files-o">
+                      <field string="Same Methodology Estimations" name="same_methodology_count" widget="statinfo"/>
+                  </button>
+              </xpath>
+
+              <xpath expr="//field[@name='fx']" position="after">
+                  <field name="methodology_id" options="{'no_create':True,'no_open': True}" required="True"/>
+              </xpath>
+              <xpath expr="//group[@name='total_cost_item']" position="before">
+                  <group colspan="2">
+                      <field name="gross_margin_value" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                      <field name="gross_margin_percentage" widget="percentage" options="{'currency_field': 'currency_id'}"/>
+                      <field name="operating_profit" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                      <field name="operating_profit_percentage" widget="percentage" options="{'currency_field': 'currency_id'}"/>
+                      <field name="cpi" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                  </group>
+              </xpath>
+              <xpath expr="//notebook" position="inside">
+                  <page string="Time Estimation Line">
+                      <field name="time_estimation_ids" readonly="state in ['approved','cancelled']">
+                          <list editable="bottom">
+
+                              <field name="salable_product"
+                                     options="{'no_quick_create': True, 'no_create_edit' : True,'no_open': True}"/>
+                              <field name="sp_desc"/>
+                              <field name="sp_quant"/>
+                              <field name="cost_item" domain="[('cost_ok', '=', True)]"
+                                     options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                              <field name="cost_item_uom_id" optional="hide"/>
+                              <field name="cost_item_description"/>
+                              <field name="cost_item_type"/>
+                              <field name="cost_item_quant_sp"/>
+                              <field name="cost_item_cost_currency" optional="hide"/>
+                              <field name="fx" invisible="1"/>
+                              <field name="taxes" widget="many2many_tags"
+                                     options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                     optional="hide"/>
+                              <field name="cost_item_unit_cost"/>
+                              <field name="cost_item_cost_sp"/>
+
+                              <field name="total_cost_item_quantity" optional="hide"/>
+                              <field name="total_cost_item_cost"/>
+                          </list>
+                      </field>
+                  </page>
+              </xpath>
+
+          </field>
+      </record>
+
+      <record id="estimation_methodology_action" model="ir.actions.act_window">
+          <field name="name">Estimation Methodology</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">estimation.methodology</field>
+          <field name="view_mode">list,form</field>
+      </record>
+
+      <!-- This Menu Item must have a parent and an action -->
+      <menuitem id="estimation_methodology_menu_item" name="Estimation Methodology"
+                parent="crm.crm_menu_config" action="estimation_methodology_action" sequence="30"/>
+  </data>
+</odoo>

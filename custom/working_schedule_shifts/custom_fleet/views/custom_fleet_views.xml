@@ -1,0 +1,117 @@
+<odoo>
+
+    <!-- Tree View of CustomFleet -->
+    <record id="custom_fleet_tree_view" model="ir.ui.view">
+        <field name="name">custom_fleet.tree.view</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="vehicleID"/>
+                <field name="motorNumber"/>
+                <field name="department"/>
+                <field name="purchaseDate"/>
+                <field name="costCenter"/>
+                <field name="licenseType"/>
+                <field name="notes"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Form View Of CustomFleet  -->
+    <record id="custom_fleet_form_view" model="ir.ui.view">
+        <field name="name">custom.fleet.form.view</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+
+                    <group col="2" >
+                        <group>
+                            <field name="vehicleID" />
+                            <field name="motorNumber" />
+                            <field name="department" widget="selection"/>
+                        </group>
+                        <group>
+                            <field name="purchaseDate"/>
+                            <field name="costCenter"/>
+                            <field name="licenseType" widget="selection"/>
+                        </group>
+                    </group>
+                    <group col="2">
+                        <field name="notes"/>
+                    </group>
+
+                </xpath>
+            </field>
+    </record>
+
+    <!-- Department Tree View-->
+    <record id="department_tree_view" model="ir.ui.view">
+        <field name="name">custom.fleet.department.tree.view</field>
+        <field name="model">custom_fleet.department</field>
+        <field name="arch" type="xml">
+            <list string="Department">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <!--Department Form View-->
+    <record model="ir.ui.view" id="department_form_view">
+            <field name="name">custom.fleet.department.form.view</field>
+            <field name="model">custom_fleet.department</field>
+            <field name="arch" type="xml">
+                <form string="Department Form">
+                    <sheet>
+                        <group>
+                            <field name="name" style="max-width: 1150px;  width: 200px"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+    <!-- License Type Tree View-->
+    <record id="license_type_tree_view" model="ir.ui.view">
+        <field name="name">custom.fleet.licence.type.tree.view</field>
+        <field name="model">custom_fleet.license_type</field>
+        <field name="arch" type="xml">
+            <list string="License Type">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <!--LicenseType Form View-->
+    <record model="ir.ui.view" id="license_type_form_view">
+            <field name="name">custom.fleet.license.type.form.view</field>
+            <field name="model">custom_fleet.license_type</field>
+            <field name="arch" type="xml">
+                <form string="License Type Form">
+                    <sheet>
+                        <group>
+                            <field name="name" style="max-width: 1150px;  width: 200px"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+    <!--Custom Action for Department -->
+    <record model="ir.actions.act_window" id="department_list_action">
+            <field name="name">Department</field>
+            <field name="res_model">custom_fleet.department</field>
+            <field name="view_mode">list,form</field>
+    </record>
+
+    <!--Custom Action for License Type-->
+    <record model="ir.actions.act_window" id="license_type_list_action">
+            <field name="name">License Type</field>
+            <field name="res_model">custom_fleet.license_type</field>
+            <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem name="Departments" parent="fleet.fleet_configuration" id="department_sub_menu" action="department_list_action" />
+    <menuitem name="License Types" parent="fleet.fleet_configuration" id="license_type_sub_menu" action="license_type_list_action" />
+
+
+</odoo>

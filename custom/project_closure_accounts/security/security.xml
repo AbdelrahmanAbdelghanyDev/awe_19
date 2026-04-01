@@ -1,0 +1,10 @@
+<odoo>
+     <record id="group_project_task_revenue" model="res.groups">
+        <field name="name">Project Task Revenue</field>
+<!--        <field name="category_id" ref="base.module_category_hidden"/>-->
+    </record>
+    <record id="group_project_task_cost" model="res.groups">
+        <field name="name">Project Task Cost / WIP</field>
+<!--        <field name="category_id" ref="base.module_category_hidden"/>-->
+    </record>
+</odoo>

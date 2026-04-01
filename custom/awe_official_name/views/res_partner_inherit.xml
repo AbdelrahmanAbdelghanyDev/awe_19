@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <record id="awe_res_partner_inherit" model="ir.ui.view">
+           <field name="name">awe res partner</field>
+           <field name="model">res.partner</field>
+           <field name="inherit_id" ref="base.view_partner_form"/>
+           <field name="arch" type="xml">
+              <data>
+                 <xpath expr="//field[@name='name']" position="after">
+                   <field name="official_name" placeholder="The Official Name"/>
+                 </xpath>
+                  <xpath expr="//field[@name='vat']" position="after">
+                      <field name="cr_numb" placeholder="e.g. BE0477472701"/>
+                  </xpath>
+              </data>
+           </field>
+        </record>
+    </data>
+</odoo>
