@@ -1,0 +1,28 @@
+<odoo>
+  <data>
+    <record id="hr_expense_form_view_inherit_in" model="ir.ui.view">
+      <field name="name">hr.expense.form.inherit.2</field>
+      <field name="model">hr.expense</field>
+      <field name="inherit_id" ref="hr_expense.hr_expense_view_form" />
+      <field eval="25" name="priority"/>
+      <field name="arch" type="xml">
+<!--        <xpath expr="//group[last()]"  position="inside">-->
+
+
+
+<!--          &lt;!&ndash;        </field>&ndash;&gt;-->
+<!--        </xpath>-->
+
+        <xpath expr="//field[@name='employee_id']" position="after">
+
+          <field name="payment_method"  invisible="payment_mode == 'own_account'"  widget="radio"/>
+          <field name="credit_owner"    invisible="payment_method  != 'credit'"/>
+
+        </xpath>
+
+
+      </field>
+    </record>
+
+  </data>
+</odoo>

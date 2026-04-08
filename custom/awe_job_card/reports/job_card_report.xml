@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="paperformat_job_card_report" model="report.paperformat">
+            <field name="name">Job Card</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <template id="job_card_report_header">
+            <div class="header"/>
+            <div class="footer"/>
+        </template>
+
+        <template id="job_card_report_page">
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Scheherazade&amp;display=swap');
+            </style>
+            <div class="page" style="font-family: 'Scheherazade', serif; font-size: 20px;">
+
+                <div style="font-weight: bold;text-align:left; font-size: 25px;">
+                    General Info.
+                </div>
+
+                <hr style="margin-top:0px;"/>
+
+                <table class="table table-bordered table-sm text-center" style="font-size: 18px;">
+                    <tr>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Client Number "Analytic Account"
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.analytic_account_id"/>
+                        </td>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Sales Person
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.user_id"/>
+                        </td>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Project Methodology
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.project_methodology_id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Opportunity Name
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.opportunity_name"/>
+                        </td>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Client Sector
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.client_sector_id"/>
+                        </td>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Client Type
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.tag_ids"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Client Name
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.client_name"/>
+                        </td>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Project Status
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.project_status"/>
+                        </td>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Project Type
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.project_type_id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Project Type
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.project_type"/>
+                        </td>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Revenue BU
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.revenue_bu_id"/>
+                        </td>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            Sales BU
+                        </th>
+                        <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dae1f1;">
+                            <span t-field="o.sales_bu_id"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+
+                <div style="font-weight: bold;text-align:left; font-size: 25px;">
+                    Accounting Info.
+                </div>
+
+                <hr style="margin-top:0px;"/>
+
+                <div style="font-weight: bold;text-align:left;">
+                    Budget vs Actual
+                </div>
+
+                <table class="table table-bordered table-sm text-center" style="font-size: 18px;">
+                    <tr>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Item
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Budget
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Actual Account
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Actual Net
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Actual Variance
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Actual Variance (%)
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Over/Under Budget (Actual)
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            WIP Account
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            WIP Net
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            WIP Variance
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            WIP Variance (%)
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Over/Under Budget (WIP)
+                        </th>
+                    </tr>
+                    <t t-set="break" t-value="False"/>
+                    <t t-set="total_budget" t-value="0"/>
+                    <t t-set="total_actual_net" t-value="0"/>
+                    <t t-set="total_wip_net" t-value="0"/>
+                    <t t-set="total_variance" t-value="0"/>
+                    <t t-set="total_wip_variance" t-value="0"/>
+                    <t t-foreach="o.budget_line" t-as="line">
+                        <t t-if="line.name == 'Time Cost'">
+                            <t t-set="break" t-value="True"/>
+                        </t>
+                        <t t-if="not break">
+                            <t t-if="line.name == 'Direct Cost'">
+                                <tr>
+                                    <td colspan="12" class="text-left"
+                                        style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-else="">
+                                <tr>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.item_id"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.cost"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.account_id"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.actual_net"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.variance"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.variance_percentage"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: white;">
+                                        <span t-field="line.over_under_budget"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.wip_account_id"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.wip_net"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.wip_variance"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">
+                                        <span t-field="line.wip_variance_percentage"/>
+                                    </td>
+                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: white;">
+                                        <span t-field="line.wip_over_under_budget"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-set="total_budget" t-value="total_budget + line.cost"/>
+                            <t t-set="total_actual_net" t-value="total_actual_net + line.actual_net"/>
+                            <t t-set="total_wip_net" t-value="total_wip_net + line.wip_net"/>
+                            <t t-set="total_variance" t-value="total_variance + line.variance"/>
+                            <t t-set="total_wip_variance" t-value="total_wip_variance + line.wip_variance"/>
+                        </t>
+                    </t>
+                    <tr>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Total
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            <span t-esc="round(total_budget,2)"/>
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;"/>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            <span t-esc="round(total_actual_net,2)"/>
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            <!--                            <span t-esc="round(total_variance,2)"/>-->
+                            <span t-esc="round(total_budget - total_actual_net,2)"/>
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            <t t-if="total_budget">
+                                <span t-esc="round((((total_budget - total_actual_net)/total_budget)*100),2)"/>
+                            </t>
+                            <t t-else="">
+                                0
+                            </t>
+                            %
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;"/>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;"/>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            <span t-esc="round(total_wip_net,2)"/>
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            <!--                            <span t-esc="round(total_wip_variance,2)"/>-->
+                            <span t-esc="round(total_budget - total_wip_net,2)"/>
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            <t t-if="total_budget">
+                                <span t-esc="round((((total_budget - total_wip_net)/total_budget)*100),2)"/>
+                            </t>
+                            <t t-else="">
+                                0
+                            </t>
+                            %
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;"/>
+                    </tr>
+
+                    <!--                    <t t-set="time" t-value="False"/>-->
+                    <!--                    <t t-set="total_budget2" t-value="0"/>-->
+                    <!--                    <t t-set="total_actual_net2" t-value="0"/>-->
+                    <!--                    <t t-set="total_wip_net2" t-value="0"/>-->
+                    <!--                    <t t-set="total_variance2" t-value="0"/>-->
+                    <!--                    <t t-set="total_wip_variance2" t-value="0"/>-->
+                    <!--                    <t t-foreach="o.budget_line" t-as="line">-->
+                    <!--                        <t t-if="line.name == 'Time Cost'">-->
+                    <!--                            <t t-set="time" t-value="True"/>-->
+                    <!--                            <tr>-->
+                    <!--                                <td colspan="12" class="text-left"-->
+                    <!--                                    style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">-->
+                    <!--                                    <span t-field="line.name"/>-->
+                    <!--                                </td>-->
+                    <!--                            </tr>-->
+                    <!--                        </t>-->
+                    <!--                        <t t-else="">-->
+                    <!--                            <t t-if="time">-->
+                    <!--                                <tr>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.item_id"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.cost"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.account_id"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.actual_net"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.variance"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.variance_percentage"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: white;">-->
+                    <!--                                        <span t-field="line.over_under_budget"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.wip_account_id"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.wip_net"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.wip_variance"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center;">-->
+                    <!--                                        <span t-field="line.wip_variance_percentage"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: white;">-->
+                    <!--                                        <span t-field="line.wip_over_under_budget"/>-->
+                    <!--                                    </td>-->
+                    <!--                                </tr>-->
+                    <!--                            </t>-->
+                    <!--                            <t t-set="total_budget2" t-value="total_budget2 + line.cost"/>-->
+                    <!--                            <t t-set="total_actual_net2" t-value="total_actual_net2 + line.actual_net"/>-->
+                    <!--                            <t t-set="total_wip_net2" t-value="total_wip_net2 + line.wip_net"/>-->
+                    <!--                            <t t-set="total_variance2" t-value="total_variance2 + line.wip_variance"/>-->
+                    <!--                            <t t-set="total_wip_variance2" t-value="total_wip_variance2 + line.wip_variance"/>-->
+                    <!--                        </t>-->
+                    <!--                    </t>-->
+                    <!--                    <t t-if="time">-->
+                    <!--                        <t t-set="total_budget_diff" t-value="total_budget2 - total_budget"/>-->
+                    <!--                        <t t-set="total_actual_net_diff" t-value="total_actual_net2 - total_actual_net"/>-->
+                    <!--                        <t t-set="total_wip_net_diff" t-value="total_wip_net2 - total_wip_net"/>-->
+                    <!--                        <t t-if="total_variance2">-->
+                    <!--                            <t t-set="total_variance_diff" t-value="abs(total_variance2 - total_variance)"/>-->
+                    <!--                        </t>-->
+                    <!--                        <t t-else="">-->
+                    <!--                            <t t-set="total_variance_diff" t-value="0"/>-->
+                    <!--                        </t>-->
+                    <!--                        <t t-if="total_wip_variance2">-->
+                    <!--                            <t t-set="total_wip_variance_diff" t-value="total_wip_variance2 - total_wip_variance"/>-->
+                    <!--                        </t>-->
+                    <!--                        <t t-else="">-->
+                    <!--                            <t t-set="total_wip_variance_diff" t-value="0"/>-->
+                    <!--                        </t>-->
+                    <!--                        <tr>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">-->
+                    <!--                                Total-->
+                    <!--                            </th>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">-->
+                    <!--                                <span t-esc="round(total_budget_diff,2)"/>-->
+                    <!--                            </th>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;"/>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">-->
+                    <!--                                <span t-esc="round(total_actual_net_diff,2)"/>-->
+                    <!--                            </th>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">-->
+                    <!--                                &lt;!&ndash;                                <span t-esc="round(total_variance_diff,2)"/>&ndash;&gt;-->
+                    <!--                                <span t-esc="round(total_budget_diff - total_actual_net_diff,2)"/>-->
+                    <!--                            </th>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">-->
+                    <!--                                <t t-if="total_budget2">-->
+                    <!--                                    <span t-esc="round((((total_budget_diff - total_actual_net_diff)/total_budget_diff)*100),2)"/>-->
+                    <!--                                </t>-->
+                    <!--                                <t t-else="">-->
+                    <!--                                    0-->
+                    <!--                                </t>-->
+                    <!--                                %-->
+                    <!--                            </th>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;"/>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;"/>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">-->
+                    <!--                                <span t-esc="round(total_wip_net_diff,2)"/>-->
+                    <!--                            </th>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">-->
+                    <!--                                &lt;!&ndash;                                <span t-esc="round(total_wip_variance_diff,2)"/>&ndash;&gt;-->
+                    <!--                                <span t-esc="round(total_budget_diff - total_wip_net_diff,2)"/>-->
+                    <!--                            </th>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">-->
+                    <!--                                <t t-if="total_budget2">-->
+                    <!--                                    <span t-esc="round((((total_budget_diff - total_wip_net_diff)/total_budget_diff)*100),2)"/>-->
+                    <!--                                </t>-->
+                    <!--                                <t t-else="">-->
+                    <!--                                    0-->
+                    <!--                                </t>-->
+                    <!--                                %-->
+                    <!--                            </th>-->
+                    <!--                            <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;"/>-->
+                    <!--                        </tr>-->
+                    <!--                    </t>-->
+                </table>
+
+                <hr style="margin-top:0px;"/>
+
+                <div style="text-align:left;">
+                    <strong>
+                        Revenue Recog:
+                    </strong>
+                    <span t-field="o.revenue_recog"/>
+                </div>
+                <div style="text-align:left;">
+                    <strong>
+                        Direct Cost:
+                    </strong>
+                    <span t-field="o.direct_cost"/>
+                </div>
+                <div style="text-align:left;">
+                    <strong>
+                        GM:
+                    </strong>
+                    <span t-field="o.gm"/>
+                </div>
+                <div style="text-align:left;">
+                    <strong>
+                        GM (%):
+                    </strong>
+                    <span t-field="o.gm_percentage"/>
+                </div>
+
+                <hr style="margin-top:0px;"/>
+
+                <div style="font-weight: bold;text-align:left;">
+                    Actual Direct Cost Break Down
+                </div>
+
+
+                <table class="table table-bordered table-sm text-center" style="font-size: 18px;">
+                    <tr>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Account
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            DR
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            CR
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Net
+                        </th>
+                    </tr>
+
+                    <t t-set="total_debit" t-value="0"/>
+                    <t t-set="total_credit" t-value="0"/>
+                    <t t-set="total_net" t-value="0"/>
+                    <t t-foreach="o.actual_line" t-as="line">
+                        <t t-set="total_debit" t-value="total_debit + line.debit"/>
+                        <t t-set="total_credit" t-value="total_credit + line.credit"/>
+                        <t t-set="total_net" t-value="total_net + line.net"/>
+                        <tr>
+                            <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:left;">
+                                <span t-field="line.account_id"/>
+                            </td>
+                            <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:right;">
+                                <span t-field="line.debit"/>
+                            </td>
+                            <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:right;">
+                                <span t-field="line.credit"/>
+                            </td>
+                            <td style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:right;">
+                                <span t-field="line.net"/>
+                            </td>
+                        </tr>
+                    </t>
+                    <tr>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:center; background-color: #dddddd;">
+                            Total
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:right; background-color: #dddddd;">
+                            <span t-esc="round(total_debit,2)"/>
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:right; background-color: #dddddd;">
+                            <span t-esc="round(total_credit,2)"/>
+                        </th>
+                        <th style="padding-top:0px;padding-bottom:0px;height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align:right; background-color: #dddddd;">
+                            <span t-esc="round(total_net,2)"/>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </template>
+
+        <template id="job_card_report_temp">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="awe_job_card.job_card_report_header"/>
+                    <t t-call="web.external_layout">
+                        <t t-call="awe_job_card.job_card_report_page"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="job_card_report" model="ir.actions.report">
+            <field name="name">Job Card</field>
+            <field name="model">job.card</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">awe_job_card.job_card_report_temp</field>
+            <field name="report_file">awe_job_card.job_card_report_temp</field>
+            <field name="binding_model_id" ref="awe_job_card.model_job_card"/>
+            <field name="paperformat_id" ref="paperformat_job_card_report"/>
+        </record>
+
+    </data>
+</odoo>

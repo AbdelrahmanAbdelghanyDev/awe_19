@@ -64,9 +64,7 @@
         'assets': {
             'web.assets_backend': [
                 'custom_opportunity_cost_estimation_v11/static/src/js/widget.js',
-            ],
-            'web.assets_qweb': [
-                'custom_opportunity_cost_estimation_v11/static/src/xml/**/*',
+                'custom_opportunity_cost_estimation_v11/static/src/xml/widget.xml',
             ],
         },
 

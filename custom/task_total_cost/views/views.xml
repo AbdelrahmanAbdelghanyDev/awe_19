@@ -1,0 +1,25 @@
+<odoo>
+  <data>
+    <!-- Inherit Form View to Modify it -->
+    <record id="project_task_total_cost" model="ir.ui.view">
+        <field name="name">project.task.total.cost</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='parent_id']" position="after">
+              <field name="task_total_cost"/>
+              <field name="cost_waves"/>
+              <field name="total_value"/>
+              <field name="task_cost_ratio"/>
+              <field name="cost_per_task"/>
+              <field name="cost_job_to_date"/>
+              <field name="time_cost_total"/>
+
+
+            </xpath>
+
+        </field>
+    </record>
+  </data>
+</odoo>

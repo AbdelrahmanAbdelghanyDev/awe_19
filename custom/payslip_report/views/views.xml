@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="employee_exel_report" model="ir.ui.view">
+            <field name="name">hr.employee.excel.report</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bank_account_ids']" position="after">
+                    <field name="bank_id"/>
+                    <field name="branch"/>
+                </xpath>project_closure_accounts
+            </field>
+        </record>
+    </data>
+</odoo>

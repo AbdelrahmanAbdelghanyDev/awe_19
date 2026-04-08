@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--        Job Card Wizard Form View-->
+        <record id="job_card_wizard_form_view" model="ir.ui.view">
+            <field name="name">job_card_wizard_form_view</field>
+            <field name="model">job.card.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="analytic_account_id"/>
+                            <field name="month_ids" widget="many2many_tags"
+                                   options="{'no_create':True,'no_create_edit':True}"/>
+                            <field name="year"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="generate_job_card" string="Generate" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

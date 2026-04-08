@@ -1,0 +1,331 @@
+<odoo>
+    <data>
+        <record id="expenses_partner_with_no_mail" model="ir.ui.view">
+            <field name="name">expenses_partner_with_no_mail</field>
+            <field name="type">qweb</field>
+            <field name="key">portal_expenses.expenses_partner_with_no_mail</field>
+            <field name="arch" type="xml">
+                <t t-name="expenses_management_portal_users.expenses_partner_with_no_mail">
+                    <t t-call="website.layout">
+                        <div id="wrap">
+                            <t t-raw="0"/>
+                            <div class="oe_structure oe_empty">
+                                <div class="container">
+                                    <h1 class="mt32">Contact with the system administrator.</h1>
+                                    <p>Unable to send email, please configure the sender's email address.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </field>
+        </record>
+        <template id="my_expense" name="My expense">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="oe_structure">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <ol class="breadcrumb mt8">
+                                        <li>
+                                            <a href="/my/home">
+                                                <i class="fa fa-home"/>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a t-attf-href="/my/expenses?#{keep_query()}">My Expenses</a>
+                                        </li>
+                                        <li t-if="expense">
+                                            <span t-field="expense.name"/>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 t-if="not expense">
+                            New Expense Request
+                        </h1>
+                        <form action="/my/expense/update" method="post">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="row o_expenses_management_portal_users">
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div t-if="error_message" class="alert alert-danger">
+                                                <t t-foreach="error_message" t-as="err">
+                                                    <t t-esc="err"/>
+                                                    <!--<br/>-->
+                                                </t>
+                                            </div>
+                                        </div>
+                                        <div t-attf-class="form-group #{error.get('name') and 'has-error' or ''} col-lg-6">
+                                            <label class="control-label" for="name">Expense Description*</label>
+                                            <input type="text" name="name" class="form-control"
+                                                   t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                   t-att-value="name or (expense and expense.name)"/>
+                                        </div>
+                                        <div id="date"
+                                             t-attf-class="form-group #{error.get('date') and 'has-error' or ''} col-lg-6">
+                                            <div>
+                                                <label class="control-label" for="date">Expense Date</label>
+                                                <div id="datepicker-container-date">
+                                                    <div id="datepicker_date"
+                                                         t-attf-class="input-group date datepicker col-lg-6">
+                                                        <input id="date_input" name="date"
+                                                               t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                               data-depends="true"
+                                                               t-att-value="date or (expense and expense.date and convert_datetime_to_date(expense.date))"
+                                                               type="text" maxlength="10" class="form-control"/>
+                                                        <span id="myid" class="input-group-addon">
+                                                            <i class="fa fa-calendar"/>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div t-attf-class="form-group #{error.get('product_id') and 'has-error' or ''} col-lg-6">
+                                            <label class="control-label" for="product_id">Item*</label>
+                                            <select name="product_id" id="product"
+                                                    t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                    class="form-control">
+                                                <option value="">Item...</option>
+                                                <t t-foreach="product_ids or []" t-as="product">
+                                                    <option t-att-value="product.id"
+                                                            t-att-selected="product.id == (product_id or (expense and expense.product_id.id))">
+                                                        <t t-esc="product.display_name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div t-attf-class="float-left form-group #{error.get('unit_amount') and 'has-error' or ''} col-lg-6">
+                                            <label class="control-label" for="unit_amount">Unit Price*</label>
+                                            <input type="number" id="input_unit_amount" name="unit_amount"
+                                                   class="form-control"
+                                                   t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                   t-att-value="unit_amount or (expense and expense.unit_amount)"/>
+                                        </div>
+                                        <div t-attf-class="form-group #{error.get('reference') and 'has-error' or ''} col-lg-6">
+                                            <label class="control-label" for="name">Bill Reference</label>
+                                            <input type="text" name="reference" class="form-control"
+                                                   t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                   t-att-value="reference or (expense and expense.reference)"/>
+                                        </div>
+                                        <div t-attf-class="form-group #{error.get('quantity') and 'has-error' or ''} col-lg-6">
+                                            <label class="control-label" for="quantity">Quantity*</label>
+                                            <input type="number" id="input_quantity" name="quantity"
+                                                   class="form-control"
+                                                   t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                   t-att-value="quantity or (expense and expense.quantity)"/>
+                                        </div>
+
+
+                                        <div t-attf-class="form-group #{error.get('analytic_account_ids') and 'has-error' or ''} col-lg-6">
+                                            <label class="control-label" for="analytic_account_ids">Projects</label>
+                                            <select name="analytic_account_ids" id="analytic_account"
+                                                    t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                    class="form-control">
+                                                <option value="">Anayltic Account...</option>
+                                                <t t-foreach="analytic_account_ids or []" t-as="so">
+                                                    <option t-att-value="so.id">
+                                                        <!--                                                            t-att-selected="so == expense.analytic_account_ids.id">-->
+                                                        <t t-esc="so.display_name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+
+                                        <!--                                        <t t-foreach="analytic_account_ids or []" t-as="so">-->
+                                        <!--                                                    <h1><t t-esc="expense.analytic_account_ids"/></h1>-->
+                                        <!--&lt;!&ndash;                                                    <option t-att-value="so.id"&ndash;&gt;-->
+                                        <!--&lt;!&ndash;                                                            t-att-selected="so.id == expense.analytic_account_ids.id">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;                                                        <t t-esc="so.analytic_account_id.display_name"/>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;                                                    </option>&ndash;&gt;-->
+                                        <!--                                                </t>-->
+                                        <br/>
+                                        <div t-attf-class="form-group #{error.get('total_amount') and 'has-error' or ''} col-lg-6">
+                                            <label class="control-label" for="total_amount">Total</label>
+                                            <output type="number" id="input_total_amount" name="total_amount"
+                                                    class="form-control"
+                                                    t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                    t-att-value="total_amount or (expense and expense.total_amount)"/>
+                                        </div>
+                                        <div t-attf-class="float-right form-group #{error.get('payment_mode') and 'has-error' or ''} col-lg-6">
+                                            <label class="control-label" for="payment_mode">Payment By</label>
+                                            <select name="payment_mode"
+                                                    t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                    class="form-control">
+                                                <option value="own_account">Employee (to reimburse)</option>
+                                                <option value="company_account">Company</option>
+                                            </select>
+                                        </div>
+                                        <br/>
+
+                                        <div t-attf-class="float-right form-group #{error.get('payment_method') and 'has-error' or ''} col-lg-6">
+                                            <label class="control-label" for="payment_method">Payment Method</label>
+                                            <select name="payment_method"
+                                                    t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                    class="form-control">
+                                                <option value="cash">Cash</option>
+                                                <option value="credit">Credit</option>
+                                            </select>
+                                        </div>
+                                        <br/>
+                                        <div t-attf-class="form-group #{error.get('credit_owner') and 'has-error' or ''} col-lg-12">
+                                            <label class="control-label" for="credit_owner">Owner</label>
+                                            <input type="text" name="credit_owner" class="form-control"
+                                                   t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                   t-att-value="credit_owner or (expense and expense.credit_owner)"/>
+                                        </div>
+                                        <br/>
+
+
+                                        <div t-attf-class="form-group #{error.get('description') and 'has-error' or ''} col-lg-12">
+                                            <label class="control-label" for="description">Description</label>
+                                            <input type="text" name="description" class="form-control"
+                                                   t-att-disabled="expense and expense.state in ['refused', 'done']"
+                                                   t-att-value="description or (expense and expense.description)"/>
+                                        </div>
+                                        <!--<div t-if="expense and expense.state == 'refused'" class="col-md-12">-->
+                                        <!--<div t-if="expense and expense.sheet_id.reason" class="alert alert-danger">-->
+                                        <!--<label>The request has been refused due to:</label>-->
+                                        <!--<br/>-->
+                                        <!--<t t-esc="expense.reason"/>-->
+                                        <!--<br/>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                        <input type="hidden" name="expense_id" t-att-value="expense and expense.id"/>
+                                        <input type="hidden" id="input_state" name="state"
+                                               t-att-value="expense and expense.state"/>
+                                    </div>
+                                    <div class="clearfix">
+                                        <input type="checkbox" id="to_delete_checkbox" name="to_delete"
+                                               style="opacity:0; position:absolute;"/>
+                                        <button t-if="expense and expense.state not in ['refused', 'done']"
+                                                id="delete_expense_id" type="submit" class="btn btn-danger mb32">
+                                            <span class="fa fa-trash-o"/>
+                                            Delete
+                                        </button>
+                                        <button t-if="expense and expense.state == 'refused'" type="submit"
+                                                id="to_reset_state"
+                                                class="btn btn-default btn-primary pull-right mb32 ">
+                                            Reset to draft
+                                            <span class="fa fa-refresh"/>
+                                        </button>
+                                        <button t-if="not expense or expense.state == 'draft' or expense.state == 'done'"
+                                                type="submit" id="to_confirm_checkbox"
+                                                class="btn btn-default btn-primary pull-right mb32 ">
+                                            Confirm
+                                            <span class="fa fa-long-arrow-right"/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </t>
+        </template>
+        <template id="my_expenses" name="My Expenses">
+            <t t-call="portal.portal_layout">
+                <div class="row">
+                    <t t-if="request.session.get('error_unlink')">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <t t-esc="request.session.get('error_unlink')"/>
+                            </div>
+                        </div>
+                    </t>
+                    <h3 class="page-header">
+                        Expenses
+                    </h3>
+                </div>
+                <form id="delete_form" action="/my/expense/delete" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="clearfix">
+                        <a t-attf-href="/my/expense/create" class="btn btn-default btn-primary mb32">Create</a>
+                        <button type="submit" id="button_to_remove_expenses"
+                                class="btn btn-default btn-danger mb32 o_hidden">
+                            Delete
+                        </button>
+                    </div>
+                    <div class="panel panel-default o_expenses_management_portal_users">
+                        <t t-if="not expenses">
+                            <div class="alert alert-warning mt8" role="alert">
+                                There are no expenses yet.
+                            </div>
+                        </t>
+                        <table t-if="expenses" class="table table-hover status_table">
+                            <thead>
+                                <tr class="active">
+                                    <th class="col-md-1 o_list_record_selector">
+                                        <div class="o_checkbox">
+                                            <input type="checkbox" name="select_all"/>
+                                            <span/>
+                                        </div>
+                                    </th>
+                                    <th class="col-md-6" id="expense_date_header">Expense Date</th>
+                                    <th class="col-md-6" id="description_header">Expense Description</th>
+                                    <th class="col-md-6" id="total_amount_header">Total</th>
+                                    <th class="col-md-6" id="state_header">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="expenses" t-as="expense">
+                                    <td class="o_list_record_selector">
+                                        <div class="o_checkbox">
+                                            <input type="checkbox" t-att-name="expense.id"
+                                                   t-att-checked="checked"/>
+                                            <span/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a t-attf-href="/my/expense/#{expense.id}?{{ keep_query() }}">
+                                            <span t-field="expense.date"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a t-attf-href="/my/expense/#{expense.id}?{{ keep_query() }}">
+                                            <span t-field="expense.name"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a t-attf-href="/my/expense/#{expense.id}?{{ keep_query() }}">
+                                            <span t-field="expense.total_amount"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span t-att-class="get_class_state_dict.get(expense.state, 'label label-success')"
+                                              title="Current state of the expense"
+                                              t-esc="get_description_state_dict.get(expense.state)"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="website.pager"/>
+                </div>
+            </t>
+        </template>
+<!--        <template id='portal_layout' inherit_id="portal.portal_layout"-->
+<!--                  name="Portal layout: expenses menu entry" priority="40">-->
+<!--            <xpath expr="//ol[contains(@class,'o_portal_submenu')]" position="inside">-->
+<!--                <li t-if="page_name == 'expenses' or expenses">-->
+<!--                    <a t-if="expense" t-attf-href="/my/expenses?{{ keep_query() }}">Expenses</a>-->
+<!--                    <t t-else="">Expenses</t>-->
+<!--                </li>-->
+<!--            </xpath>-->
+<!--        </template>-->
+        <template id='portal_my_home' inherit_id="portal.portal_my_home"
+                  name="Portal My Home: expenses" priority="40">
+            <xpath expr="//div[contains(@class,'o_portal_my_home')]" position="inside">
+                <h3 class="page-header">
+                    <a href="/my/expenses">Your Expenses</a>
+                </h3>
+            </xpath>
+        </template>
+    </data>
+</odoo>

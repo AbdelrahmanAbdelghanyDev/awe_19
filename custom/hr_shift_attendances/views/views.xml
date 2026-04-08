@@ -69,7 +69,7 @@
         <field name="model">resource.calendar.attendance</field>
         <field name="inherit_id" ref="resource.view_resource_calendar_attendance_tree" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='date_to']" position='after'>
+            <xpath expr="//field[@name='hour_to']" position='after'>
                 <field name='late_time'/>
                 <field name='early_time'/>
                 <field name='working_hours' widget="float_time"/>
@@ -77,20 +77,20 @@
         </field>
     </record>
 
-    <record id="abc_test" model="ir.ui.view">
-        <field name="name">abc test</field>
-        <field name="model">hr.payslip</field>
-        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
-        <field name="arch" type="xml">
-            <xpath expr="/form/sheet/notebook/page[1]/field/list/field[@name='number_of_hours']" position='replace'>
-                <field name="number_of_hours" sum="Total Worked Hours."/>
-            </xpath>
-            <xpath expr="//field[@name='contract_id']" position="replace">
-                <field name="contract_id"
-                       domain="[('employee_id','=',employee_id), ('state', '=', 'open')]"
-                       context="{'default_employee_id': employee_id}"/>
-            </xpath>
-        </field>
-    </record>
+<!--    <record id="abc_test" model="ir.ui.view">-->
+<!--        <field name="name">abc test</field>-->
+<!--        <field name="model">hr.payslip</field>-->
+<!--        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="/form/sheet/notebook/page[1]/field/list/field[@name='number_of_hours']" position='replace'>-->
+<!--                <field name="number_of_hours" sum="Total Worked Hours."/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='contract_id']" position="replace">-->
+<!--                <field name="contract_id"-->
+<!--                       domain="[('employee_id','=',employee_id), ('state', '=', 'open')]"-->
+<!--                       context="{'default_employee_id': employee_id}"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
   </data>
 </odoo>

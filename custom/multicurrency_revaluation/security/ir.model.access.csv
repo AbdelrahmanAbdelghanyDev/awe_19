@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_multicurrency_revaluation_multicurrency_revaluation,multicurrency_revaluation.multicurrency_revaluation,model_multicurrency_revaluation_multicurrency_revaluation,,1,0,0,0

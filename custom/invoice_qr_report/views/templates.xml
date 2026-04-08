@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="res_company_qr_name" model="ir.ui.view">
+            <field name="name">res.company.qr.name</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='street']" position="after">
+                    <field name="company_tax_name"/>
+                </xpath>
+
+            </field>
+        </record>
+<!--        <template id="qr_account_invoice" inherit_id="account.report_invoice_document">-->
+<!--            <xpath expr="//div[hasclass('page')]" position="inside">-->
+<!--                <div class="col-6" style="padding: 0px;" align="left">-->
+<!--                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', o.l10n_sa_qr_code_str, 150, 150)"/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--        </template>-->
+
+<!--        <template id="qr_account_invoice" inherit_id="awe_official_name.report_ksa_invoice_arabic">-->
+<!--            <xpath expr="//div[hasclass('page')]/div[1]/h5[1]" position="before">-->
+<!--                <div align="left" >-->
+<!--                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', o.l10n_sa_qr_code_str, 150, 150)"/>-->
+<!--                </div>-->
+<!--                                <br/>-->
+
+<!--            </xpath>-->
+<!--        </template>-->
+    </data>
+</odoo>

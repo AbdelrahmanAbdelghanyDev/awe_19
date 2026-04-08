@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <act_window id="action_payslip_excel" key2="client_action_multi"
+                name="Payslip Excel Report " res_model="wizard.reports" src_model="hr.payslip"
+                view_mode="form" target="new"/>
+
+    <record id="payslip_excel_view" model="ir.ui.view">
+        <field name="name">wizard.reports</field>
+        <field name="model">wizard.reports</field>
+        <field name="arch" type="xml">
+            <form string="Export Payslip Report">
+                <p class="oe_grey">
+                    You want to Print Payslip Excel Report?
+                </p>
+                <footer>
+                    <button string="Print Excel Report" class="btn-primary" name="action_payslip_report" type="object"/>
+                    <button string="Cancel" class="btn-primary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="payslip_excel_views" model="ir.ui.view">
+        <field name="name">wizard.reports.out</field>
+        <field name="model">wizard.reports.out</field>
+        <field name="arch" type="xml">
+            <form string="Export Payslip">
+                <group>
+                    <field name="file_name" filename="payslip_data"/>
+                    <field name="payslip_data" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Cancel" class="btn-primary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

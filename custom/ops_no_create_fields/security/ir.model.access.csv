@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ops_no_create_fields_ops_no_create_fields,ops_no_create_fields.ops_no_create_fields,model_ops_no_create_fields_ops_no_create_fields,base.group_user,1,1,1,1

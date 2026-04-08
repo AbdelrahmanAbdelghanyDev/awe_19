@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="categ_job_card" model="ir.module.category">
+        <field name="name">Job Card</field>
+    </record>
+
+    <record id="group_wip" model="res.groups">
+        <field name="name">WIP</field>
+<!--        <field name="category_id" ref="categ_job_card"/>-->
+    </record>
+
+</odoo>

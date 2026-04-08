@@ -1,0 +1,98 @@
+<odoo>
+    <data>
+        <template id='portal_my_home' inherit_id="portal.portal_my_home"
+                  name="Portal My Home: attendance" priority="41">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+                <t t-set="portal_service_category_enable" t-value="True"/>
+            </xpath>
+            <div id="portal_service_category" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Your Attendance</t>
+                    <t t-set="url" t-value="'/my/attendance'"/>
+                    <t t-set="text">Check in / Check out from the portal</t>
+                </t>
+            </div>
+        </template>
+        <template id="attendance" name="Attendance">
+            <t t-call="portal.portal_layout">
+                <div class="row">
+                    <t t-if="request.session.get('error_unlink')">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <t t-esc="request.session.get('error_unlink')"/>
+                            </div>
+                        </div>
+                    </t>
+                    <h3 class="page-header">
+                        Your Attendance
+                    </h3>
+                </div>
+                <form id="checkin_form" action="/check_in" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="clearfix">
+                        <a t-attf-href="/check_in" t-if="attendance_status == 'check_in'"  class="btn btn-primary mb-4">Check In</a>
+                        <a t-attf-href="/check_out" t-if="attendance_status == 'check_out'" class="alert alert-danger">Check Out</a>
+                        <p t-if="attendance_status == 'not_available'" class="alert alert-danger">There is no Employee Related to this user</p>
+                    </div>
+
+                </form>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="website.pager"/>
+                </div>
+            </t>
+        </template>
+        <template id="checked_in" name="Checked In">
+            <t t-call="portal.portal_layout">
+                <div class="row">
+                    <t t-if="request.session.get('error_unlink')">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <t t-esc="request.session.get('error_unlink')"/>
+                            </div>
+                        </div>
+                    </t>
+                    <h3 class="page-header">
+                        Check in Success
+                    </h3>
+                </div>
+                <form id="checked_in" action="/checked_in_Success" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="clearfix">
+                        <h1>Welcome</h1>
+                    </div>
+
+                </form>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="website.pager"/>
+                </div>
+            </t>
+        </template>
+        <template id="checked_out" name="Checked Out">
+            <t t-call="portal.portal_layout">
+                <div class="row">
+                    <t t-if="request.session.get('error_unlink')">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <t t-esc="request.session.get('error_unlink')"/>
+                            </div>
+                        </div>
+                    </t>
+                    <h3 class="page-header">
+                        Check Out Success
+                    </h3>
+                </div>
+                <form id="checked_in" action="/checked_out_Success" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="clearfix">
+                        <h1>Good Bye</h1>
+                    </div>
+
+                </form>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="website.pager"/>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

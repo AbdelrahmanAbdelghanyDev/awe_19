@@ -1,0 +1,51 @@
+<odoo>
+  <data>
+    <!-- Inherit Form View to Modify it -->
+    <record id="res_users_sales_bu" model="ir.ui.view">
+        <field name="name">res.users.sales.bu</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+
+          <xpath expr="//field[@name='company_id']" position="after">
+            <field name="allowed_sales_bu_ids" widget='many2many_tags'/>
+          </xpath>
+
+        </field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="crm_lead_view_pivot_inheritedd" model="ir.ui.view">
+         <field name="name">crm.lead.view.pivotedd</field>
+            <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_pivot"/>
+        <field name="arch" type="xml">
+
+          <xpath expr="//field[@name='expected_revenue']" position="after">
+              <field name="count_percentage" type="measure" widget="percentage"/>
+          </xpath>
+
+        </field>
+    </record>
+
+
+<!--      <record id="crm_lead_view_dashboard_inheritedd" model="ir.ui.view">-->
+<!--          <field name="name">crm.lead.view.dashboard.inherit</field>-->
+<!--          <field name="model">crm.lead</field>-->
+<!--          <field name="inherit_id" ref="crm_enterprise.crm_opportunity_view_dashboard"/>-->
+<!--          <field name="arch" type="xml">-->
+
+<!--              <xpath expr="//aggregate[@name='days_exceeding_closing']" position="replace">-->
+<!--              </xpath>-->
+<!--              <xpath expr="//aggregate[@name='days_to_assign']" position="replace">-->
+<!--              </xpath>-->
+
+<!--          </field>-->
+<!--      </record>-->
+
+
+
+
+
+  </data>
+</odoo>

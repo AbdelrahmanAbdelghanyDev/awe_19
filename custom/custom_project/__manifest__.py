@@ -34,7 +34,9 @@
         'demo/demo.xml',
     ],
     'assets': {
-
+        'web.assets_backend': [
+            'custom_project/static/src/js/form_label_patch.js',
+        ],
         'web.report_assets_common': [
             '/custom_project/static/src/css/style.css',
         ],

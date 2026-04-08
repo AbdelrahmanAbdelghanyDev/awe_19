@@ -1,0 +1,128 @@
+<odoo>
+    <data>
+
+        <template id="user_navbar" active="True">
+            <xpath expr="//nav[hasclass('o_menu_systray')]/div[@id='website_switcher']" position="attributes">
+                <attribute name="groups">base.group_user,base.group_portal</attribute>
+            </xpath>
+
+            <xpath expr="//nav[hasclass('o_menu_systray')]/div[@id='edit-page-menu']" position="attributes">
+                <attribute name="groups">mo_portal_timesheet.website_editor_admin</attribute>
+            </xpath>
+
+            <xpath expr="//nav[hasclass('o_menu_systray')]/div[@id='new-content-menu']" position="attributes">
+                <attribute name="groups">mo_portal_timesheet.website_editor_admin</attribute>
+            </xpath>
+
+            <xpath expr="//nav[hasclass('o_menu_systray')]/div[@id='website_switcher']" position="attributes">
+                <attribute name="groups">base.group_user,base.group_portal</attribute>
+            </xpath>
+        </template>
+
+
+        <template id="portal_timesheet_creation" name="Timesheet Portal Creation">
+            <xpath expr="//div[@id='portal_sidebar']" position="after">
+                <div class="mb-4">
+                    <a t-attf-href="/portal/timesheet/create" class="btn btn-primary">Create</a>
+                </div>
+            </xpath>
+        </template>
+
+
+        <template id="portal_timesheet_create" name="Timesheet Portal">
+            <t t-call="portal.portal_layout">
+                <t t-call="web.assets_js"/>
+                <t t-call="web.assets_frontend"/>
+                <t t-call="web.assets_frontend_lazy"/>
+
+                <t t-call="portal.portal_layout">
+                    <form action="/portal/timesheet/submit" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <button name="submit" class="btn btn-primary">Save</button>
+
+                        <div class="o_form_view">
+                            <div class="o_form_sheet bg-white">
+
+                                <div t-if="error_message" class="alert alert-danger">
+                                    <t t-esc="error_message"/>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="form-group col-md-6 form-field o_website_form_required_custom">
+                                        <div class="col-md-6" style="margin-bottom:10px;">
+                                            <label class="col-md-offset-1 col-md-1 col-sm-4 control-label"
+                                                   style="padding-top: 8px;" for="search">Project
+                                            </label>
+                                            <div class="col-md-5 col-sm-8">
+                                                <select name="project_id" required="True" id="project"
+                                                        class="form-control"
+                                                        style="width: 432px; height: 35px;">
+                                                    <t t-foreach="projects" t-as="project">
+                                                        <option t-att-value="project.id">
+                                                            <t t-esc="project.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 form-field o_website_form_required_custom">
+                                        <div class="col-md-12" style="margin-bottom:10px;">
+                                            <label class="col-md-offset-1 col-md-1 col-sm-4 control-label"
+                                                   style="padding-top: 8px;" for="search">Task
+                                            </label>
+                                            <div class="col-md-5 col-sm-8">
+                                                <select name="task_id" required="True" id="taskId"
+                                                        class="form-control"
+                                                        style="width: 432px; height: 35px;">
+                                                    <t t-foreach="tasks" t-as="task">
+                                                        <option t-att-value="task.id" t-esc="task.name"/>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 form-field o_website_form_required_custom">
+                                        <div class="col-md-12" style="margin-bottom:10px;">
+                                            <label class="control-label">Date</label>
+                                            <div>
+                                                <input name="date" type="date" class="form-control" required="True"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 form-field o_website_form_required_custom">
+                                        <div class="col-md-12" style="margin-bottom:10px;">
+                                            <label class="control-label">Description</label>
+                                            <div>
+                                                <input name="name" type="text"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 form-field o_website_form_required_custom">
+                                        <div class="col-md-12" style="margin-bottom:10px;">
+                                            <label class="control-label">Hours</label>
+                                            <div>
+                                                <input name="hours" type="number" step="0.1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </t>
+
+                <div t-foreach="web.assets_frontend_lazy" t-as="asset">
+                    <t t-call="asset.template"/>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

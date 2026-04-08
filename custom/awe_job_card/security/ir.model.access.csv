@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_month,res.month,model_res_month,,1,1,1,1
+access_job_card,job.card,model_job_card,,1,0,0,1
+access_job_card_wizard,job.card.wizard,model_job_card_wizard,,1,1,1,1
+access_job_card_budget_line,job.card.budget.line,model_job_card_budget_line,,1,1,1,0
+access_actual_line,actual.line,model_actual_line,,1,1,1,1
+access_actual_line_calc,actual.line.calc,model_actual_line_calc,,1,1,1,1
+access_budget_wip_line,budget.wip.line,model_budget_wip_line,,1,1,1,0
+access_revenue_bu,revenue.bu,model_revenue_bu,,1,0,0,0
+access_revenue_bu_wizard,revenue.bu.wizard,model_revenue_bu_wizard,,1,1,1,1

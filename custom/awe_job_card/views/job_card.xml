@@ -1,0 +1,204 @@
+<odoo>
+    <data>
+
+        <!--        Job Card Tree View-->
+        <record id="job_card_tree_view" model="ir.ui.view">
+            <field name="name">job_card_tree_view</field>
+            <field name="model">job.card</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="analytic_account_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!--        Job Card Form View-->
+        <record id="job_card_form_view" model="ir.ui.view">
+            <field name="name">job_card_form_view</field>
+            <field name="model">job.card</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <h4 style="color:#44485a;">
+                            General Info.
+                        </h4>
+                        <hr/>
+                        <!--                        <group string="General Info.">-->
+                        <group>
+                            <table class="table table-bordered"
+                                   style="text-align:center; background-color: #dae1f1;">
+                                <tr>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Client Number "Analytic Account"
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="analytic_account_id" readonly="1"/>
+                                    </td>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Sales Person
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="user_id" readonly="1"/>
+                                    </td>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Project Methodology
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="project_methodology_id" readonly="1"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Opportunity Name
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="opportunity_name" readonly="1"/>
+                                    </td>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Client Sector
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="client_sector_id" readonly="1"/>
+                                    </td>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Client Type
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="tag_ids" widget="many2many_tags" readonly="1"
+                                               options="{'color_field': 'color', 'no_create_edit': True}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Client Name
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="client_name" readonly="1"/>
+                                    </td>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Project Status
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="project_status" readonly="1"/>
+                                    </td>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Project Type
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="project_type_id" readonly="1"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Project Type
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="project_type" readonly="1"/>
+                                    </td>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Revenue BU
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="revenue_bu_id" readonly="1"/>
+                                    </td>
+                                    <th style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        Sales BU
+                                    </th>
+                                    <td style="padding-top:0px; padding-bottom:0px; height:0px; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;">
+                                        <field name="sales_bu_id" readonly="1"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </group>
+                        <h4 style="color:#44485a;">
+                            Accounting Info.
+                        </h4>
+                        <hr/>
+                        <!--                        <group string="Accounting Info."/>-->
+                        <notebook>
+                            <page string="Budget vs Actual" name="budget_actual">
+                                <field name="budget_line" widget="section_and_note_one2many">
+                                    <list editable="bottom" create="0">
+                                        <!--                                        <control>-->
+                                        <!--                                            <create name="add_line_control" string="Add a line"/>-->
+                                        <!--                                            <create name="add_section_control" string="Add a section"-->
+                                        <!--                                                    context="{'default_display_type': 'line_section'}"/>-->
+                                        <!--                                        </control>-->
+                                        <field name="name" readonly="1"/>
+                                        <field name="display_type" invisible="1"/>
+                                        <field name="item_id" readonly="1"/>
+                                        <field name="quantity" invisible="1"/>
+                                        <field name="unit_cost" invisible="1"/>
+                                        <field name="cost" sum="total_cost" readonly="1"/>
+                                        <field name="account_id" readonly="1"/>
+                                        <field name="actual_net" sum="total_actual_net" readonly="1"/>
+                                        <field name="variance" sum="total_variance" readonly="1"/>
+                                        <field name="variance_percentage" readonly="1"/>
+                                        <field name="over_under_budget" readonly="1"/>
+                                        <field name="wip_account_id" readonly="1"/>
+                                        <field name="wip_net" sum="total_wip_net" readonly="1"/>
+                                        <field name="wip_variance" sum="total_wip_variance" readonly="1"/>
+                                        <field name="wip_variance_percentage" readonly="1"/>
+                                        <field name="wip_over_under_budget" readonly="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Actual Direct Cost Break Down" name="actual">
+                                <field name="actual_line" readonly="1">
+                                    <list editable="bottom">
+                                        <field name="account_id"/>
+                                        <field name="debit" sum="total_debit"/>
+                                        <field name="credit" sum="total_credit"/>
+                                        <field name="net" sum="total_net"/>
+                                    </list>
+                                </field>
+                                <group>
+                                    <field name="actual_net" readonly="1"/>
+                                </group>
+                            </page>
+                            <page string="Actual Lines (For Calculations)" name="actual_calc" invisible="1">
+                                <field name="actual_line_calc" readonly="1">
+                                    <list editable="bottom">
+                                        <field name="account_id"/>
+                                        <field name="debit" sum="total_debit"/>
+                                        <field name="credit" sum="total_credit"/>
+                                        <field name="net" sum="total_net"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="WIP" name="budget_wip" groups="awe_job_card.group_wip">
+                                <field name="budget_wip_line" widget="section_and_note_one2many">
+                                    <list editable="bottom" create="0">
+                                        <field name="name" readonly="1"/>
+                                        <field name="display_type" invisible="1"/>
+                                        <field name="item_id" readonly="1"/>
+                                        <field name="quantity" invisible="1"/>
+                                        <field name="unit_cost" invisible="1"/>
+                                        <field name="cost" sum="total_cost" readonly="1"/>
+                                        <field name="account_id" readonly="1"/>
+                                        <field name="actual_net" sum="total_actual_net" readonly="1"/>
+                                        <field name="wip_account_id" readonly="1"/>
+                                        <field name="debit" sum="total_debit" readonly="1"/>
+                                        <field name="credit" sum="total_credit" readonly="1"/>
+                                        <field name="wip_net" sum="total_wip_net" readonly="1"/>
+                                        <field name="wip_variance" sum="total_wip_variance" readonly="1"/>
+                                        <field name="wip_over_under_budget" readonly="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group>
+                            <field name="revenue_recog" readonly="1"/>
+                            <field name="direct_cost" readonly="1"/>
+                            <field name="gm" readonly="1"/>
+                            <field name="gm_percentage" readonly="1"/>
+                            <field name="time_cost" invisible="1"/>
+                            <field name="op" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

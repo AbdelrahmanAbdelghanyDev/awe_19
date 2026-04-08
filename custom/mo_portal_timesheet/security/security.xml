@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <record id="website_editor_admin" model="res.groups">
+            <field name="name">Website Editor Admin</field>
+        </record>
+    </data>
+</odoo>

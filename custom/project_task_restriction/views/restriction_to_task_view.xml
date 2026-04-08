@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_restriction_to_task" model="ir.ui.view">
+        <field name="name">restriction.task.inherit</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="model">project.task.type</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="mail_template_id" position="after">
+                <field name="allowed_user_ids" groups="base.group_system"/>
+            </field>
+        </field>
+
+    </record>
+</odoo>

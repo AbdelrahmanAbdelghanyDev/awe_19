@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+
+        <!-- Account Budget Post Inherited Form View -->
+<!--        <record id="account_budget_post_form_view_inherit" model="ir.ui.view">-->
+<!--            <field name="name">account_budget_post_form_view_inherit</field>-->
+<!--            <field name="model">account.budget.post</field>-->
+<!--            <field name="inherit_id" ref="account_budget.view_budget_post_form"/>-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//field[@name='account_ids']/list/field[@name='code']" position="before">-->
+<!--                    <field name="cost_account_check" invisible="1"/>-->
+<!--                    <field name="wip_account_check" invisible="1"/>-->
+<!--                </xpath>-->
+
+<!--            </field>-->
+<!--        </record>-->
+
+        <!--        Actions-->
+        <!-- Job Card -->
+        <record id="action_job_card" model="ir.actions.act_window">
+            <field name="name">Job Card by Analytic Account</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.card</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        <record id="action_job_card_wizard" model="ir.actions.act_window">
+            <field name="name">Job Card by Analytic Account</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.card.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <!-- Revenue BU -->
+        <record id="action_revenue_bu" model="ir.actions.act_window">
+            <field name="name">Job Card by Analytic Tag</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">revenue.bu</field>
+            <field name="view_mode">list</field>
+        </record>
+        <record id="action_revenue_bu_wizard" model="ir.actions.act_window">
+            <field name="name">Job Card by Analytic Tag</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">revenue.bu.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!--        Menu Items-->
+        <menuitem id="menu_job_card_root" name="Job Card"
+                  web_icon="awe_job_card,static/icons/job_card.png"/>
+        <menuitem id="menu_job_card_reports" name="Reports"
+                  parent="awe_job_card.menu_job_card_root"/>
+        <menuitem id="menu_job_card_settings" name="Settings"
+                  parent="awe_job_card.menu_job_card_root"/>
+        <!-- This Menu Item must have a parent and an action -->
+        <!-- Job Card -->
+        <menuitem id="menu_job_card" name="Job Card by Analytic Account"
+                  parent="awe_job_card.menu_job_card_reports"
+                  action="action_job_card"/>
+        <menuitem id="menu_job_card_wizard" name="Job Card by Analytic Account"
+                  parent="awe_job_card.menu_job_card_settings"
+                  action="action_job_card_wizard"/>
+        <!-- Revenue BU -->
+        <!--        <menuitem id="menu_revenue_bu" name="Job Card by Analytic Tag"-->
+        <!--                  parent="awe_job_card.menu_job_card_reports"-->
+        <!--                  action="action_revenue_bu"/>-->
+        <menuitem id="menu_revenue_bu_wizard" name="Job Card by Analytic Tag"
+                  parent="awe_job_card.menu_job_card_settings"
+                  action="action_revenue_bu_wizard"/>
+
+    </data>
+</odoo>
